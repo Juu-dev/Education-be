@@ -1,0 +1,7 @@
+enum ProductCategoriesPermission {
+  CREATE_PRODUCT_CATEGORY = 'CREATE_PRODUCT_CATEGORY',
+  UPDATE_PRODUCT_CATEGORY = 'UPDATE_PRODUCT_CATEGORY',
+  GET_PRODUCT_CATEGORIES = 'GET_PRODUCT_CATEGORIES',
+}
+
+export default ProductCategoriesPermission;

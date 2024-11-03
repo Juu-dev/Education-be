@@ -1,0 +1,8 @@
+enum ProductsPermission {
+  GET_PRODUCTS = 'GET_PRODUCTS',
+  CREATE_PRODUCT = 'CREATE_PRODUCT',
+  UPDATE_PRODUCT = 'UPDATE_PRODUCT',
+  EXPORT_PRODUCTS = 'EXPORT_PRODUCTS',
+}
+
+export default ProductsPermission;

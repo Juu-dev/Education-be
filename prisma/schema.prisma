@@ -1,0 +1,294 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["fullTextSearch"]
+  binaryTargets   = ["native", "debian-openssl-1.1.x", "debian-openssl-3.0.x"]
+  output          = "../node_modules/.prisma/client"
+}
+
+generator kysely {
+  provider     = "prisma-kysely"
+  output       = "../src/database/kysely"
+  fileName     = "types.ts"
+  enumFileName = "enums.ts"
+  camelCase    = true
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// schema.prisma
+
+model User {
+  id       String @id @default(uuid()) @map("id")
+  username String @unique @map("username") @db.VarChar(20)
+  password String @map("password") @db.VarChar(120)
+  email    String @unique @map("email") @db.VarChar(50)
+
+  roles      UserRole[]
+  students   Student[]
+  teachers   Teacher[]
+  librarians Librarian[]
+
+  @@map("users")
+}
+
+model Role {
+  id   String @id @default(uuid()) @map("id")
+  name String @unique @map("name") @db.VarChar(255)
+
+  users UserRole[]
+
+  @@map("roles")
+}
+
+model UserRole {
+  userId String @map("user_id") @db.VarChar(255)
+  roleId String @map("role_id") @db.VarChar(255)
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  role Role @relation(fields: [roleId], references: [id], onDelete: Cascade)
+
+  @@id([userId, roleId])
+  @@map("user_roles")
+}
+
+model Class {
+  id     String @id @default(uuid())
+  name   String @map("name") @db.VarChar(255)
+  amount Int?   @map("amount") @db.Integer
+
+  students  Student[]
+  teachers  Teacher[]
+  exercises Exercise[]
+
+  @@map("classes")
+}
+
+model Student {
+  id          String    @id @default(uuid()) @map("id")
+  userId      String?   @map("user_id") @db.VarChar(36)
+  classId     String?   @map("class_id") @db.VarChar(36)
+  metadataUrl String?   @map("metadata_url") @db.VarChar(255)
+  name        String    @map("name") @db.VarChar(255)
+  birthDate   DateTime? @map("birth_date") @db.Timestamp(6)
+  parentName  String?   @map("parent_name") @db.VarChar(255)
+  level       String?   @map("level") @db.VarChar(255)
+
+  user         User?             @relation(fields: [userId], references: [id])
+  class        Class?            @relation(fields: [classId], references: [id])
+  documents    DocumentStudent[]
+  goals        Goal[]
+  marks        Mark[]
+  ratings      Rating[]
+  tasks        Task[]
+  exercises    ExerciseStudent[]
+  borrowedLogs BorrowedLog[]
+  Comment      Comment[]
+  Request      Request[]
+
+  @@map("students")
+}
+
+model Teacher {
+  id          String    @id @default(uuid())
+  userId      String?   @map("user_id") @db.VarChar(36)
+  classId     String?   @map("class_id") @db.VarChar(36)
+  metadataUrl String?   @map("metadata_url") @db.VarChar(255)
+  name        String    @map("name") @db.VarChar(255)
+  dob         DateTime? @map("dob") @db.Timestamp(6)
+  position    String?   @map("position") @db.VarChar(255)
+
+  user      User?      @relation(fields: [userId], references: [id])
+  class     Class?     @relation(fields: [classId], references: [id])
+  documents Document[]
+  tasks     Task[]
+  exercises Exercise[]
+
+  @@map("teachers")
+}
+
+model Librarian {
+  id          String    @id @default(uuid())
+  userId      String?   @map("user_id") @db.VarChar(36)
+  metadataUrl String?   @map("metadata_url") @db.VarChar(255)
+  name        String    @map("name") @db.VarChar(255)
+  dob         DateTime? @map("dob") @db.Timestamp(6)
+  position    String?   @map("position") @db.VarChar(255)
+
+  user User? @relation(fields: [userId], references: [id])
+
+  // requests Request[]
+  @@map("librarians")
+}
+
+model Document {
+  id          String   @id @default(uuid())
+  teacherId   String?  @map("teacher_id") @db.VarChar(36)
+  type        String?  @map("type") @db.VarChar(255)
+  description String?  @map("description") @db.Text
+  createdAt   DateTime @map("created_at") @db.Timestamp(6)
+  url         String?  @map("url") @db.VarChar(255)
+  metadataUrl String?  @map("metadata_url") @db.VarChar(255)
+
+  teacher          Teacher?          @relation(fields: [teacherId], references: [id])
+  ratings          Rating[]
+  comments         Comment[]
+  goals            Goal[]
+  marks            Mark[]
+  documentStudents DocumentStudent[]
+  BorrowedLog      BorrowedLog[]
+
+  @@map("documents")
+}
+
+model Rating {
+  id         String   @id @default(uuid())
+  documentId String   @map("document_id") @db.VarChar(36)
+  studentId  String   @map("student_id") @db.VarChar(36)
+  star       Int?
+  ratedAt    DateTime @map("rated_at") @db.Timestamp(6)
+
+  document Document @relation(fields: [documentId], references: [id])
+  student  Student  @relation(fields: [studentId], references: [id])
+
+  @@map("ratings")
+}
+
+model Comment {
+  id         String   @id @default(uuid())
+  documentId String   @map("document_id") @db.VarChar(36)
+  studentId  String   @map("student_id") @db.VarChar(36)
+  parentId   String?  @map("parent_id") @db.VarChar(36)
+  content    String   @map("content") @db.Text
+  createdAt  DateTime @map("created_at") @db.Timestamp(6)
+
+  document Document @relation(fields: [documentId], references: [id])
+  student  Student  @relation(fields: [studentId], references: [id])
+
+  // parent   Comment?  @relation(fields: [parentId], references: [id])
+  // Comment  Comment[]
+  @@map("comments")
+}
+
+model DocumentStudent {
+  id             String    @id @default(uuid())
+  documentId     String    @map("document_id") @db.VarChar(36)
+  studentId      String    @map("student_id") @db.VarChar(36)
+  percentage     Int?
+  status         String?   @map("status") @db.VarChar(255)
+  marked         Boolean?
+  startedTime    DateTime? @map("started_time") @db.Timestamp(6)
+  lastAccessTime DateTime? @map("last_access_time") @db.Timestamp(6)
+
+  document Document @relation(fields: [documentId], references: [id])
+  student  Student  @relation(fields: [studentId], references: [id])
+
+  @@map("document_students")
+}
+
+model Goal {
+  id          String    @id @default(uuid())
+  documentId  String    @map("document_id") @db.VarChar(36)
+  studentId   String    @map("student_id") @db.VarChar(36)
+  description String?   @map("description") @db.Text
+  dueDate     DateTime? @map("due_date") @db.Timestamp(6)
+  createdAt   DateTime  @map("created_at") @db.Timestamp(6)
+  status      String?   @map("status") @db.VarChar(255)
+
+  document Document @relation(fields: [documentId], references: [id])
+  student  Student  @relation(fields: [studentId], references: [id])
+
+  @@map("goals")
+}
+
+model Mark {
+  id         String   @id @default(uuid())
+  documentId String   @map("document_id") @db.VarChar(36)
+  studentId  String   @map("student_id") @db.VarChar(36)
+  page       Int?
+  markedAt   DateTime @map("marked_at") @db.Timestamp(6)
+
+  document Document @relation(fields: [documentId], references: [id])
+  student  Student  @relation(fields: [studentId], references: [id])
+
+  @@map("marks")
+}
+
+model Task {
+  id              String    @id @default(uuid())
+  assignerId      String    @map("assigner_id") @db.VarChar(36)
+  assigneeId      String    @map("assignee_id") @db.VarChar(36)
+  status          String?   @map("status") @db.VarChar(255)
+  taskDescription String?   @map("task_description") @db.Text
+  assignedAt      DateTime  @map("assigned_at") @db.Timestamp(6)
+  startTime       DateTime? @map("start_time") @db.Timestamp(6)
+  endTime         DateTime? @map("end_time") @db.Timestamp(6)
+
+  assigner Teacher @relation(fields: [assignerId], references: [id])
+  assignee Student @relation(fields: [assigneeId], references: [id])
+
+  @@map("tasks")
+}
+
+model Request {
+  id          String   @id @default(uuid())
+  librarianId String?  @map("librarian_id") @db.VarChar(36)
+  studentId   String?  @map("student_id") @db.VarChar(36)
+  bookTitle   String?  @map("book_title") @db.VarChar(255)
+  description String?  @map("description") @db.Text
+  status      String?  @map("status") @db.VarChar(255)
+  createdAt   DateTime @map("created_at") @db.Timestamp(6)
+
+  // librarian Librarian @relation(fields: [librarianId], references: [id])
+  student Student? @relation(fields: [studentId], references: [id])
+
+  @@map("requests")
+}
+
+model BorrowedLog {
+  id         String    @id @default(uuid())
+  studentId  String    @map("student_id") @db.VarChar(36)
+  documentId String    @map("document_id") @db.VarChar(36)
+  borrowDate DateTime  @map("borrow_date") @db.Timestamp(6)
+  returnDate DateTime? @map("return_date") @db.Timestamp(6)
+  status     String?   @map("status") @db.VarChar(255)
+
+  student  Student  @relation(fields: [studentId], references: [id])
+  document Document @relation(fields: [documentId], references: [id])
+
+  @@map("borrowed_logs")
+}
+
+model Exercise {
+  id          String   @id @default(uuid())
+  classId     String   @map("class_id") @db.VarChar(36)
+  name        String   @map("name") @db.VarChar(255)
+  level       String?  @map("level") @db.VarChar(255)
+  metadataUrl String?  @map("metadata_url") @db.VarChar(255)
+  createdAt   DateTime @map("created_at") @db.Timestamp(6)
+
+  class            Class             @relation(fields: [classId], references: [id])
+  exerciseStudents ExerciseStudent[]
+  Teacher          Teacher?          @relation(fields: [teacherId], references: [id])
+  teacherId        String?           @db.VarChar(36)
+
+  @@map("exercises")
+}
+
+model ExerciseStudent {
+  id         String   @id @default(uuid())
+  exerciseId String   @map("exercise_id") @db.VarChar(36)
+  studentId  String   @map("student_id") @db.VarChar(36)
+  grade      Int?
+  markedAt   DateTime @map("marked_at") @db.Timestamp(6)
+
+  exercise Exercise @relation(fields: [exerciseId], references: [id])
+  student  Student  @relation(fields: [studentId], references: [id])
+
+  @@map("exercise_students")
+}

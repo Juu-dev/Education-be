@@ -1,0 +1,43 @@
+###################
+# BUILD FOR PRODUCTION
+###################
+
+FROM node:18-slim As build
+
+# Set NODE_ENV environment variable
+ENV NODE_ENV production
+
+WORKDIR /build
+
+COPY --chown=node:node package*.json ./
+
+RUN npm install
+# In order to run `npm run build` we need access to the Nest CLI which is a dev dependency. In the previous development stage we ran `npm ci` which installed all dependencies, so we can copy over the node_modules directory from the development image
+
+# Copy the source code into the container
+COPY --chown=node:node . .
+RUN  npx prisma generate
+# Run the build command which creates the production bundle
+RUN npm run build
+
+# Running `npm ci` removes the existing node_modules directory and passing in --only=production ensures that only the production dependencies are installed. This ensures that the node_modules directory is as optimized as possible
+# RUN npm ci --only=production && npm cache clean --force
+
+USER node
+
+# ###################
+# # PRODUCTION
+# ###################
+
+FROM node:18-slim As production
+
+WORKDIR /usr/src/app
+RUN apt-get update && apt-get install libssl-dev -y --no-install-recommends
+# Copy the bundled code from the build stage to the production image
+COPY --chown=node:node --from=build /build/package*.json /usr/src/app/.
+COPY --chown=node:node --from=build /build/node_modules /usr/src/app/node_modules
+COPY --chown=node:node --from=build /build/dist /usr/src/app/dist
+
+EXPOSE 3000
+# Start the server using the production build
+CMD [ "npm", "run", "start" ]

@@ -1,0 +1,6 @@
+/Users/pham.minh.thong/Working/Binh_An/O2-BE/src/modules/education-service/classes/dto/create-document.dto.ts
+/Users/pham.minh.thong/Working/Binh_An/O2-BE/src/modules/education-service/classes/dto/update-document.dto.ts
+/Users/pham.minh.thong/Working/Binh_An/O2-BE/src/modules/education-service/classes/documents.repository.ts
+/Users/pham.minh.thong/Working/Binh_An/O2-BE/src/modules/education-service/classes/documents.service.ts
+/Users/pham.minh.thong/Working/Binh_An/O2-BE/src/modules/education-service/classes/documents.module.ts
+/Users/pham.minh.thong/Working/Binh_An/O2-BE/src/modules/education-service/classes/documents.controller.ts

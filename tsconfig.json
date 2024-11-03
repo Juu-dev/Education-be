@@ -1,0 +1,71 @@
+{
+  "compilerOptions": {
+    "allowJs": false,
+    // Cho phép sử dụng các tệp JavaScript trong dự án.
+    "allowSyntheticDefaultImports": true,
+    // Cho phép sử dụng các import mặc định trong TypeScript.
+    "baseUrl": "./src",
+    // Cấu hình liên quan đến đường dẫn và alias trong dự án. `"baseUrl"` xác định thư mục gốc cho đường dẫn tương đối
+    "declaration": false,
+    // Nếu đặt thành `true`, TypeScript sẽ tạo ra các tệp `.d.ts` (khai báo) để hỗ trợ IntelliSense và kiểm tra kiểu dữ liệu. Khi `false`, TypeScript sẽ không tạo các tệp `.d.ts`.
+    "emitDecoratorMetadata": true,
+    // Bật chế độ hỗ trợ metadata của các decorators trong TypeScript.
+    "experimentalDecorators": true,
+    // Bật chế độ hỗ trợ decorators trong TypeScript.
+    "esModuleInterop": true,
+    // Bật chế độ hỗ trợ decorators trong TypeScript.
+    "incremental": true,
+    // Bật chế độ biên dịch gia tăng, giúp tăng tốc quá trình biên dịch bằng cách sử dụng bộ nhớ đệm.
+    "module": "commonjs",
+    // Xác định cách TypeScript biên dịch các module (commonjs, esnext, ...).
+    "noImplicitAny": false,
+    // Bật chế độ kiểm tra các biến có kiểu dữ liệu `any` trong mã nguồn TypeScript.
+    "noLib": false,
+    // Bỏ qua các tệp thư viện chuẩn của TypeScript.
+    "noUnusedLocals": false,
+    // Bật chế độ kiểm tra các biến không sử dụng trong mã nguồn TypeScript.
+    "outDir": "dist",
+    // Xác định thư mục đầu ra cho tệp JavaScript sau khi biên dịch. Trong trường hợp này, tệp JavaScript sẽ được lưu trong thư mục "dist".
+    "paths": {
+      "@n-configs/*": ["configs/*"],
+      "@n-constants": ["constants/index"],
+      "@n-constants/*": ["constants/*"],
+      "@n-models": ["models/index"],
+      "@n-models/*": ["models/*"],
+      "@n-database/*": ["database/*"],
+      "@n-decorators": ["decorators/index"],
+      "@n-decorators/*": ["decorators/*"],
+      "@n-dtos": ["dtos/index"],
+      "@n-dtos/*": ["dtos/*"],
+      "@n-exceptions": ["filter-exceptions/index"],
+      "@n-exceptions/*": ["filter-exceptions/*"],
+      "@n-guards/*": ["guards/*"],
+      "@n-interceptors": ["interceptors/index"],
+      "@n-interceptors/*": ["interceptors/*"],
+      "@n-jobs/*": ["jobs/*"],
+      "@n-middlewares/*": ["middlewares/*"],
+      "@n-pipes/*": ["pipes/*"],
+      "@n-shared/*": ["shared/*"],
+      "@n-modules/*": ["modules/*"],
+      "@n-filters/*": ["filters/*"],
+      "@n-utils": ["utils/index"],
+      "@n-utils/*": ["utils/*"]
+    },
+    // `"paths"` cho phép bạn định nghĩa các đối số thay thế cho import (alias). Điều này giúp quản lý các đường dẫn dễ dàng hơn.
+    "removeComments": true,
+    // Xóa các comment trong mã nguồn TypeScript sau khi biên dịch.
+    "skipLibCheck": true,
+    // Bỏ qua kiểm tra các tệp `.d.ts` bên ngoài dự án.
+    "sourceMap": true,
+    // Tạo các tệp map (`.map`) để hỗ trợ gỡ lỗi, cho phép bạn gỡ lỗi mã TypeScript gốc trong mã JavaScript đã biên dịch.
+    // "strictNullChecks": true,
+    // Bật chế độ kiểm tra nghiêm ngặt về kiểu null và undefined. TypeScript sẽ yêu cầu bạn xử lý kiểu dữ liệu này một cách an toàn.
+    "target": "ES2021",
+    // Xác định phiên bản ECMAScript mà mã nguồn TypeScript được biên dịch thành.
+    "useUnknownInCatchVariables": false
+    // Bật chế độ kiểm tra nghiêm ngặt về kiểu dữ liệu trong các biểu thức `catch`.
+  },
+  "include": ["src/**/*.ts"],
+  "exclude": ["node_modules", "src/**/*.spec.ts"]
+  // Xác định danh sách các thư mục hoặc tệp mà TypeScript sẽ bỏ qua trong quá trình biên dịch. Trong trường hợp này, TypeScript sẽ bỏ qua thư mục "node_modules" và các tệp có phần mở rộng ".spec.ts" (các tệp kiểm thử).
+}

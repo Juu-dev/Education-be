@@ -1,0 +1,84 @@
+services:
+  app:
+    container_name: education-backend
+    build:
+      context: ../../
+      dockerfile: ./docker/developer/Dockerfile
+    working_dir: /home/node/app
+    # command: [ "npm", "run", "start:dev" ]
+    restart: unless-stopped
+    tty: true
+    env_file:
+      - .env.local
+    volumes:
+      - ../../:/home/node/app
+    ports:
+      - 9001:9001
+    networks:
+      - education-network
+    depends_on:
+      # Local database
+      - postgres
+      - redis
+
+
+  prisma-studio:
+    container_name: education-prisma-studio
+    build:
+      context: ../../
+      dockerfile: ./docker/developer/Dockerfile
+    working_dir: /home/node/app
+    command: ["npx", "prisma", "studio"]
+    restart: unless-stopped
+    tty: true
+    env_file:
+      - .env.local
+    volumes:
+      - ../../:/home/node/app
+    ports:
+      - 5555:5555
+    networks:
+      - education-network
+    depends_on:
+      # Local database
+      - postgres
+      - redis
+
+
+  # If you want to use local database, use this code
+  postgres:
+     container_name: education-postgres
+     image: postgres:13.5
+     restart: unless-stopped
+     environment:
+       POSTGRES_DB: education_db
+       POSTGRES_USER: education_username
+       POSTGRES_PASSWORD: education_password
+     volumes:
+       - postgres:/var/lib/postgresql/data
+     ports:
+       - 5432:5432
+     networks:
+       - education-network
+
+  redis:
+    container_name: education-redis
+    image: redis/redis-stack-server:latest
+    restart: unless-stopped
+    ports:
+      - 6379:6379
+    volumes:
+      - redis:/data
+    networks:
+      - education-network
+
+volumes:
+  # Local database
+  postgres:
+    driver: local
+  redis:
+    driver: local
+
+networks:
+  education-network:
+    driver: bridge

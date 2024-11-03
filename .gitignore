@@ -1,0 +1,30 @@
+# Logs
+*.log
+.DS_Store
+
+npm-debug.log*
+
+logs/access.txt
+
+# Dependency directory
+node_modules
+
+# Optional npm cache directory
+.npm
+#IDEs
+.idea
+
+.env
+.env.local
+
+#config files
+ormconfig.json
+src/config.ts
+
+# code testing coverage
+coverage
+
+
+dist/
+yarn.lock
+package-lock.json

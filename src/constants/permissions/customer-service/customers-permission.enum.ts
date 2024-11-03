@@ -1,0 +1,8 @@
+enum CustomersPermission {
+  GET_CUSTOMERS = 'GET_CUSTOMERS',
+  CREATE_CUSTOMER = 'CREATE_CUSTOMER',
+  UPDATE_CUSTOMER = 'UPDATE_CUSTOMER',
+  EXPORT_CUSTOMERS = 'EXPORT_CUSTOMERS',
+}
+
+export default CustomersPermission;

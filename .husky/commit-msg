@@ -1,0 +1,44 @@
+#!/usr/bin/env bash
+
+# Đọc nội dung commit message từ tệp
+message="$(cat $1)"
+
+# Biểu thức chính quy cho mã công việc
+taskCodePattern="^\[([A-Z]+-[0-9]+)\]"
+
+# Biểu thức chính quy cho loại công việc
+typePattern="^(feature|fixbug|refactor|build|chore)"
+
+# Biểu thức chính quy cho mô tả công việc
+descriptionPattern=": [A-Z].*"
+
+# Kiểm tra mã công việc
+if [[ $message =~ $taskCodePattern ]]; then
+  taskCode=${BASH_REMATCH[1]}
+  echo "Task code: $taskCode"
+else
+  echo "Task code is not valid"
+  exit 1
+fi
+
+# Kiểm tra loại công việc
+if [[ $message =~ $typePattern ]]; then
+  type=${BASH_REMATCH[1]}
+  echo "Type: $type"
+else
+  echo "Type is not valid"
+  exit 1
+fi
+
+# Kiểm tra mô tả công việc
+if [[ $message =~ $descriptionPattern ]]; then
+  description=${BASH_REMATCH[0]:2}
+  description=$(echo "$description" | sed '/^#/d')
+  echo "Description: $description"
+else
+  echo "Description is not valid"
+  exit 1
+fi
+
+# Nếu tất cả đều hợp lệ, thoát với mã trạng thái 0
+exit 0

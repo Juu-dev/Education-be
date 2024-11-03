@@ -1,0 +1,103 @@
+name: O2 Clinic Backend Intergration Production
+
+on:
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  build-test:
+    name: Run build and test source code
+    runs-on: ubuntu-latest
+    permissions: write-all
+    strategy:
+      matrix:
+        node-version: ["18.x"]
+    steps:
+      - uses: actions/checkout@v2
+      - name: Install Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+          # cache: 'npm'
+      
+      - name: get SHORT_SHA
+        id: get_sha
+        run: |
+          SHORT_SHA=$(git rev-parse --short ${{ github.event.pull_request.head.sha || github.sha }})
+          echo "SHORT_SHA=$SHORT_SHA" >> "$GITHUB_OUTPUT"
+          echo "SHORT_SHA=$SHORT_SHA"
+      - name: Get npm cache directory # get cache directory in github runner
+        id: npm-cache-dir
+        shell: bash
+        run: echo "dir=$(npm config get cache)" >> ${GITHUB_OUTPUT}
+
+      - name: cache node modules # get cache hash file in runner
+        id:  npm-cache 
+        uses: actions/cache@v2
+        with:
+          path: node_modules
+          key: ${{ github.event.repository.name }}-${{ runner.os }}-node_modules-cache-restore-key-from-package.json-${{ hashFiles('**/package.json') }}
+          restore-keys: |
+               ${{ github.event.repository.name }}-${{ runner.os }}-node_modules-cache-restore-key-from-package.json-${{ hashFiles('**/package.json') }}
+      - name: Install dependencies
+        #if cache is true then skip npm i, else run npm i
+        if: steps. npm-cache .outputs.cache-hit != 'true' 
+        run: |
+          npm install
+      - name: Generate prisma
+        run: |
+          npx prisma generate
+      - name: Save Code Linting Report JSON
+        run: 
+          npm run lint:report
+        continue-on-error: true
+      - name: Annotate Code Linting Results
+        uses: ataylorme/eslint-annotate-action@v2
+        with:
+          repo-token: "${{ secrets.GITHUB_TOKEN }}"
+          report-json: "eslint_report.json"
+      # Build test
+      - name: Build
+        run: |
+          npm run build
+    outputs:
+      SHORT_SHA: ${{ steps.get_sha.outputs.SHORT_SHA }}
+
+  build-and-push-image-docker-to-ghcr:
+    name: Build and push Docker image to GitHub Container Registry
+    runs-on: ubuntu-latest
+    needs: build-test
+    permissions:
+      contents: read
+      packages: write
+    env:
+      PR_NUMBER: ${{ github.event.number }}
+      SHORT_SHA: ${{ needs.build-test.outputs.SHORT_SHA }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check repository
+        run: ls -la
+      
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+        
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ vars.GHCR_USERNAME }}
+          password: ${{ secrets.GHCR_TOKEN }}
+      - name: Build and push
+        uses: docker/build-push-action@v3
+        with:
+          context: .
+          file: ./docker/production/Dockerfile
+          push: true
+          tags: |
+            ghcr.io/colorme-bussiness-development/${{ github.event.repository.name }}:${{ env.SHORT_SHA }}
+            ghcr.io/colorme-bussiness-development/${{ github.event.repository.name }}:latest
+          # cache-from: type=local,src=/tmp/.buildx-cache
+          # cache-to: type=local,dest=/tmp/.buildx-cache-new
+          cache-from: type=gha
+          cache-to: type=gha, mode=max    
