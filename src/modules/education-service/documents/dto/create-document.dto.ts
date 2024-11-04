@@ -43,7 +43,7 @@ export class CreateDocumentDto {
         description: 'Thời điểm tạo tài liệu',
         type: String
     })
-    @Transform(({ value }) => new Date(value))
+    @Transform(({value}) => new Date(value))
     createdAt?: Date;
 
     @IsString()

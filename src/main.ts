@@ -60,8 +60,8 @@ async function bootstrap() {
 
 function setupOpenApi(app: INestApplication) {
   const options = new DocumentBuilder()
-    .setTitle('O2 SKIN API')
-    .setDescription('NestJS application for O2 Skin Backend')
+    .setTitle('EDUCATION API')
+    .setDescription('NestJS application for Education Backend')
     .setVersion('1.0')
     .addBearerAuth()
     .build();

@@ -2,40 +2,21 @@
 
 ## For developer
 
-- to run compose (BE-db-redis):
+- to build docker container:
 
 ```sh
-./script-docker/start-dev-docker-compose.sh
+make init-dev
 ```
 
-- to watch backend log
+- to connect db:
 
 ```sh
-./script-docker/log-backend.sh
+make connect
 ```
 
-- to stop compose
+- to migrate db, seed database
+check file Makefile -> find command -> copy -> parse to container terminal
 
-```sh
-./script-docker/stop-dev-docker-compose.sh
-```
+Bug -> ChatGPT research, please
 
-## dependencies
-
-- class-validator: ValidationPipe
-- class-transformer: DTOs
-- cli-color: color for cli in terminal
-- cors
-- express (???)
-- graphql-subscriptions (???)
-- iterare (data Array)
-- object-hash (hash object in JS)
-- 
-
-## hot reload
-
-## Permission
-
-- Edit _PermissionNameType_ in schema.prisma
-- Update enum permisstion in constants/permission path folder
-- Update permission.type.ts to use permission in @Permission decorator
+BE run on port 9001 -> check 9001/swagger to read doc API

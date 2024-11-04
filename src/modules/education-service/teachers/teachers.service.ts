@@ -22,11 +22,13 @@ export class TeachersService {
         const items = await this.teachersRepository.findAllPagination(page, pageSize);
 
         return {
-            page: page,
-            pageSize: pageSize,
-            totalPage: Math.ceil(count / pageSize),
+            pagination: {
+                page: page,
+                pageSize: pageSize,
+                totalPage: Math.ceil(count / pageSize)
+            },
             count,
-            items,
+            data: items,
         };
     }
 
@@ -37,7 +39,17 @@ export class TeachersService {
             throw new BaseException(Errors.CATEGORY.CATEGORY_NOT_FOUND);
         }
 
-        return teacher;
+        return {data: teacher};
+    }
+
+    async getTeacherByUserId(userId: string) {
+        const teacher = await this.teachersRepository.findByUserId(userId);
+
+        if (!teacher) {
+            throw new BaseException(Errors.CATEGORY.CATEGORY_NOT_FOUND);
+        }
+
+        return {data: teacher};
     }
 
     async updateTeacher(id: string, updateTeacherDto: UpdateTeacherDto) {

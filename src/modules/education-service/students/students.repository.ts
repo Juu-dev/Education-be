@@ -9,4 +9,8 @@ export class StudentsRepository extends GenericRepository<Student> {
     constructor(private readonly prismaService: PrismaService) {
         super(prismaService, 'student');
     }
+
+    async findByClassId(id: string): Promise<Student[] | null> {
+        return this.prismaService.student.findMany({where: {classId: id}});
+    }
 }

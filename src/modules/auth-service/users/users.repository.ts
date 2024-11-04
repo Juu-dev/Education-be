@@ -13,6 +13,10 @@ export class UsersRepository extends GenericRepository<User> {
         return this.prismaService.user.findFirst({
             where: {
                 username,
+            },
+            include: {
+                Student: true,
+                Teacher: true,
             }
         })
     }

@@ -9,4 +9,13 @@ export class TeachersRepository extends GenericRepository<Teacher> {
     constructor(private readonly prismaService: PrismaService) {
         super(prismaService, 'teacher');
     }
+
+    async findByUserId(userId: string): Promise<Teacher | null> {
+        return this.prismaService.teacher.findFirst({where: {userId},
+            include: {
+                class: true,
+                user: true,
+            }
+        });
+    }
 }

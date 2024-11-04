@@ -1,6 +1,6 @@
 #!/bin/bash
 
-DIRECTORY="/Users/pham.minh.thong/Working/Binh_An/O2-BE/src/modules/education-service/students"
+DIRECTORY="/Users/pham.minh.thong/Working/Binh_An/Education-be/src/modules/education-service/students"
 SEARCH_STRING="teacher"
 REPLACE_STRING="student"
 

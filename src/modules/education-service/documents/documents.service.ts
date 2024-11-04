@@ -22,11 +22,13 @@ export class DocumentsService {
         const items = await this.documentsRepository.findAllPagination(page, pageSize);
 
         return {
-            page: page,
-            pageSize: pageSize,
-            totalPage: Math.ceil(count / pageSize),
+            pagination: {
+                page: page,
+                pageSize: pageSize,
+                totalPage: Math.ceil(count / pageSize)
+            },
             count,
-            items,
+            data: items,
         };
     }
 

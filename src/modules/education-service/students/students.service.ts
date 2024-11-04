@@ -22,11 +22,13 @@ export class StudentsService {
         const items = await this.studentsRepository.findAllPagination(page, pageSize);
 
         return {
-            page: page,
-            pageSize: pageSize,
-            totalPage: Math.ceil(count / pageSize),
+            pagination: {
+                page: page,
+                pageSize: pageSize,
+                totalPage: Math.ceil(count / pageSize)
+            },
             count,
-            items,
+            data: items,
         };
     }
 
@@ -38,6 +40,16 @@ export class StudentsService {
         }
 
         return student;
+    }
+
+    async getStudentsByClassId(id: string) {
+        const students = await this.studentsRepository.findByClassId(id);
+
+        if (!students) {
+            throw new BaseException(Errors.CATEGORY.CATEGORY_NOT_FOUND);
+        }
+
+        return {data: students};
     }
 
     async updateStudent(id: string, updateStudentDto: UpdateStudentDto) {

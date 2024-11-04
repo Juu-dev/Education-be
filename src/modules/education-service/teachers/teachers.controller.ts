@@ -51,6 +51,14 @@ export class TeachersController {
         return this.teachersService.getTeacherById(id);
     }
 
+    @Get('user/:id')
+    @Roles([Permission.GET_CATEGORY])
+    @AuthClaims()
+    @ApiOkResponse({type: CategoryEntity})
+    findOneByUserId(@Param('id') id: string) {
+        return this.teachersService.getTeacherByUserId(id);
+    }
+
     @Patch(':id')
     @Roles([Permission.UPDATE_CATEGORY])
     @AuthClaims()

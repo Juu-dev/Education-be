@@ -157,17 +157,17 @@ const seedDocuments = async () => {
 
 
 const main = async () => {
-  // await seedRoles();
-  //
-  // const users = await seedUsers();
-  // const userIds = users.map(user => user.id);
-  // await assignRoles(userIds);
-  //
-  // const classIds = await seedClasses();
-  //
-  // await seedStudents(userIds, classIds.map(classData => classData.id));
-  // await seedTeachers(userIds, classIds.map(classData => classData.id));
-  // await seedDocuments();
+  await seedRoles();
+
+  const users = await seedUsers();
+  const userIds = users.map(user => user.id);
+  await assignRoles(userIds);
+
+  const classIds = await seedClasses();
+
+  await seedStudents(userIds, classIds.map(classData => classData.id));
+  await seedTeachers(userIds, classIds.map(classData => classData.id));
+  await seedDocuments();
 
   console.log('Seeding completed!');
 };

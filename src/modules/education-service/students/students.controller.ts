@@ -51,6 +51,14 @@ export class StudentsController {
         return this.studentsService.getStudentById(id);
     }
 
+    @Get('class/:id')
+    @Roles([Permission.GET_CATEGORY])
+    @AuthClaims()
+    @ApiOkResponse({type: CategoryEntity})
+    findByClassId(@Param('id') id: string) {
+        return this.studentsService.getStudentsByClassId(id);
+    }
+
     @Patch(':id')
     @Roles([Permission.UPDATE_CATEGORY])
     @AuthClaims()
