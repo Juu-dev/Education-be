@@ -28,3 +28,5 @@ coverage
 dist/
 yarn.lock
 package-lock.json
+
+/uploads
