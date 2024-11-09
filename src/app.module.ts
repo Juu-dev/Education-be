@@ -25,6 +25,7 @@ import {EducationServiceModule} from '@n-modules/education-service/education-ser
 
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
+import { FileUploadModule } from './modules/file-upload/file-upload.module';
 
 @Module({
   imports: [
@@ -40,6 +41,7 @@ import { AppService } from './app.service';
     PrismaModule,
     AuthServiceModule,
     EducationServiceModule,
+    FileUploadModule,
   ],
   controllers: [AppController],
   providers: [
