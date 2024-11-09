@@ -5,6 +5,8 @@ import { extname } from 'path';
 
 @Controller('file-upload')
 export class FileUploadController {
+  private readonly baseUrl: string = `http://${process.env.CLIENT_URL}:${process.env.PORT}/api/v1`; // Địa chỉ server của bạn
+
   @Post('upload')
   @UseInterceptors(
     FileInterceptor('file', {
@@ -22,12 +24,15 @@ export class FileUploadController {
     }),
   )
   uploadFile(@UploadedFile() file: Express.Multer.File) {
+    const fileUrl = `${this.baseUrl}/uploads/${file.filename}`; // Tạo URL của file
+
     return {
       message: 'File uploaded successfully!',
       fileName: file.filename,
       originalName: file.originalname,
       mimeType: file.mimetype,
       size: file.size,
+      url: fileUrl, // Trả về URL của tài liệu
     };
   }
 }
