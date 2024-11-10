@@ -21,7 +21,7 @@ import { HttpExceptionFilter } from '@n-exceptions';
 import { ResponseInterceptor } from '@n-interceptors';
 import { ScheduledJobService } from '@n-jobs/sync-categories.auth-service';
 import { AuthServiceModule } from '@n-modules/auth-service/auth-service.module';
-import {EducationServiceModule} from '@n-modules/education-service/education-service.module';
+import { EducationServiceModule } from '@n-modules/education-service/education-service.module';
 
 import { AppController } from './app.controller';
 import { AppService } from './app.service';

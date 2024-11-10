@@ -1,72 +1,74 @@
-import {Permission} from '@n-constants';
-import {AuthClaims, Roles} from '@n-decorators';
-import {PaginationParamsDto} from '@n-dtos';
-import {Body, Controller, Get, Param, Patch, Post, Query} from '@nestjs/common';
-import {ApiCreatedResponse, ApiOkResponse, ApiTags} from '@nestjs/swagger';
+import { Permission } from '@n-constants';
+import { AuthClaims, Roles } from '@n-decorators';
+import { PaginationParamsDto } from '@n-dtos';
+import {
+  Body, Controller, Get, Param, Patch, Post, Query,
+} from '@nestjs/common';
+import { ApiCreatedResponse, ApiOkResponse, ApiTags } from '@nestjs/swagger';
 
-import {CategoryEntity} from './entities/category.entity';
-import {CreateTeacherDto, UpdateTeacherDto} from "@n-modules/education-service/teachers/dto";
-import {TeachersService} from "@n-modules/education-service/teachers/teachers.service";
+import { CreateTeacherDto, UpdateTeacherDto } from '@n-modules/education-service/teachers/dto';
+import { TeachersService } from '@n-modules/education-service/teachers/teachers.service';
+import { CategoryEntity } from './entities/category.entity';
 
 @Controller('teachers')
 @ApiTags('Teacher')
 export class TeachersController {
-    constructor(private readonly teachersService: TeachersService) {
-    }
+  constructor(private readonly teachersService: TeachersService) {
+  }
 
-    @Post()
-    @Roles([Permission.CREATE_CATEGORY])
-    @AuthClaims()
-    @ApiCreatedResponse({type: CategoryEntity})
-    create(
-        @Body() createCategoryDto: CreateTeacherDto,
-    ) {
-        return this.teachersService.createTeacher(createCategoryDto);
-    }
+  @Post()
+  @Roles([Permission.CREATE_CATEGORY])
+  @AuthClaims()
+  @ApiCreatedResponse({ type: CategoryEntity })
+  create(
+  @Body() createCategoryDto: CreateTeacherDto,
+  ) {
+    return this.teachersService.createTeacher(createCategoryDto);
+  }
 
-    @Get('pagination')
-    @Roles([Permission.GET_CATEGORIES])
-    @AuthClaims()
-    @ApiOkResponse({
-        type: CategoryEntity,
-        isArray: true
-    })
-    findAll(
-        @Query() {
-            page,
-            pageSize
-        }: PaginationParamsDto,
-    ) {
-        return this.teachersService.getListTeacher(
-            page,
-            pageSize,
-        );
-    }
+  @Get('pagination')
+  @Roles([Permission.GET_CATEGORIES])
+  @AuthClaims()
+  @ApiOkResponse({
+    type: CategoryEntity,
+    isArray: true,
+  })
+  findAll(
+  @Query() {
+    page,
+    pageSize,
+  }: PaginationParamsDto,
+  ) {
+    return this.teachersService.getListTeacher(
+      page,
+      pageSize,
+    );
+  }
 
-    @Get(':id')
-    @Roles([Permission.GET_CATEGORY])
-    @AuthClaims()
-    @ApiOkResponse({type: CategoryEntity})
-    findOne(@Param('id') id: string) {
-        return this.teachersService.getTeacherById(id);
-    }
+  @Get(':id')
+  @Roles([Permission.GET_CATEGORY])
+  @AuthClaims()
+  @ApiOkResponse({ type: CategoryEntity })
+  findOne(@Param('id') id: string) {
+    return this.teachersService.getTeacherById(id);
+  }
 
-    @Get('user/:id')
-    @Roles([Permission.GET_CATEGORY])
-    @AuthClaims()
-    @ApiOkResponse({type: CategoryEntity})
-    findOneByUserId(@Param('id') id: string) {
-        return this.teachersService.getTeacherByUserId(id);
-    }
+  @Get('user/:id')
+  @Roles([Permission.GET_CATEGORY])
+  @AuthClaims()
+  @ApiOkResponse({ type: CategoryEntity })
+  findOneByUserId(@Param('id') id: string) {
+    return this.teachersService.getTeacherByUserId(id);
+  }
 
-    @Patch(':id')
-    @Roles([Permission.UPDATE_CATEGORY])
-    @AuthClaims()
-    @ApiOkResponse({type: CategoryEntity})
-    update(@Param('id') id: string, @Body() updateCategoryDto: UpdateTeacherDto) {
-        return this.teachersService.updateTeacher(
-            id,
-            updateCategoryDto,
-        );
-    }
+  @Patch(':id')
+  @Roles([Permission.UPDATE_CATEGORY])
+  @AuthClaims()
+  @ApiOkResponse({ type: CategoryEntity })
+  update(@Param('id') id: string, @Body() updateCategoryDto: UpdateTeacherDto) {
+    return this.teachersService.updateTeacher(
+      id,
+      updateCategoryDto,
+    );
+  }
 }

@@ -1,50 +1,50 @@
-import {AuthServiceUser} from '@prisma/client';
-import {ApiProperty} from '@nestjs/swagger';
-import {Exclude} from 'class-transformer';
+import { AuthServiceUser } from '@prisma/client';
+import { ApiProperty } from '@nestjs/swagger';
+import { Exclude } from 'class-transformer';
 
 export class UserEntity implements AuthServiceUser {
-    @ApiProperty()
+  @ApiProperty()
     id: string;
 
-    @ApiProperty()
+  @ApiProperty()
     platformid: string;
 
-    @ApiProperty()
+  @ApiProperty()
     avatarUrl: string;
 
-    @ApiProperty()
+  @ApiProperty()
     phone: string;
 
-    @ApiProperty()
+  @ApiProperty()
     name: string;
 
-    @Exclude()
-    @ApiProperty()
+  @Exclude()
+  @ApiProperty()
     password: string;
 
-    @ApiProperty()
+  @ApiProperty()
     code: string;
 
-    @ApiProperty()
+  @ApiProperty()
     legalName: string;
 
-    @ApiProperty()
+  @ApiProperty()
     email: string;
 
-    @Exclude()
-    @ApiProperty()
+  @Exclude()
+  @ApiProperty()
     otp: number;
 
-    @Exclude()
-    @ApiProperty()
+  @Exclude()
+  @ApiProperty()
     otpExpiredAt: Date;
 
-    @ApiProperty()
+  @ApiProperty()
     createdAt: Date;
 
-    @ApiProperty()
+  @ApiProperty()
     updatedAt: Date;
 
-    @ApiProperty()
+  @ApiProperty()
     isActive: boolean;
 }
