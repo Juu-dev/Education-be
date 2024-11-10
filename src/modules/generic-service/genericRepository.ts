@@ -1,4 +1,5 @@
 import { PrismaClient } from '@prisma/client';
+import {includesConfig} from "@n-modules/generic-service/includesConfig";
 
 export class GenericRepository<T> {
   constructor(private prisma: PrismaClient, private model: string) {
@@ -14,9 +15,13 @@ export class GenericRepository<T> {
 
   async findAllPagination(page: number = 1, limit: number = 10): Promise<T[]> {
     const skip = (page - 1) * limit;
+
+    // console.log(this.model, includesConfig[this.model])
+
     return this.prisma[this.model].findMany({
       skip,
       take: limit,
+      include: includesConfig[this.model] || {},
     });
   }
 

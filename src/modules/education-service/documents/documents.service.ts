@@ -16,11 +16,16 @@ export class DocumentsService {
   async getListDocument(
     page?: number,
     pageSize?: number,
+    teacherId?: string,
   ) {
-    const count = await this.documentsRepository.count();
+    console.log("teacherId: ", teacherId)
+    const count = teacherId
+        ? await this.documentsRepository.countByTeacherId(teacherId)
+        : await this.documentsRepository.count();
 
-    const items = await this.documentsRepository.findAllPagination(page, pageSize);
-
+    const items = teacherId
+        ? await this.documentsRepository.findAllPaginationByTeacherId(page, pageSize, teacherId)
+        : await this.documentsRepository.findAllPagination(page, pageSize);
     return {
       pagination: {
         page,

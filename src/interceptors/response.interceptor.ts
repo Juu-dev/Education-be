@@ -19,6 +19,7 @@ export interface Response<T> {
   message: string;
   statusCode: number;
   result: T;
+  success: boolean;
 }
 
 @Injectable()
@@ -74,6 +75,7 @@ export class ResponseInterceptor<T> implements NestInterceptor<T, Response<T>> {
 
     return {
       message: 'Success',
+      success: true,
       statusCode: HttpStatus.OK,
       result: responseBody,
     };

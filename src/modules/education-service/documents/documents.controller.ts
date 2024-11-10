@@ -45,6 +45,27 @@ export class DocumentsController {
     );
   }
 
+  @Get('pagination/:teacherId')
+  @Roles([Permission.GET_CATEGORIES])
+  @AuthClaims()
+  @ApiOkResponse({
+    type: CategoryEntity,
+    isArray: true,
+  })
+  findAllByTeacherId(
+      @Query() {
+        page,
+        pageSize,
+      }: PaginationParamsDto,
+      @Param('teacherId') teacherId: string
+  ) {
+    return this.documentsService.getListDocument(
+        page,
+        pageSize,
+        teacherId
+    );
+  }
+
   @Get(':id')
   @Roles([Permission.GET_CATEGORY])
   @AuthClaims()
