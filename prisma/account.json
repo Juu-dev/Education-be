@@ -1,0 +1,64 @@
+{
+    "accounts": [
+        {
+            "username": "binh.ttt",
+            "password": "123456"
+        },
+        {
+            "username": "anh76.ntv",
+            "password": "123456"
+        },
+        {
+            "username": "anh75.ntv",
+            "password": "123456"
+        },
+        {
+            "username": "bau.dt",
+            "password": "123456"
+        },
+        {
+            "username": "an.ptb",
+            "password": "123456"
+        },
+        {
+            "username": "dung.ntm",
+            "password": "123456"
+        },
+        {
+            "username": "ha.ht",
+            "password": "123456"
+        },
+        {
+            "username": "ha.ltv",
+            "password": "123456"
+        },
+        {
+            "username": "ha.lth",
+            "password": "123456"
+        },
+        {
+            "username": "ha.ntt",
+            "password": "123456"
+        },
+        {
+            "username": "hai.ltt",
+            "password": "123456"
+        },
+        {
+            "username": "hang.dtb",
+            "password": "123456"
+        },
+        {
+            "username": "hang.ntl",
+            "password": "123456"
+        },
+        {
+            "username": "hang.ntt",
+            "password": "123456"
+        },
+        {
+            "username": "hien.dtt",
+            "password": "123456"
+        }
+    ]
+}
