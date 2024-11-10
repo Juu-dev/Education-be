@@ -1,25 +1,25 @@
-import {AuthServiceRole} from '@prisma/client';
-import {ApiProperty} from '@nestjs/swagger';
+import { AuthServiceRole } from '@prisma/client';
+import { ApiProperty } from '@nestjs/swagger';
 
 export class RoleEntity implements AuthServiceRole {
-    @ApiProperty()
+  @ApiProperty()
     id: string;
 
-    @ApiProperty()
+  @ApiProperty()
     platformid: string;
 
-    @ApiProperty()
+  @ApiProperty()
     name: string;
 
-    @ApiProperty()
+  @ApiProperty()
     description: string;
 
-    @ApiProperty()
+  @ApiProperty()
     createdAt: Date;
 
-    @ApiProperty()
+  @ApiProperty()
     updatedAt: Date;
 
-    @ApiProperty()
+  @ApiProperty()
     isActive: boolean;
 }

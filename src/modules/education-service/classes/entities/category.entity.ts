@@ -1,37 +1,37 @@
-import {CategoryType, CateServiceCategory, Prisma} from '@prisma/client';
-import {ApiProperty} from '@nestjs/swagger';
+import { CategoryType, CateServiceCategory, Prisma } from '@prisma/client';
+import { ApiProperty } from '@nestjs/swagger';
 
 export class CategoryEntity implements CateServiceCategory {
-    @ApiProperty()
+  @ApiProperty()
     id: string;
 
-    @ApiProperty()
+  @ApiProperty()
     platformid: string;
 
-    @ApiProperty()
+  @ApiProperty()
     name: string;
 
-    @ApiProperty()
+  @ApiProperty()
     description: string;
 
-    @ApiProperty()
+  @ApiProperty()
     address: string;
 
-    @ApiProperty()
+  @ApiProperty()
     color: string;
 
-    @ApiProperty()
+  @ApiProperty()
     categoryType: CategoryType;
 
-    @ApiProperty()
+  @ApiProperty()
     metadata: Prisma.JsonValue;
 
-    @ApiProperty()
+  @ApiProperty()
     createdAt: Date;
 
-    @ApiProperty()
+  @ApiProperty()
     updatedAt: Date;
 
-    @ApiProperty()
+  @ApiProperty()
     isActive: boolean;
 }
