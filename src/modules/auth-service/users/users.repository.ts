@@ -1,7 +1,7 @@
 import { PrismaService } from '@n-database/prisma/prisma.service';
 import { Injectable } from '@nestjs/common';
 import { User } from '@prisma/client';
-import { GenericRepository } from '@n-modules/generic-service/genericRepository';
+import { GenericRepository } from '@n-modules/generic-service/generic.repository';
 
 @Injectable()
 export class UsersRepository extends GenericRepository<User> {
@@ -17,6 +17,11 @@ export class UsersRepository extends GenericRepository<User> {
       include: {
         Student: true,
         Teacher: true,
+        roles: {
+          include: {
+              role: true
+          }
+        }
       },
     });
   }

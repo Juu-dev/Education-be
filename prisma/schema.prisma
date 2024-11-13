@@ -24,22 +24,39 @@ datasource db {
 // schema.prisma
 
 model User {
-  id       String @id @default(uuid()) @map("id")
-  username String @unique @map("username") @db.VarChar(20)
-  password String @map("password") @db.VarChar(120)
-  email    String @unique @map("email") @db.VarChar(50)
+  id        String   @id @default(uuid()) @map("id")
+  username  String   @unique @map("username") @db.VarChar(20)
+  password  String   @map("password") @db.VarChar(120)
+  email     String   @unique @map("email") @db.VarChar(50)
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @default(now()) @updatedAt @map("updated_at")
 
-  roles      UserRole[]
-  librarians Librarian[]
-  Student    Student?
-  Teacher    Teacher?
+  roles        UserRole[]
+  librarians   Librarian[]
+  Student      Student?
+  Teacher      Teacher?
+  RefreshToken RefreshToken[]
 
   @@map("users")
 }
 
+model RefreshToken {
+  id        String   @id @default(uuid()) @map("id")
+  value     String
+  userId    String   @map("user_id")
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @default(now()) @updatedAt @map("updated_at")
+
+  User User? @relation(fields: [userId], references: [id])
+
+  @@map("refresh_tokens")
+}
+
 model Role {
-  id   String @id @default(uuid()) @map("id")
-  name String @unique @map("name") @db.VarChar(255)
+  id        String   @id @default(uuid()) @map("id")
+  name      String   @unique @map("name") @db.VarChar(255)
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @default(now()) @updatedAt @map("updated_at")
 
   users UserRole[]
 
@@ -58,9 +75,11 @@ model UserRole {
 }
 
 model Class {
-  id     String @id @default(uuid())
-  name   String @map("name") @db.VarChar(255)
-  amount Int?   @map("amount") @db.Integer
+  id        String   @id @default(uuid())
+  name      String   @map("name") @db.VarChar(255)
+  amount    Int?     @map("amount") @db.Integer
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @default(now()) @updatedAt @map("updated_at")
 
   students  Student[]
   teachers  Teacher[]
@@ -78,6 +97,8 @@ model Student {
   birthDate   DateTime? @map("birth_date") @db.Timestamp(6)
   parentName  String?   @map("parent_name") @db.VarChar(255)
   level       String?   @map("level") @db.VarChar(255)
+  createdAt   DateTime  @default(now()) @map("created_at")
+  updatedAt   DateTime  @default(now()) @updatedAt @map("updated_at")
 
   user         User?             @relation(fields: [userId], references: [id])
   class        Class?            @relation(fields: [classId], references: [id])
@@ -102,6 +123,8 @@ model Teacher {
   name        String    @map("name") @db.VarChar(255)
   dob         DateTime? @map("dob") @db.Timestamp(6)
   position    String?   @map("position") @db.VarChar(255)
+  createdAt   DateTime  @default(now()) @map("created_at")
+  updatedAt   DateTime  @default(now()) @updatedAt @map("updated_at")
 
   user      User?      @relation(fields: [userId], references: [id])
   class     Class?     @relation(fields: [classId], references: [id])
@@ -119,6 +142,8 @@ model Librarian {
   name        String    @map("name") @db.VarChar(255)
   dob         DateTime? @map("dob") @db.Timestamp(6)
   position    String?   @map("position") @db.VarChar(255)
+  createdAt   DateTime  @default(now()) @map("created_at")
+  updatedAt   DateTime  @default(now()) @updatedAt @map("updated_at")
 
   user User? @relation(fields: [userId], references: [id])
 
@@ -131,9 +156,10 @@ model Document {
   teacherId   String?  @map("teacher_id") @db.VarChar(36)
   type        String?  @map("type") @db.VarChar(255)
   description String?  @map("description") @db.Text
-  createdAt   DateTime @map("created_at") @db.Timestamp(6)
   url         String?  @map("url") @db.VarChar(255)
   metadataUrl String?  @map("metadata_url") @db.VarChar(255)
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @default(now()) @updatedAt @map("updated_at")
 
   teacher          Teacher?          @relation(fields: [teacherId], references: [id])
   ratings          Rating[]
@@ -152,6 +178,8 @@ model Rating {
   studentId  String   @map("student_id") @db.VarChar(36)
   star       Int?
   ratedAt    DateTime @map("rated_at") @db.Timestamp(6)
+  createdAt  DateTime @default(now()) @map("created_at")
+  updatedAt  DateTime @default(now()) @updatedAt @map("updated_at")
 
   document Document @relation(fields: [documentId], references: [id])
   student  Student  @relation(fields: [studentId], references: [id])
@@ -165,7 +193,8 @@ model Comment {
   studentId  String   @map("student_id") @db.VarChar(36)
   parentId   String?  @map("parent_id") @db.VarChar(36)
   content    String   @map("content") @db.Text
-  createdAt  DateTime @map("created_at") @db.Timestamp(6)
+  createdAt  DateTime @default(now()) @map("created_at")
+  updatedAt  DateTime @default(now()) @updatedAt @map("updated_at")
 
   document Document @relation(fields: [documentId], references: [id])
   student  Student  @relation(fields: [studentId], references: [id])
@@ -184,6 +213,8 @@ model DocumentStudent {
   marked         Boolean?
   startedTime    DateTime? @map("started_time") @db.Timestamp(6)
   lastAccessTime DateTime? @map("last_access_time") @db.Timestamp(6)
+  createdAt      DateTime  @default(now()) @map("created_at")
+  updatedAt      DateTime  @default(now()) @updatedAt @map("updated_at")
 
   document Document @relation(fields: [documentId], references: [id])
   student  Student  @relation(fields: [studentId], references: [id])
@@ -197,8 +228,9 @@ model Goal {
   studentId   String    @map("student_id") @db.VarChar(36)
   description String?   @map("description") @db.Text
   dueDate     DateTime? @map("due_date") @db.Timestamp(6)
-  createdAt   DateTime  @map("created_at") @db.Timestamp(6)
   status      String?   @map("status") @db.VarChar(255)
+  createdAt   DateTime  @default(now()) @map("created_at")
+  updatedAt   DateTime  @default(now()) @updatedAt @map("updated_at")
 
   document Document @relation(fields: [documentId], references: [id])
   student  Student  @relation(fields: [studentId], references: [id])
@@ -212,6 +244,8 @@ model Mark {
   studentId  String   @map("student_id") @db.VarChar(36)
   page       Int?
   markedAt   DateTime @map("marked_at") @db.Timestamp(6)
+  createdAt  DateTime @default(now()) @map("created_at")
+  updatedAt  DateTime @default(now()) @updatedAt @map("updated_at")
 
   document Document @relation(fields: [documentId], references: [id])
   student  Student  @relation(fields: [studentId], references: [id])
@@ -228,6 +262,8 @@ model Task {
   assignedAt      DateTime  @map("assigned_at") @db.Timestamp(6)
   startTime       DateTime? @map("start_time") @db.Timestamp(6)
   endTime         DateTime? @map("end_time") @db.Timestamp(6)
+  createdAt       DateTime  @default(now()) @map("created_at")
+  updatedAt       DateTime  @default(now()) @updatedAt @map("updated_at")
 
   assigner Teacher @relation(fields: [assignerId], references: [id])
   assignee Student @relation(fields: [assigneeId], references: [id])
@@ -242,7 +278,8 @@ model Request {
   bookTitle   String?  @map("book_title") @db.VarChar(255)
   description String?  @map("description") @db.Text
   status      String?  @map("status") @db.VarChar(255)
-  createdAt   DateTime @map("created_at") @db.Timestamp(6)
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @default(now()) @updatedAt @map("updated_at")
 
   // librarian Librarian @relation(fields: [librarianId], references: [id])
   student Student? @relation(fields: [studentId], references: [id])
@@ -257,6 +294,8 @@ model BorrowedLog {
   borrowDate DateTime  @map("borrow_date") @db.Timestamp(6)
   returnDate DateTime? @map("return_date") @db.Timestamp(6)
   status     String?   @map("status") @db.VarChar(255)
+  createdAt  DateTime  @default(now()) @map("created_at")
+  updatedAt  DateTime  @default(now()) @updatedAt @map("updated_at")
 
   student  Student  @relation(fields: [studentId], references: [id])
   document Document @relation(fields: [documentId], references: [id])
@@ -270,7 +309,8 @@ model Exercise {
   name        String   @map("name") @db.VarChar(255)
   level       String?  @map("level") @db.VarChar(255)
   metadataUrl String?  @map("metadata_url") @db.VarChar(255)
-  createdAt   DateTime @map("created_at") @db.Timestamp(6)
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @default(now()) @updatedAt @map("updated_at")
 
   class            Class             @relation(fields: [classId], references: [id])
   exerciseStudents ExerciseStudent[]
@@ -286,6 +326,8 @@ model ExerciseStudent {
   studentId  String   @map("student_id") @db.VarChar(36)
   grade      Int?
   markedAt   DateTime @map("marked_at") @db.Timestamp(6)
+  createdAt  DateTime @default(now()) @map("created_at")
+  updatedAt  DateTime @default(now()) @updatedAt @map("updated_at")
 
   exercise Exercise @relation(fields: [exerciseId], references: [id])
   student  Student  @relation(fields: [studentId], references: [id])

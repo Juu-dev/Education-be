@@ -11,11 +11,15 @@ export type BorrowedLog = {
     borrowDate: Timestamp;
     returnDate: Timestamp | null;
     status: string | null;
+    createdAt: Generated<Timestamp>;
+    updatedAt: Generated<Timestamp>;
 };
 export type Class = {
     id: Generated<string>;
     name: string;
     amount: number | null;
+    createdAt: Generated<Timestamp>;
+    updatedAt: Generated<Timestamp>;
 };
 export type Comment = {
     id: Generated<string>;
@@ -23,16 +27,18 @@ export type Comment = {
     studentId: string;
     parentId: string | null;
     content: string;
-    createdAt: Timestamp;
+    createdAt: Generated<Timestamp>;
+    updatedAt: Generated<Timestamp>;
 };
 export type Document = {
     id: Generated<string>;
     teacherId: string | null;
     type: string | null;
     description: string | null;
-    createdAt: Timestamp;
     url: string | null;
     metadataUrl: string | null;
+    createdAt: Generated<Timestamp>;
+    updatedAt: Generated<Timestamp>;
 };
 export type DocumentStudent = {
     id: Generated<string>;
@@ -43,6 +49,8 @@ export type DocumentStudent = {
     marked: boolean | null;
     startedTime: Timestamp | null;
     lastAccessTime: Timestamp | null;
+    createdAt: Generated<Timestamp>;
+    updatedAt: Generated<Timestamp>;
 };
 export type Exercise = {
     id: Generated<string>;
@@ -50,7 +58,8 @@ export type Exercise = {
     name: string;
     level: string | null;
     metadataUrl: string | null;
-    createdAt: Timestamp;
+    createdAt: Generated<Timestamp>;
+    updatedAt: Generated<Timestamp>;
     teacherId: string | null;
 };
 export type ExerciseStudent = {
@@ -59,6 +68,8 @@ export type ExerciseStudent = {
     studentId: string;
     grade: number | null;
     markedAt: Timestamp;
+    createdAt: Generated<Timestamp>;
+    updatedAt: Generated<Timestamp>;
 };
 export type Goal = {
     id: Generated<string>;
@@ -66,8 +77,9 @@ export type Goal = {
     studentId: string;
     description: string | null;
     dueDate: Timestamp | null;
-    createdAt: Timestamp;
     status: string | null;
+    createdAt: Generated<Timestamp>;
+    updatedAt: Generated<Timestamp>;
 };
 export type Librarian = {
     id: Generated<string>;
@@ -76,6 +88,8 @@ export type Librarian = {
     name: string;
     dob: Timestamp | null;
     position: string | null;
+    createdAt: Generated<Timestamp>;
+    updatedAt: Generated<Timestamp>;
 };
 export type Mark = {
     id: Generated<string>;
@@ -83,6 +97,8 @@ export type Mark = {
     studentId: string;
     page: number | null;
     markedAt: Timestamp;
+    createdAt: Generated<Timestamp>;
+    updatedAt: Generated<Timestamp>;
 };
 export type Rating = {
     id: Generated<string>;
@@ -90,6 +106,15 @@ export type Rating = {
     studentId: string;
     star: number | null;
     ratedAt: Timestamp;
+    createdAt: Generated<Timestamp>;
+    updatedAt: Generated<Timestamp>;
+};
+export type RefreshToken = {
+    id: Generated<string>;
+    value: string;
+    userId: string;
+    createdAt: Generated<Timestamp>;
+    updatedAt: Generated<Timestamp>;
 };
 export type Request = {
     id: Generated<string>;
@@ -98,11 +123,14 @@ export type Request = {
     bookTitle: string | null;
     description: string | null;
     status: string | null;
-    createdAt: Timestamp;
+    createdAt: Generated<Timestamp>;
+    updatedAt: Generated<Timestamp>;
 };
 export type Role = {
     id: Generated<string>;
     name: string;
+    createdAt: Generated<Timestamp>;
+    updatedAt: Generated<Timestamp>;
 };
 export type Student = {
     id: Generated<string>;
@@ -113,6 +141,8 @@ export type Student = {
     birthDate: Timestamp | null;
     parentName: string | null;
     level: string | null;
+    createdAt: Generated<Timestamp>;
+    updatedAt: Generated<Timestamp>;
 };
 export type Task = {
     id: Generated<string>;
@@ -123,6 +153,8 @@ export type Task = {
     assignedAt: Timestamp;
     startTime: Timestamp | null;
     endTime: Timestamp | null;
+    createdAt: Generated<Timestamp>;
+    updatedAt: Generated<Timestamp>;
 };
 export type Teacher = {
     id: Generated<string>;
@@ -132,12 +164,16 @@ export type Teacher = {
     name: string;
     dob: Timestamp | null;
     position: string | null;
+    createdAt: Generated<Timestamp>;
+    updatedAt: Generated<Timestamp>;
 };
 export type User = {
     id: Generated<string>;
     username: string;
     password: string;
     email: string;
+    createdAt: Generated<Timestamp>;
+    updatedAt: Generated<Timestamp>;
 };
 export type UserRole = {
     userId: string;
@@ -155,6 +191,7 @@ export type DB = {
     librarians: Librarian;
     marks: Mark;
     ratings: Rating;
+    refreshTokens: RefreshToken;
     requests: Request;
     roles: Role;
     students: Student;

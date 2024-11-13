@@ -5,7 +5,7 @@ import {
 import { CACHE_MANAGER } from '@nestjs/cache-manager';
 import { PrismaService } from '@n-database/prisma/prisma.service';
 import { PermissionType, Errors } from '@n-constants';
-import { BaseException } from '@n-exceptions/http.exception.filter';
+import { BaseException } from '@n-exceptions/all.exceptions.filter';
 import { Cache } from 'cache-manager';
 
 @Injectable()

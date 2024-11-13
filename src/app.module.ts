@@ -17,7 +17,7 @@ import {
 } from '@n-configs/module-configs';
 
 import { PrismaModule } from '@n-database/prisma/prisma.module';
-import { HttpExceptionFilter } from '@n-exceptions';
+import { AllExceptionsFilter } from '@n-exceptions';
 import { ResponseInterceptor } from '@n-interceptors';
 import { ScheduledJobService } from '@n-jobs/sync-categories.auth-service';
 import { AuthServiceModule } from '@n-modules/auth-service/auth-service.module';
@@ -53,7 +53,7 @@ import { FileUploadModule } from './modules/file-upload/file-upload.module';
     },
     {
       provide: APP_FILTER,
-      useClass: HttpExceptionFilter,
+      useClass: AllExceptionsFilter,
     },
   ],
 })
