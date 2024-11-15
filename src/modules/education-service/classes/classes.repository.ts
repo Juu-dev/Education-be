@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { Class } from '@prisma/client';
 
 import { PrismaService } from '@n-database/prisma/prisma.service';
-import { GenericRepository } from '@n-modules/generic-service/genericRepository';
+import { GenericRepository } from '@n-modules/generic-service/generic.repository';
 
 @Injectable()
 export class ClassesRepository extends GenericRepository<Class> {

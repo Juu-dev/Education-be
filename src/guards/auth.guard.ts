@@ -2,7 +2,7 @@ import { CanActivate, ExecutionContext, Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { ConfigService } from '@nestjs/config';
 import { Request } from 'express';
-import { BaseException } from '@n-exceptions/http.exception.filter';
+import { BaseException } from '@n-exceptions/all.exceptions.filter';
 import { Errors } from '@n-constants';
 
 @Injectable()

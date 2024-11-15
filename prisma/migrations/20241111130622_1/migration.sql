@@ -4,14 +4,29 @@ CREATE TABLE "users" (
     "username" VARCHAR(20) NOT NULL,
     "password" VARCHAR(120) NOT NULL,
     "email" VARCHAR(50) NOT NULL,
+    "created_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updated_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
     CONSTRAINT "users_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "refresh_tokens" (
+    "id" TEXT NOT NULL,
+    "value" TEXT NOT NULL,
+    "user_id" TEXT NOT NULL,
+    "created_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updated_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+
+    CONSTRAINT "refresh_tokens_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
 CREATE TABLE "roles" (
     "id" TEXT NOT NULL,
     "name" VARCHAR(255) NOT NULL,
+    "created_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updated_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
     CONSTRAINT "roles_pkey" PRIMARY KEY ("id")
 );
@@ -29,6 +44,8 @@ CREATE TABLE "classes" (
     "id" TEXT NOT NULL,
     "name" VARCHAR(255) NOT NULL,
     "amount" INTEGER,
+    "created_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updated_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
     CONSTRAINT "classes_pkey" PRIMARY KEY ("id")
 );
@@ -43,6 +60,8 @@ CREATE TABLE "students" (
     "birth_date" TIMESTAMP(6),
     "parent_name" VARCHAR(255),
     "level" VARCHAR(255),
+    "created_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updated_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
     CONSTRAINT "students_pkey" PRIMARY KEY ("id")
 );
@@ -56,6 +75,8 @@ CREATE TABLE "teachers" (
     "name" VARCHAR(255) NOT NULL,
     "dob" TIMESTAMP(6),
     "position" VARCHAR(255),
+    "created_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updated_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
     CONSTRAINT "teachers_pkey" PRIMARY KEY ("id")
 );
@@ -68,6 +89,8 @@ CREATE TABLE "librarians" (
     "name" VARCHAR(255) NOT NULL,
     "dob" TIMESTAMP(6),
     "position" VARCHAR(255),
+    "created_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updated_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
     CONSTRAINT "librarians_pkey" PRIMARY KEY ("id")
 );
@@ -78,9 +101,10 @@ CREATE TABLE "documents" (
     "teacher_id" VARCHAR(36),
     "type" VARCHAR(255),
     "description" TEXT,
-    "created_at" TIMESTAMP(6) NOT NULL,
     "url" VARCHAR(255),
     "metadata_url" VARCHAR(255),
+    "created_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updated_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
     CONSTRAINT "documents_pkey" PRIMARY KEY ("id")
 );
@@ -92,6 +116,8 @@ CREATE TABLE "ratings" (
     "student_id" VARCHAR(36) NOT NULL,
     "star" INTEGER,
     "rated_at" TIMESTAMP(6) NOT NULL,
+    "created_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updated_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
     CONSTRAINT "ratings_pkey" PRIMARY KEY ("id")
 );
@@ -103,7 +129,8 @@ CREATE TABLE "comments" (
     "student_id" VARCHAR(36) NOT NULL,
     "parent_id" VARCHAR(36),
     "content" TEXT NOT NULL,
-    "created_at" TIMESTAMP(6) NOT NULL,
+    "created_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updated_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
     CONSTRAINT "comments_pkey" PRIMARY KEY ("id")
 );
@@ -118,6 +145,8 @@ CREATE TABLE "document_students" (
     "marked" BOOLEAN,
     "started_time" TIMESTAMP(6),
     "last_access_time" TIMESTAMP(6),
+    "created_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updated_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
     CONSTRAINT "document_students_pkey" PRIMARY KEY ("id")
 );
@@ -129,8 +158,9 @@ CREATE TABLE "goals" (
     "student_id" VARCHAR(36) NOT NULL,
     "description" TEXT,
     "due_date" TIMESTAMP(6),
-    "created_at" TIMESTAMP(6) NOT NULL,
     "status" VARCHAR(255),
+    "created_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updated_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
     CONSTRAINT "goals_pkey" PRIMARY KEY ("id")
 );
@@ -142,6 +172,8 @@ CREATE TABLE "marks" (
     "student_id" VARCHAR(36) NOT NULL,
     "page" INTEGER,
     "marked_at" TIMESTAMP(6) NOT NULL,
+    "created_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updated_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
     CONSTRAINT "marks_pkey" PRIMARY KEY ("id")
 );
@@ -156,6 +188,8 @@ CREATE TABLE "tasks" (
     "assigned_at" TIMESTAMP(6) NOT NULL,
     "start_time" TIMESTAMP(6),
     "end_time" TIMESTAMP(6),
+    "created_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updated_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
     CONSTRAINT "tasks_pkey" PRIMARY KEY ("id")
 );
@@ -168,7 +202,8 @@ CREATE TABLE "requests" (
     "book_title" VARCHAR(255),
     "description" TEXT,
     "status" VARCHAR(255),
-    "created_at" TIMESTAMP(6) NOT NULL,
+    "created_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updated_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
     CONSTRAINT "requests_pkey" PRIMARY KEY ("id")
 );
@@ -181,6 +216,8 @@ CREATE TABLE "borrowed_logs" (
     "borrow_date" TIMESTAMP(6) NOT NULL,
     "return_date" TIMESTAMP(6),
     "status" VARCHAR(255),
+    "created_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updated_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
     CONSTRAINT "borrowed_logs_pkey" PRIMARY KEY ("id")
 );
@@ -192,7 +229,8 @@ CREATE TABLE "exercises" (
     "name" VARCHAR(255) NOT NULL,
     "level" VARCHAR(255),
     "metadata_url" VARCHAR(255),
-    "created_at" TIMESTAMP(6) NOT NULL,
+    "created_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updated_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "teacherId" VARCHAR(36),
 
     CONSTRAINT "exercises_pkey" PRIMARY KEY ("id")
@@ -205,6 +243,8 @@ CREATE TABLE "exercise_students" (
     "student_id" VARCHAR(36) NOT NULL,
     "grade" INTEGER,
     "marked_at" TIMESTAMP(6) NOT NULL,
+    "created_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updated_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
     CONSTRAINT "exercise_students_pkey" PRIMARY KEY ("id")
 );
@@ -225,10 +265,7 @@ CREATE UNIQUE INDEX "students_user_id_key" ON "students"("user_id");
 CREATE UNIQUE INDEX "teachers_user_id_key" ON "teachers"("user_id");
 
 -- AddForeignKey
-ALTER TABLE "users" ADD CONSTRAINT "user_student_fk" FOREIGN KEY ("id") REFERENCES "students"("user_id") ON DELETE RESTRICT ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "users" ADD CONSTRAINT "user_teacher_fk" FOREIGN KEY ("id") REFERENCES "teachers"("user_id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "refresh_tokens" ADD CONSTRAINT "refresh_tokens_user_id_fkey" FOREIGN KEY ("user_id") REFERENCES "users"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "user_roles" ADD CONSTRAINT "user_roles_user_id_fkey" FOREIGN KEY ("user_id") REFERENCES "users"("id") ON DELETE CASCADE ON UPDATE CASCADE;
@@ -237,7 +274,13 @@ ALTER TABLE "user_roles" ADD CONSTRAINT "user_roles_user_id_fkey" FOREIGN KEY ("
 ALTER TABLE "user_roles" ADD CONSTRAINT "user_roles_role_id_fkey" FOREIGN KEY ("role_id") REFERENCES "roles"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
+ALTER TABLE "students" ADD CONSTRAINT "students_user_id_fkey" FOREIGN KEY ("user_id") REFERENCES "users"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- AddForeignKey
 ALTER TABLE "students" ADD CONSTRAINT "students_class_id_fkey" FOREIGN KEY ("class_id") REFERENCES "classes"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "teachers" ADD CONSTRAINT "teachers_user_id_fkey" FOREIGN KEY ("user_id") REFERENCES "users"("id") ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "teachers" ADD CONSTRAINT "teachers_class_id_fkey" FOREIGN KEY ("class_id") REFERENCES "classes"("id") ON DELETE SET NULL ON UPDATE CASCADE;

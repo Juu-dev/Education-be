@@ -30,7 +30,7 @@ export class BaseException extends HttpException {
 }
 
 @Catch()
-export class HttpExceptionFilter implements ExceptionFilter {
+export class AllExceptionsFilter implements ExceptionFilter {
   constructor(private readonly configService: ConfigService) {}
 
   private readonly loggerTerminal = new Logger('😟😕 HttpExceptionFilter');
@@ -40,9 +40,11 @@ export class HttpExceptionFilter implements ExceptionFilter {
     errorFile: 'access-error.log',
   });
 
-  catch(exception: HttpException, host: ArgumentsHost): any {
-    const httpCtx = host.switchToHttp();
-    const request = httpCtx.getRequest<Request>();
+  catch(exception: unknown, host: ArgumentsHost): any {
+    console.log("exception: ", exception)
+
+    const ctx = host.switchToHttp();
+    const request = ctx.getRequest<Request>();
     const stacktraceEnable: number = parseInt(
       this.configService.get('STACKTRACE_ENABLE'),
       COMMON_CONSTANT.RADIX_BASE,
@@ -55,7 +57,7 @@ export class HttpExceptionFilter implements ExceptionFilter {
     }
 
     const detailError = exception.getResponse() as BaseErrorFormat;
-    const response = httpCtx.getResponse<Response>();
+    const response = ctx.getResponse<Response>();
     const rawReqBody = request.body;
     const requestBody = transformObject(rawReqBody, 'request');
 
