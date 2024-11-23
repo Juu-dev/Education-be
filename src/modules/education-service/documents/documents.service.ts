@@ -18,14 +18,13 @@ export class DocumentsService {
     pageSize?: number,
     teacherId?: string,
   ) {
-    console.log("teacherId: ", teacherId)
     const count = teacherId
-        ? await this.documentsRepository.countByTeacherId(teacherId)
-        : await this.documentsRepository.count();
+      ? await this.documentsRepository.countByTeacherId(teacherId)
+      : await this.documentsRepository.count();
 
     const items = teacherId
-        ? await this.documentsRepository.findAllPaginationByTeacherId(page, pageSize, teacherId)
-        : await this.documentsRepository.findAllPagination(page, pageSize);
+      ? await this.documentsRepository.findAllPaginationByTeacherId(page, pageSize, teacherId)
+      : await this.documentsRepository.findAllPagination(page, pageSize);
     return {
       pagination: {
         page,

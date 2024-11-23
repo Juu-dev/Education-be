@@ -1,5 +1,5 @@
 import { PrismaClient } from '@prisma/client';
-import {includesConfig} from "@n-modules/generic-service/includesConfig";
+import { includesConfig } from '@n-modules/generic-service/includesConfig';
 
 export class GenericRepository<T> {
   constructor(private prisma: PrismaClient, private model: string) {

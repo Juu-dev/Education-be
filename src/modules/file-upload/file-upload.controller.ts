@@ -1,5 +1,5 @@
 import {
-  Body, Controller, Post, UploadedFile, UseInterceptors,
+  Controller, Post, UploadedFile, UseInterceptors,
 } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { diskStorage } from 'multer';
@@ -7,7 +7,7 @@ import { extname } from 'path';
 import { FileUploadService } from '@n-modules/file-upload/file-upload.service';
 import { ApiFile } from '@n-decorators/api-file.decorator';
 import { GetUser } from '@n-decorators';
-import {ApiTags} from "@nestjs/swagger";
+import { ApiTags } from '@nestjs/swagger';
 
 interface IFile {
   encoding: string;
@@ -58,10 +58,9 @@ export class FileUploadController {
   @Post('file')
   @ApiFile({ name: 'file' })
   async uploadFileDocument(
-      @GetUser() user: any,
+    @GetUser() user: any,
       @UploadedFile() file: IFile,
   ): Promise<any> {
-    console.log("file: ", file)
     const data = await this.fileUploadService.uploadFile(file);
 
     return {

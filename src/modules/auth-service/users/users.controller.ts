@@ -23,7 +23,7 @@ export class UsersController {
   @Permissions([Permission.CREATE_USER])
   @AuthClaims()
   @ApiCreatedResponse({ type: UserEntity })
-  create(@Body() createUserDto: CreateUserDto, @Req() request) {
+  create(@Body() createUserDto: CreateUserDto) {
     return this.usersService.createUser(createUserDto);
   }
 
@@ -89,7 +89,6 @@ export class UsersController {
   update(
   @Param('id') id: string,
     @Body() updateUserDto: UpdateUserDto,
-    @Req() request,
   ) {
     return this.usersService.updateUserById(
       id,

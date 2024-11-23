@@ -7,7 +7,10 @@ import {
 export class CreateTeacherDto {
   @IsUUID()
   @IsOptional()
-  @ApiProperty({ example: 'f47ac10b-58cc-4372-a567-0e02b2c3d479', description: 'ID của giáo viên' })
+  @ApiProperty({
+    example: 'f47ac10b-58cc-4372-a567-0e02b2c3d479',
+    description: 'ID của giáo viên',
+  })
     id?: string;
 
   @IsUUID()
@@ -20,7 +23,10 @@ export class CreateTeacherDto {
 
   @IsUUID()
   @IsOptional()
-  @ApiProperty({ example: 'f47ac10b-58cc-4372-a567-0e02b2c3d481', description: 'ID của lớp liên quan đến giáo viên' })
+  @ApiProperty({
+    example: 'f47ac10b-58cc-4372-a567-0e02b2c3d481',
+    description: 'ID của lớp liên quan đến giáo viên',
+  })
     classId?: string;
 
   @IsString()
@@ -35,17 +41,27 @@ export class CreateTeacherDto {
   @IsString()
   @IsNotEmpty()
   @Transform(({ value }) => value.trim())
-  @ApiProperty({ example: 'Nguyen Van A', description: 'Tên của giáo viên' })
+  @ApiProperty({
+    example: 'Nguyen Van A',
+    description: 'Tên của giáo viên',
+  })
     name: string;
 
   @IsString()
   @IsOptional()
-  @ApiProperty({ example: '1990-01-01T00:00:00Z', description: 'Ngày sinh của giáo viên', type: String })
+  @ApiProperty({
+    example: '1990-01-01T00:00:00Z',
+    description: 'Ngày sinh của giáo viên',
+    type: String,
+  })
     dob?: Date;
 
   @IsString()
   @IsOptional()
   @Transform(({ value }) => value.trim())
-  @ApiProperty({ example: 'Giáo viên chính', description: 'Chức vụ của giáo viên' })
+  @ApiProperty({
+    example: 'Giáo viên chính',
+    description: 'Chức vụ của giáo viên',
+  })
     position?: string;
 }

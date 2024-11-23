@@ -1,64 +1,590 @@
-{
-    "accounts": [
-        {
-            "username": "binh.ttt",
-            "password": "123456"
-        },
-        {
-            "username": "anh76.ntv",
-            "password": "123456"
-        },
-        {
-            "username": "anh75.ntv",
-            "password": "123456"
-        },
-        {
-            "username": "bau.dt",
-            "password": "123456"
-        },
-        {
-            "username": "an.ptb",
-            "password": "123456"
-        },
-        {
-            "username": "dung.ntm",
-            "password": "123456"
-        },
-        {
-            "username": "ha.ht",
-            "password": "123456"
-        },
-        {
-            "username": "ha.ltv",
-            "password": "123456"
-        },
-        {
-            "username": "ha.lth",
-            "password": "123456"
-        },
-        {
-            "username": "ha.ntt",
-            "password": "123456"
-        },
-        {
-            "username": "hai.ltt",
-            "password": "123456"
-        },
-        {
-            "username": "hang.dtb",
-            "password": "123456"
-        },
-        {
-            "username": "hang.ntl",
-            "password": "123456"
-        },
-        {
-            "username": "hang.ntt",
-            "password": "123456"
-        },
-        {
-            "username": "hien.dtt",
-            "password": "123456"
-        }
-    ]
-}
+[
+    {
+        "fullName": "Phan Thị Bình An",
+        "birthDate": "1970-02-23",
+        "gender": "Nữ",
+        "ethnicity": "Kinh",
+        "phone": "0915775667",
+        "jobPosition": "Giáo viên",
+        "classId": 1,
+        "email": "an.ptb@g.com",
+        "password": "$2a$10$9CtWDff4uH5jUQcLqpgobObQqrp5EYVdhnr.5EMa4/oKwPrepihPS",
+        "role": "teacher"
+    },
+    {
+        "fullName": "Nguyễn Thị Việt Anh",
+        "birthDate": "1976-02-20",
+        "gender": "Nữ",
+        "ethnicity": "Kinh",
+        "phone": "0977315276",
+        "jobPosition": "Giáo viên",
+        "classId": 1,
+        "email": "anh.ntv@g.com",
+        "password": "$2a$10$9CtWDff4uH5jUQcLqpgobObQqrp5EYVdhnr.5EMa4/oKwPrepihPS",
+        "role": "teacher"
+    },
+    {
+        "fullName": "Nguyễn Thị Việt Anh",
+        "birthDate": "1975-07-13",
+        "gender": "Nữ",
+        "ethnicity": "Kinh",
+        "phone": "0983237275",
+        "jobPosition": "Cán bộ quản lý",
+        "classId": 1,
+        "email": "anh.ntv1@g.com",
+        "password": "$2a$10$9CtWDff4uH5jUQcLqpgobObQqrp5EYVdhnr.5EMa4/oKwPrepihPS",
+        "role": "teacher"
+    },
+    {
+        "fullName": "Đặng Thị Báu",
+        "birthDate": "1982-11-23",
+        "gender": "Nữ",
+        "ethnicity": "Kinh",
+        "phone": "0915678795",
+        "jobPosition": "Nhân viên",
+        "classId": 1,
+        "email": "bau.dt@g.com",
+        "password": "$2a$10$9CtWDff4uH5jUQcLqpgobObQqrp5EYVdhnr.5EMa4/oKwPrepihPS",
+        "role": "librarian"
+    },
+    {
+        "fullName": "Tống Thị Thanh Bình",
+        "birthDate": "1973-03-27",
+        "gender": "Nữ",
+        "ethnicity": "Kinh",
+        "phone": "0914549798",
+        "jobPosition": "Cán bộ quản lý",
+        "classId": 1,
+        "email": "binh.ttt@g.com",
+        "password": "$2a$10$9CtWDff4uH5jUQcLqpgobObQqrp5EYVdhnr.5EMa4/oKwPrepihPS",
+        "role": "admin"
+    },
+    {
+        "fullName": "Nguyễn Thị Mỹ Dung",
+        "birthDate": "1974-01-12",
+        "gender": "Nữ",
+        "ethnicity": "Kinh",
+        "phone": "0913745557",
+        "jobPosition": "Giáo viên",
+        "classId": 1,
+        "email": "dung.ntm@g.com",
+        "password": "$2a$10$9CtWDff4uH5jUQcLqpgobObQqrp5EYVdhnr.5EMa4/oKwPrepihPS",
+        "role": "teacher"
+    },
+    {
+        "fullName": "Hoàng Thị Hà",
+        "birthDate": "1990-05-12",
+        "gender": "Nữ",
+        "ethnicity": "Kinh",
+        "phone": "0912183669",
+        "jobPosition": "Giáo viên",
+        "classId": 1,
+        "email": "ha.ht@g.com",
+        "password": "$2a$10$9CtWDff4uH5jUQcLqpgobObQqrp5EYVdhnr.5EMa4/oKwPrepihPS",
+        "role": "teacher"
+    },
+    {
+        "fullName": "Lâm Thị Việt Hà",
+        "birthDate": "1977-05-11",
+        "gender": "Nữ",
+        "ethnicity": "Kinh",
+        "phone": "0975445778",
+        "jobPosition": "Giáo viên",
+        "classId": 1,
+        "email": "ha.ltv77@g.com",
+        "password": "$2a$10$9CtWDff4uH5jUQcLqpgobObQqrp5EYVdhnr.5EMa4/oKwPrepihPS",
+        "role": "teacher"
+    },
+    {
+        "fullName": "Lê Thị Hà",
+        "birthDate": "1976-07-20",
+        "gender": "Nữ",
+        "ethnicity": "Kinh",
+        "phone": "0917145568",
+        "jobPosition": "Giáo viên",
+        "classId": 1,
+        "email": "ha.lt76@g.com",
+        "password": "$2a$10$9CtWDff4uH5jUQcLqpgobObQqrp5EYVdhnr.5EMa4/oKwPrepihPS",
+        "role": "teacher"
+    },
+    {
+        "fullName": "Nguyễn Thị Thu Hà",
+        "birthDate": "1979-07-06",
+        "gender": "Nữ",
+        "ethnicity": "Kinh",
+        "phone": "0911097279",
+        "jobPosition": "Giáo viên",
+        "classId": 1,
+        "email": "ha.ntt@g.com",
+        "password": "$2a$10$9CtWDff4uH5jUQcLqpgobObQqrp5EYVdhnr.5EMa4/oKwPrepihPS",
+        "role": "teacher"
+    },
+    {
+        "fullName": "Lê Thị Thanh Hải",
+        "birthDate": "1982-05-05",
+        "gender": "Nữ",
+        "ethnicity": "Kinh",
+        "phone": "0935282456",
+        "jobPosition": "Giáo viên",
+        "classId": 1,
+        "email": "hai.ltt@g.com",
+        "password": "$2a$10$9CtWDff4uH5jUQcLqpgobObQqrp5EYVdhnr.5EMa4/oKwPrepihPS",
+        "role": "teacher"
+    },
+    {
+        "fullName": "Đào Thị Bích Hằng",
+        "birthDate": "1975-09-07",
+        "gender": "Nữ",
+        "ethnicity": "Kinh",
+        "phone": "0916013799",
+        "jobPosition": "Giáo viên",
+        "classId": 1,
+        "email": "hang.dtb@g.com",
+        "password": "$2a$10$9CtWDff4uH5jUQcLqpgobObQqrp5EYVdhnr.5EMa4/oKwPrepihPS",
+        "role": "teacher"
+    },
+    {
+        "fullName": "Nguyễn Thị Lệ Hằng",
+        "birthDate": "1971-06-30",
+        "gender": "Nữ",
+        "ethnicity": "Kinh",
+        "phone": "0943763528",
+        "jobPosition": "Giáo viên",
+        "classId": 1,
+        "email": "hang.ntl@g.com",
+        "password": "$2a$10$9CtWDff4uH5jUQcLqpgobObQqrp5EYVdhnr.5EMa4/oKwPrepihPS",
+        "role": "teacher"
+    },
+    {
+        "fullName": "Nguyễn Thị Thu Hằng",
+        "birthDate": "1974-09-01",
+        "gender": "Nữ",
+        "ethnicity": "Kinh",
+        "phone": "0835447058",
+        "jobPosition": "Giáo viên",
+        "classId": 1,
+        "email": "hang.ntt@g.com",
+        "password": "$2a$10$9CtWDff4uH5jUQcLqpgobObQqrp5EYVdhnr.5EMa4/oKwPrepihPS",
+        "role": "teacher"
+    },
+    {
+        "fullName": "Đinh Thị Thu Hiền",
+        "birthDate": "1981-01-25",
+        "gender": "Nữ",
+        "ethnicity": "Kinh",
+        "phone": "0948988279",
+        "jobPosition": "Giáo viên",
+        "classId": 1,
+        "email": "hien.dtt@g.com",
+        "password": "$2a$10$9CtWDff4uH5jUQcLqpgobObQqrp5EYVdhnr.5EMa4/oKwPrepihPS",
+        "role": "teacher"
+    },
+    {
+        "fullName": "Hồ Thị Thu Hiền",
+        "birthDate": "1973-10-28",
+        "gender": "Nữ",
+        "ethnicity": "Kinh",
+        "phone": "0948184780",
+        "jobPosition": "Giáo viên",
+        "classId": 1,
+        "email": "hien.htt@g.com",
+        "password": "$2a$10$9CtWDff4uH5jUQcLqpgobObQqrp5EYVdhnr.5EMa4/oKwPrepihPS",
+        "role": "teacher"
+    },
+    {
+        "fullName": "Lê Thị Thu Hiền",
+        "birthDate": "1976-03-20",
+        "gender": "Nữ",
+        "ethnicity": "Kinh",
+        "phone": "0946086129",
+        "jobPosition": "Giáo viên",
+        "classId": 1,
+        "email": "hien.ltt@g.com",
+        "password": "$2a$10$9CtWDff4uH5jUQcLqpgobObQqrp5EYVdhnr.5EMa4/oKwPrepihPS",
+        "role": "teacher"
+    },
+    {
+        "fullName": "Nguyễn Thanh Hiền",
+        "birthDate": "1974-11-12",
+        "gender": "Nữ",
+        "ethnicity": "Kinh",
+        "phone": "0911076368",
+        "jobPosition": "Giáo viên",
+        "classId": 1,
+        "email": "hien.nt@g.com",
+        "password": "$2a$10$9CtWDff4uH5jUQcLqpgobObQqrp5EYVdhnr.5EMa4/oKwPrepihPS",
+        "role": "teacher"
+    },
+    {
+        "fullName": "Phạm Thị Ánh Hoài",
+        "birthDate": "1994-04-03",
+        "gender": "Nữ",
+        "ethnicity": "Kinh",
+        "phone": "0963626816",
+        "jobPosition": "Giáo viên",
+        "classId": 1,
+        "email": "hoai.pta@g.com",
+        "password": "$2a$10$9CtWDff4uH5jUQcLqpgobObQqrp5EYVdhnr.5EMa4/oKwPrepihPS",
+        "role": "teacher"
+    },
+    {
+        "fullName": "Lê Thị Hương",
+        "birthDate": "1979-10-20",
+        "gender": "Nữ",
+        "ethnicity": "Kinh",
+        "phone": "0989836068",
+        "jobPosition": "Nhân viên",
+        "classId": 1,
+        "email": "huong.lt@g.com",
+        "password": "$2a$10$9CtWDff4uH5jUQcLqpgobObQqrp5EYVdhnr.5EMa4/oKwPrepihPS",
+        "role": "teacher"
+    },
+    {
+        "fullName": "Phạm Thị Quế Hương",
+        "birthDate": "1975-07-27",
+        "gender": "Nữ",
+        "ethnicity": "Kinh",
+        "phone": "0977377661",
+        "jobPosition": "Cán bộ quản lý",
+        "classId": 1,
+        "email": "huong.ptq@g.com",
+        "password": "$2a$10$9CtWDff4uH5jUQcLqpgobObQqrp5EYVdhnr.5EMa4/oKwPrepihPS",
+        "role": "teacher"
+    },
+    {
+        "fullName": "Trần Thị Hường",
+        "birthDate": "1977-07-25",
+        "gender": "Nữ",
+        "ethnicity": "Kinh",
+        "phone": "0919969726",
+        "jobPosition": "Giáo viên",
+        "classId": 1,
+        "email": "huong.tt@g.com",
+        "password": "$2a$10$9CtWDff4uH5jUQcLqpgobObQqrp5EYVdhnr.5EMa4/oKwPrepihPS",
+        "role": "teacher"
+    },
+    {
+        "fullName": "Nguyễn Thị Lam",
+        "birthDate": "1979-04-02",
+        "gender": "Nữ",
+        "ethnicity": "Kinh",
+        "phone": "0912435738",
+        "jobPosition": "Giáo viên",
+        "classId": 1,
+        "email": "lam.nt@g.com",
+        "password": "$2a$10$9CtWDff4uH5jUQcLqpgobObQqrp5EYVdhnr.5EMa4/oKwPrepihPS",
+        "role": "teacher"
+    },
+    {
+        "fullName": "Nguyễn Thị Phương Lan",
+        "birthDate": "1979-03-14",
+        "gender": "Nữ",
+        "ethnicity": "Kinh",
+        "phone": "0917713588",
+        "jobPosition": "Giáo viên",
+        "classId": 1,
+        "email": "lan.ntp@g.com",
+        "password": "$2a$10$9CtWDff4uH5jUQcLqpgobObQqrp5EYVdhnr.5EMa4/oKwPrepihPS",
+        "role": "teacher"
+    },
+    {
+        "fullName": "Trần Thị Mỹ Lệ",
+        "birthDate": "1975-09-02",
+        "gender": "Nữ",
+        "ethnicity": "Kinh",
+        "phone": "0915983274",
+        "jobPosition": "Giáo viên",
+        "classId": 1,
+        "email": "le.ttm@g.com",
+        "password": "$2a$10$9CtWDff4uH5jUQcLqpgobObQqrp5EYVdhnr.5EMa4/oKwPrepihPS",
+        "role": "teacher"
+    },
+    {
+        "fullName": "Lê Thị Thanh Lương",
+        "birthDate": "1977-04-24",
+        "gender": "Nữ",
+        "ethnicity": "Kinh",
+        "phone": "0904347677",
+        "jobPosition": "Giáo viên",
+        "classId": 1,
+        "email": "luong.ltt@g.com",
+        "password": "$2a$10$9CtWDff4uH5jUQcLqpgobObQqrp5EYVdhnr.5EMa4/oKwPrepihPS",
+        "role": "teacher"
+    },
+    {
+        "fullName": "Trần Thị Hồng Minh",
+        "birthDate": "1976-04-26",
+        "gender": "Nữ",
+        "ethnicity": "Kinh",
+        "phone": "0915192364",
+        "jobPosition": "Giáo viên",
+        "classId": 1,
+        "email": "minh.tth@g.com",
+        "password": "$2a$10$9CtWDff4uH5jUQcLqpgobObQqrp5EYVdhnr.5EMa4/oKwPrepihPS",
+        "role": "teacher"
+    },
+    {
+        "fullName": "Phan Thị Ngọc",
+        "birthDate": "1998-09-02",
+        "gender": "Nữ",
+        "ethnicity": "Kinh",
+        "phone": "0855511498",
+        "jobPosition": "Giáo viên",
+        "classId": 1,
+        "email": "ngoc.pt@g.com",
+        "password": "$2a$10$9CtWDff4uH5jUQcLqpgobObQqrp5EYVdhnr.5EMa4/oKwPrepihPS",
+        "role": "teacher"
+    },
+    {
+        "fullName": "Nguyễn Thị Nguyệt",
+        "birthDate": "1977-12-12",
+        "gender": "Nữ",
+        "ethnicity": "Kinh",
+        "phone": "0912268587",
+        "jobPosition": "Giáo viên",
+        "classId": 1,
+        "email": "nguyet.nt@g.com",
+        "password": "$2a$10$9CtWDff4uH5jUQcLqpgobObQqrp5EYVdhnr.5EMa4/oKwPrepihPS",
+        "role": "teacher"
+    },
+    {
+        "fullName": "Phạm Thị Oanh",
+        "birthDate": "1972-10-20",
+        "gender": "Nữ",
+        "ethnicity": "Kinh",
+        "phone": "0948013275",
+        "jobPosition": "Giáo viên",
+        "classId": 1,
+        "email": "oanh.pt@g.com",
+        "password": "$2a$10$9CtWDff4uH5jUQcLqpgobObQqrp5EYVdhnr.5EMa4/oKwPrepihPS",
+        "role": "teacher"
+    },
+    {
+        "fullName": "Nguyễn Thị Phước",
+        "birthDate": "1975-04-08",
+        "gender": "Nữ",
+        "ethnicity": "Kinh",
+        "phone": "0386960929",
+        "jobPosition": "Giáo viên",
+        "classId": 1,
+        "email": "phuoc.nt@g.com",
+        "password": "$2a$10$9CtWDff4uH5jUQcLqpgobObQqrp5EYVdhnr.5EMa4/oKwPrepihPS",
+        "role": "teacher"
+    },
+    {
+        "fullName": "Hoàng Thị Thùy Phương",
+        "birthDate": "1980-10-17",
+        "gender": "Nữ",
+        "ethnicity": "Kinh",
+        "phone": "0941262255",
+        "jobPosition": "Giáo viên",
+        "classId": 1,
+        "email": "phuong.htt@g.com",
+        "password": "$2a$10$9CtWDff4uH5jUQcLqpgobObQqrp5EYVdhnr.5EMa4/oKwPrepihPS",
+        "role": "teacher"
+    },
+    {
+        "fullName": "Nguyễn Thị Hồng Quyên",
+        "birthDate": "1986-07-28",
+        "gender": "Nữ",
+        "ethnicity": "Kinh",
+        "phone": "0946740967",
+        "jobPosition": "Giáo viên",
+        "classId": 1,
+        "email": "quyen.nth@g.com",
+        "password": "$2a$10$9CtWDff4uH5jUQcLqpgobObQqrp5EYVdhnr.5EMa4/oKwPrepihPS",
+        "role": "teacher"
+    },
+    {
+        "fullName": "Nguyễn Thị Thu Sen",
+        "birthDate": "1976-05-12",
+        "gender": "Nữ",
+        "ethnicity": "Kinh",
+        "phone": "0983212576",
+        "jobPosition": "Giáo viên",
+        "classId": 1,
+        "email": "sen.ntt@g.com",
+        "password": "$2a$10$9CtWDff4uH5jUQcLqpgobObQqrp5EYVdhnr.5EMa4/oKwPrepihPS",
+        "role": "teacher"
+    },
+    {
+        "fullName": "Nguyễn Thị Thắm",
+        "birthDate": "1986-08-28",
+        "gender": "Nữ",
+        "ethnicity": "Kinh",
+        "phone": "0977644778",
+        "jobPosition": "Giáo viên",
+        "classId": 1,
+        "email": "tham.nt@g.com",
+        "password": "$2a$10$9CtWDff4uH5jUQcLqpgobObQqrp5EYVdhnr.5EMa4/oKwPrepihPS",
+        "role": "teacher"
+    },
+    {
+        "fullName": "Lê Thị Bích Thảo",
+        "birthDate": "1973-11-11",
+        "gender": "Nữ",
+        "ethnicity": "Kinh",
+        "phone": "0916881651",
+        "jobPosition": "Giáo viên",
+        "classId": 1,
+        "email": "thao.ltb@g.com",
+        "password": "$2a$10$9CtWDff4uH5jUQcLqpgobObQqrp5EYVdhnr.5EMa4/oKwPrepihPS",
+        "role": "teacher"
+    },
+    {
+        "fullName": "Vũ Thị Thỏa",
+        "birthDate": "1970-03-20",
+        "gender": "Nữ",
+        "ethnicity": "Kinh",
+        "phone": "0948223881",
+        "jobPosition": "Giáo viên",
+        "classId": 1,
+        "email": "thoa.vt@g.com",
+        "password": "$2a$10$9CtWDff4uH5jUQcLqpgobObQqrp5EYVdhnr.5EMa4/oKwPrepihPS",
+        "role": "teacher"
+    },
+    {
+        "fullName": "Trương Thị Thuận",
+        "birthDate": "1977-05-19",
+        "gender": "Nữ",
+        "ethnicity": "Kinh",
+        "phone": "0915420345",
+        "jobPosition": "Giáo viên",
+        "classId": 1,
+        "email": "thuan.tt@g.com",
+        "password": "$2a$10$9CtWDff4uH5jUQcLqpgobObQqrp5EYVdhnr.5EMa4/oKwPrepihPS",
+        "role": "teacher"
+    },
+    {
+        "fullName": "Lê Thị Diệu Thúy",
+        "birthDate": "1975-08-18",
+        "gender": "Nữ",
+        "ethnicity": "Kinh",
+        "phone": "0919649379",
+        "jobPosition": "Giáo viên",
+        "classId": 1,
+        "email": "thuy.ltd@g.com",
+        "password": "$2a$10$9CtWDff4uH5jUQcLqpgobObQqrp5EYVdhnr.5EMa4/oKwPrepihPS",
+        "role": "teacher"
+    },
+    {
+        "fullName": "Phạm Thị Tình",
+        "birthDate": "1975-12-24",
+        "gender": "Nữ",
+        "ethnicity": "Kinh",
+        "phone": "0988436551",
+        "jobPosition": "Giáo viên",
+        "classId": 1,
+        "email": "tinh.pt@g.com",
+        "password": "$2a$10$9CtWDff4uH5jUQcLqpgobObQqrp5EYVdhnr.5EMa4/oKwPrepihPS",
+        "role": "teacher"
+    },
+    {
+        "fullName": "Hồ Thị Tuyết Trinh",
+        "birthDate": "1998-05-01",
+        "gender": "Nữ",
+        "ethnicity": "Kinh",
+        "phone": "0814337596",
+        "jobPosition": "Giáo viên",
+        "classId": 1,
+        "email": "trinh.htt@g.com",
+        "password": "$2a$10$9CtWDff4uH5jUQcLqpgobObQqrp5EYVdhnr.5EMa4/oKwPrepihPS",
+        "role": "teacher"
+    },
+    {
+        "fullName": "Nguyễn Thị Hồng Vinh",
+        "birthDate": "1992-07-23",
+        "gender": "Nữ",
+        "ethnicity": "Kinh",
+        "phone": "0942734592",
+        "jobPosition": "Giáo viên",
+        "classId": 1,
+        "email": "vinh.nth@g.com",
+        "password": "$2a$10$9CtWDff4uH5jUQcLqpgobObQqrp5EYVdhnr.5EMa4/oKwPrepihPS",
+        "role": "teacher"
+    },
+    {
+        "fullName": "Bùi Thị Hải Yến",
+        "birthDate": "1974-12-10",
+        "gender": "Nữ",
+        "ethnicity": "Kinh",
+        "phone": "0913638660",
+        "jobPosition": "Giáo viên",
+        "classId": 1,
+        "email": "yen.bth@g.com",
+        "password": "$2a$10$9CtWDff4uH5jUQcLqpgobObQqrp5EYVdhnr.5EMa4/oKwPrepihPS",
+        "role": "teacher"
+    },
+    {
+        "fullName": "Le Thị Hải Yến",
+        "birthDate": "1982-03-28",
+        "gender": "Nữ",
+        "ethnicity": "Kinh",
+        "phone": "0915860678",
+        "jobPosition": "Giáo viên",
+        "classId": 1,
+        "email": "yen.lth@g.com",
+        "password": "$2a$10$9CtWDff4uH5jUQcLqpgobObQqrp5EYVdhnr.5EMa4/oKwPrepihPS",
+        "role": "teacher"
+    },
+    {
+        "fullName": "Lê Thị Hoàng Yến",
+        "birthDate": "1978-08-01",
+        "gender": "Nữ",
+        "ethnicity": "Kinh",
+        "phone": "0918265667",
+        "jobPosition": "Giáo viên",
+        "classId": 1,
+        "email": "yen.lth1@g.com",
+        "password": "$2a$10$9CtWDff4uH5jUQcLqpgobObQqrp5EYVdhnr.5EMa4/oKwPrepihPS",
+        "role": "teacher"
+    },
+    {
+        "fullName": "Trương Thị Yến",
+        "birthDate": "1987-04-06",
+        "gender": "Nữ",
+        "ethnicity": "Kinh",
+        "phone": "0941335419",
+        "jobPosition": "Giáo viên",
+        "classId": 1,
+        "email": "yen.tt@g.com",
+        "password": "$2a$10$9CtWDff4uH5jUQcLqpgobObQqrp5EYVdhnr.5EMa4/oKwPrepihPS",
+        "role": "teacher"
+    },
+    {
+        "fullName": "Le Van C",
+        "birthDate": "2005-09-10",
+        "gender": "Male",
+        "ethnicity": "Kinh",
+        "phone": "0555987654",
+        "jobPosition": "Student",
+        "classId": null,
+        "email": "student1@example.com",
+        "password": "$2a$10$9CtWDff4uH5jUQcLqpgobObQqrp5EYVdhnr.5EMa4/oKwPrepihPS",
+        "role": "student"
+    },
+    {
+        "fullName": "Pham Thi D",
+        "birthDate": "2006-03-22",
+        "gender": "Female",
+        "ethnicity": "Kinh",
+        "phone": "0555123987",
+        "jobPosition": "Student",
+        "classId": null,
+        "email": "student2@example.com",
+        "password": "$2a$10$9CtWDff4uH5jUQcLqpgobObQqrp5EYVdhnr.5EMa4/oKwPrepihPS",
+        "role": "student"
+    },
+    {
+        "fullName": "Hoang Van E",
+        "birthDate": "2005-04-06",
+        "gender": "Male",
+        "ethnicity": "Kinh",
+        "phone": "0555987123",
+        "jobPosition": "Student",
+        "classId": 1,
+        "email": "stud3@a.com",
+        "password": "$2a$10$9CtWDff4uH5jUQcLqpgobObQqrp5EYVdhnr.5EMa4/oKwPrepihPS",
+        "role": "student"
+    }
+]

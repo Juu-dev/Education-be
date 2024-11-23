@@ -1,29 +1,22 @@
 import {
-  Body,
-  Req,
-  Controller,
-  Post,
-  Get,
-  UseInterceptors,
+  Body, Controller, Get, Post, Req, UseInterceptors,
 } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 import { AuthClaims, AuthToken, Permissions } from '@n-decorators';
-import { CookieInterceptor, ClearCookieInterceptor } from '@n-interceptors';
+import { ClearCookieInterceptor, CookieInterceptor } from '@n-interceptors';
 import { Request } from 'express';
 
 import { Permission } from '@n-constants';
 import { AuthService } from './auth.service';
 import {
-  LoginDto,
-  RegisterDto,
-  ForgotPasswordDto,
-  ResetPasswordDto,
+  ForgotPasswordDto, LoginDto, RegisterDto, ResetPasswordDto,
 } from './dtos';
 
 @Controller('auth')
 @ApiTags('Auth')
 export class AuthController {
-  constructor(private readonly authService: AuthService) {}
+  constructor(private readonly authService: AuthService) {
+  }
 
   @Post('register')
   @Permissions([Permission.CREATE_USER])

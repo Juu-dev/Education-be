@@ -13,8 +13,9 @@ COPY --chown=node:node package*.json ./
 
 # Install app dependencies using the `npm ci` command instead of `npm install`
 # RUN npm ci
-# RUN npm install -f
-RUN npm cache clean --force && npm install --force --legacy-peer-deps
+RUN npm install
+# RUN npm cache clean --force && npm install --force --legacy-peer-deps
+# RUN npm cache clean --force && npm install
 
 # Bundle app source
 COPY --chown=node:node . .

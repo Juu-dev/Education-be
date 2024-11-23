@@ -53,16 +53,16 @@ export class DocumentsController {
     isArray: true,
   })
   findAllByTeacherId(
-      @Query() {
-        page,
-        pageSize,
-      }: PaginationParamsDto,
-      @Param('teacherId') teacherId: string
+  @Query() {
+    page,
+    pageSize,
+  }: PaginationParamsDto,
+  @Param('teacherId') teacherId: string,
   ) {
     return this.documentsService.getListDocument(
-        page,
-        pageSize,
-        teacherId
+      page,
+      pageSize,
+      teacherId,
     );
   }
 

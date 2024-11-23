@@ -89,7 +89,7 @@ export function FileInterceptor(fieldName: string, localOptions?: MulterOptions)
     async intercept(context: ExecutionContext, next: CallHandler): Promise<Observable<any>> {
       const ctx = context.switchToHttp();
 
-      await new Promise<void>((resolve, reject) =>
+      await new Promise<void>((resolve, reject) => // eslint-disable-next-line consistent-return
         this.multer.single(fieldName)(ctx.getRequest(), ctx.getResponse(), (err: any) => {
           if (err) {
             const error = transformException(err);

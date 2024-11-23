@@ -17,8 +17,6 @@ export class CookieInterceptor implements NestInterceptor {
         const ctx = context.switchToHttp();
         const response = ctx.getResponse<Response>();
 
-        console.log('refreshToken', data.refreshToken);
-
         response.cookie('refreshToken', data.refreshToken, {
           expires: new Date(Date.now() + COMMON_CONSTANT.COOKIE_EXPIRES_IN),
           sameSite: 'none',

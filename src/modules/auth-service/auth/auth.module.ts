@@ -12,7 +12,7 @@ import { AuthController } from './auth.controller';
 import { RolesModule } from '../roles/roles.module';
 import { RolesRepository } from '../roles/roles.repository';
 import { UsersModule } from '../users/users.module';
-import {RefreshTokensRepository} from "./refresh-tokens.repository";
+import { RefreshTokensRepository } from './refresh-tokens.repository';
 
 @Module({
   imports: [

@@ -25,7 +25,7 @@ datasource db {
 
 model User {
   id        String   @id @default(uuid()) @map("id")
-  username  String   @unique @map("username") @db.VarChar(20)
+  username  String   @unique @map("username") @db.VarChar(50)
   password  String   @map("password") @db.VarChar(120)
   email     String   @unique @map("email") @db.VarChar(50)
   createdAt DateTime @default(now()) @map("created_at")

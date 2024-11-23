@@ -83,7 +83,10 @@ connect-db:
 	docker exec -it $(DB_NAME) bash
 
 login-db:
-	docker exec -it $(DB_NAME) psql -U education_username -d education_db
+	docker exec -it $(DB_NAME) psql -U education_username -d education_dbß
+
+delete-db:
+	docker exec -it $(DB_NAME) psql -U education_username -d postgres -c "DROP DATABASE education_db;"
 
 login-check:
 	docker exec -it $(DB_NAME) psql -U postgres
@@ -93,6 +96,15 @@ connect-redis:
 
 connect:
 	docker exec -it $(APP_NAME) bash
+
+root-connect:
+	docker exec -u root -it education-backend bash
+	# mkdir logs
+	# chmod 777 logs
+
+start-server:
+	docker exec -d education-backend npm run start:dev
+
 
 # combo
 restart:

@@ -13,22 +13,22 @@ export class DocumentsRepository extends GenericRepository<Document> {
   async countByTeacherId(id: string): Promise<number> {
     return this.prismaService.document.count({
       where: {
-        teacherId: id
-      }
+        teacherId: id,
+      },
     });
   }
 
-  async findAllPaginationByTeacherId(page: number = 1, limit: number = 10, id: string): Promise<Document[]> {
+  async findAllPaginationByTeacherId(page: number = 1, limit: number = 10, id: string = ''): Promise<Document[]> {
     const skip = (page - 1) * limit;
     return this.prismaService.document.findMany({
       skip,
       take: limit,
       where: {
-        teacherId: id
+        teacherId: id,
       },
       include: {
         teacher: true,
-      }
+      },
     });
   }
 }

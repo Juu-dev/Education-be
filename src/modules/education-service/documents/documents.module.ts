@@ -1,9 +1,9 @@
 import { Module } from '@nestjs/common';
 import { PrismaModule } from '@n-database/prisma/prisma.module';
+import { FileUploadService } from '@n-modules/file-upload/file-upload.service';
 import { DocumentsService } from './documents.service';
 import { DocumentsController } from './documents.controller';
 import { DocumentsRepository } from './documents.repository';
-import {FileUploadService} from "@n-modules/file-upload/file-upload.service";
 
 @Module({
   controllers: [DocumentsController],

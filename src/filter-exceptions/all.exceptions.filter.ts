@@ -41,8 +41,6 @@ export class AllExceptionsFilter implements ExceptionFilter {
   });
 
   catch(exception: unknown, host: ArgumentsHost): any {
-    console.log("exception: ", exception)
-
     const ctx = host.switchToHttp();
     const request = ctx.getRequest<Request>();
     const stacktraceEnable: number = parseInt(

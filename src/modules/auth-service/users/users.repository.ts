@@ -19,9 +19,9 @@ export class UsersRepository extends GenericRepository<User> {
         Teacher: true,
         roles: {
           include: {
-              role: true
-          }
-        }
+            role: true,
+          },
+        },
       },
     });
   }
