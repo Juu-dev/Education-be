@@ -8,6 +8,7 @@ import {StudentsRepository} from './students.repository';
     controllers: [StudentsController],
     providers: [StudentsService, StudentsRepository],
     imports: [PrismaModule],
+    exports: [StudentsService], // export StudentService to getStudentId in task comtroller
 })
 export class StudentsModule {
 }
