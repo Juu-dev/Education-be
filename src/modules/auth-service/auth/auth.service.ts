@@ -104,11 +104,13 @@ export class AuthService {
     });
 
     return {
-      accessToken,
-      user: {
-        ...user,
-      },
-    };
+        data: {
+          accessToken,
+          user: {
+            ...user,
+          },
+        }
+      };
   }
 
   public async logOut(refreshTokenId: string) {
