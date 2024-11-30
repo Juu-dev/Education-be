@@ -19,4 +19,16 @@ export class TeachersRepository extends GenericRepository<Teacher> {
       },
     });
   }
+
+  async findAllWithClass(): Promise<Teacher[] | null> {
+    return this.prismaService.teacher.findMany({
+      include: {
+        class: {
+          select: {
+            name: true
+          }
+        },
+      },
+    });
+  }
 }

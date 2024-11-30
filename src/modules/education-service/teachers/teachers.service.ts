@@ -32,6 +32,11 @@ export class TeachersService {
     };
   }
 
+  async getAllTeachers() {
+    const teachers = await this.teachersRepository.findAllWithClass();
+    return {data: teachers}
+  }
+
   async getTeacherById(id: string) {
     const teacher = await this.teachersRepository.findById(id);
 

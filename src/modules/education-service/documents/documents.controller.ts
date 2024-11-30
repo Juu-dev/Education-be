@@ -2,7 +2,7 @@ import { Permission } from '@n-constants';
 import { AuthClaims, Roles } from '@n-decorators';
 import { PaginationParamsDto } from '@n-dtos';
 import {
-  Body, Controller, Get, Param, Patch, Post, Query,
+  Body, Controller, Delete, Get, Param, Patch, Post, Query,
 } from '@nestjs/common';
 import { ApiCreatedResponse, ApiOkResponse, ApiTags } from '@nestjs/swagger';
 
@@ -83,5 +83,13 @@ export class DocumentsController {
       id,
       updateCategoryDto,
     );
+  }
+
+  @Delete(':id')
+  @Roles([Permission.UPDATE_CATEGORY])
+  @AuthClaims()
+  @ApiOkResponse({ type: CategoryEntity })
+  remove(@Param('id') id: string) {
+    return this.documentsService.deleteById(id);
   }
 }

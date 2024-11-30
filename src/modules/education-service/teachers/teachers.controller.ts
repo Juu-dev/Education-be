@@ -45,6 +45,14 @@ export class TeachersController {
     );
   }
 
+  @Get()
+  @Roles([Permission.GET_CATEGORY])
+  @AuthClaims()
+  @ApiOkResponse({ type: CategoryEntity })
+  findAllTeacher() {
+    return this.teachersService.getAllTeachers();
+  }
+
   @Get(':id')
   @Roles([Permission.GET_CATEGORY])
   @AuthClaims()

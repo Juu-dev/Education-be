@@ -57,4 +57,13 @@ export class DocumentsService {
       updateDocumentDto as any,
     );
   }
+
+  async deleteById(id: string) {
+    const document = await this.documentsRepository.findById(id);
+    if (!document) {
+      throw new BaseException(Errors.CATEGORY.CATEGORY_NOT_FOUND);
+    }
+
+    return this.documentsRepository.deleteById(id);
+  }
 }
