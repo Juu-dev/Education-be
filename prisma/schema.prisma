@@ -334,3 +334,17 @@ model ExerciseStudent {
 
   @@map("exercise_students")
 }
+
+model LibraryBooks {
+  id             String   @id @default(uuid()) 
+  bookId         String   @map("book_id") 
+  librarianId    String   @map("librarian_id")
+  bookTitle      String   @map("book_title")
+  remainingBooks Int?     @map("remaining_books") 
+  publisher      String   @map("publisher")
+  publishedYear  Int       @map("published_year")
+  createdAt      DateTime @default(now()) @map("created_at")
+  updatedAt      DateTime @updatedAt @map("updated_at")
+
+  @@map("library_books") 
+}

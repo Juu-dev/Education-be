@@ -91,6 +91,17 @@ export type Librarian = {
     createdAt: Generated<Timestamp>;
     updatedAt: Generated<Timestamp>;
 };
+export type LibraryBooks = {
+    id: Generated<string>;
+    bookId: string;
+    librarianId: string;
+    bookTitle: string;
+    remainingBooks: number | null;
+    publisher: string;
+    publishedYear: number;
+    createdAt: Generated<Timestamp>;
+    updatedAt: Timestamp;
+};
 export type Mark = {
     id: Generated<string>;
     documentId: string;
@@ -189,6 +200,7 @@ export type DB = {
     exercises: Exercise;
     goals: Goal;
     librarians: Librarian;
+    libraryBooks: LibraryBooks;
     marks: Mark;
     ratings: Rating;
     refreshTokens: RefreshToken;
