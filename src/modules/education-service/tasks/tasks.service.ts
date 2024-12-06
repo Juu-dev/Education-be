@@ -26,6 +26,7 @@ export class TasksService {
     // Check if the assigner exists
     const assignerExists = await this.studentsService.getStudentById(createTaskDto.assignerId) //await this.tasksRepository.findUserById(createTaskDto.assignerId);
     if (!assignerExists) {
+        console.log(`Assignee with ID ${createTaskDto.assigneeId} does not exist`)
         throw new NotFoundException(`Assigner with ID ${createTaskDto.assignerId} does not exist`);
     }
 
