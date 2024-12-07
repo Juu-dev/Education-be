@@ -93,10 +93,9 @@ export type Librarian = {
 };
 export type LibraryBooks = {
     id: Generated<string>;
-    bookId: string;
-    librarianId: string;
     bookTitle: string;
     remainingBooks: number | null;
+    borrowedBooks: number | null;
     publisher: string;
     publishedYear: number;
     createdAt: Generated<Timestamp>;

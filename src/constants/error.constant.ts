@@ -361,4 +361,36 @@ export const Errors = {
       errorCode: 'PR18',
     },
   },
+  UPLOAD:{
+    FILE_NOT_FOUND: {
+      message: 'File not found. <Ref: UP01>',
+      statusCode: HttpStatus.NOT_FOUND,
+      errorCode: 'UP01',
+    },
+    FILE_TYPE_INVALID: {
+      message: 'File type invalid. <Ref: UP02>',
+      statusCode: HttpStatus.BAD_REQUEST,
+      errorCode: 'UP02',
+    },
+    FILE_SIZE_INVALID: {
+      message: 'File size invalid. <Ref: UP03>',
+      statusCode: HttpStatus.BAD_REQUEST,
+      errorCode: 'UP03',
+    },
+    FILE_CONTENT_INVALID: {
+      message: 'File content invalid. <Ref: UP04>',
+      statusCode: HttpStatus.BAD_REQUEST,
+      errorCode: 'UP04',
+    },
+    FILE_UPLOAD_FAILED: {
+      message: 'File upload failed. <Ref: UP04>',
+      statusCode: HttpStatus.INTERNAL_SERVER_ERROR,
+      errorCode: 'UP05',
+    },
+    FILE_EMPTY: {
+      message: 'File is empty. <Ref: UP05>',
+      statusCode: HttpStatus.BAD_REQUEST,
+      errorCode: 'UP06',
+    }
+  }
 };
