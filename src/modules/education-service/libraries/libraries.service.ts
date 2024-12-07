@@ -6,9 +6,11 @@ import { CreateLibBookDto } from "./dto";
 import { LibrariesRepository } from "./libraries.repository";
 import { plainToInstance } from "class-transformer";
 import { validate } from "class-validator";
+import { ChartJSNodeCanvas } from "chartjs-node-canvas";
 
 @Injectable()
 export class LibrariesService {
+  private chartJsNodeCanvas: ChartJSNodeCanvas;
   constructor(private readonly librariansRepository: LibrariesRepository) {}
 
   //Đọc file excel và lưu dữ liệu vào database theo định dạng của file output.xlsx
@@ -53,5 +55,52 @@ export class LibrariesService {
 
   async getLibraryBooks() {
     return this.librariansRepository.findAll();
+  }
+
+  /**
+   * Tạo biểu đồ từ dữ liệu sách trong database
+   */
+  async getVisualizeData() {
+    // Lấy dữ liệu từ database
+    const books = await this.librariansRepository.findAll();
+
+    // Chuẩn bị dữ liệu cho biểu đồ
+    const labels = books.map((book) => book.bookTitle); // Tên sách
+    const totalBooks = books.map((book) => book.remainingBooks); // Tổng số sách
+    const borrowedBooks = books.map((book) => book.borrowedBooks); // Số sách đã mượn
+
+    // Cấu hình biểu đồ
+    const configuration = {
+      type: "bar" as const,
+      data: {
+        labels: labels,
+        datasets: [
+          {
+            label: "Tổng số sách",
+            data: totalBooks,
+            backgroundColor: "rgba(54, 162, 235, 0.5)",
+            borderColor: "rgba(54, 162, 235, 1)",
+            borderWidth: 1,
+          },
+          {
+            label: "Số sách đã mượn",
+            data: borrowedBooks,
+            backgroundColor: "rgba(255, 99, 132, 0.5)",
+            borderColor: "rgba(255, 99, 132, 1)",
+            borderWidth: 1,
+          },
+        ],
+      },
+      options: {
+        scales: {
+          y: {
+            beginAtZero: true,
+          },
+        },
+      },
+    };
+
+    // Tạo hình ảnh biểu đồ
+    return this.chartJsNodeCanvas.renderToBuffer(configuration);
   }
 }
