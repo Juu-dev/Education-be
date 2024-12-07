@@ -8,15 +8,7 @@ import { FileUploadService } from '@n-modules/file-upload/file-upload.service';
 import { ApiFile } from '@n-decorators/api-file.decorator';
 import { GetUser } from '@n-decorators';
 import { ApiTags } from '@nestjs/swagger';
-
-interface IFile {
-  encoding: string;
-  buffer: Buffer | Uint8Array;
-  fieldname: string;
-  mimetype: string;
-  originalname: string;
-  size: number;
-}
+import {IFile} from "../../interfaces";
 
 @ApiTags('File Upload')
 @Controller('file-upload')

@@ -12,7 +12,6 @@ export class FileUploadService {
     });
 
     const originalName = decode(Buffer.from(file.originalname, 'binary'), 'utf-8');
-    console.log('Decoded originalName:', originalName);
 
     const params =
             {

@@ -4,6 +4,16 @@ export type Generated<T> = T extends ColumnType<infer S, infer I, infer U>
   : ColumnType<T, T | undefined, T>;
 export type Timestamp = ColumnType<Date, Date | string, Date | string>;
 
+export type Book = {
+    id: Generated<string>;
+    title: string;
+    description: string;
+    author: string;
+    publishingHouse: string;
+    coverImageUrl: string | null;
+    contentPdfUrl: string | null;
+    evaluate: number | null;
+};
 export type BorrowedLog = {
     id: Generated<string>;
     studentId: string;
@@ -180,6 +190,7 @@ export type UserRole = {
     roleId: string;
 };
 export type DB = {
+    books: Book;
     borrowedLogs: BorrowedLog;
     classes: Class;
     comments: Comment;

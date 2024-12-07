@@ -92,6 +92,7 @@ function ApiFileDecorator(files: IApiFile[] = [], options: Partial<{ isRequired:
 
 export function ApiFile(files: _.Many<IApiFile>, options: Partial<{ isRequired: boolean }> = {}): MethodDecorator {
   const filesArray = _.castArray(files);
+  console.log("filesArray: ", JSON.stringify(filesArray));
   const apiFileInterceptors = filesArray.map((file) =>
     (file.isArray ? UseInterceptors(FilesInterceptor(file.name)) : UseInterceptors(FileInterceptor(file.name))));
 

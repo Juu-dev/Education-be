@@ -334,3 +334,16 @@ model ExerciseStudent {
 
   @@map("exercise_students")
 }
+
+model Book {
+  id              String  @id @default(uuid())
+  title           String  @db.VarChar(100)
+  description     String  @db.VarChar(1000)
+  author          String  @db.VarChar(50)
+  publishingHouse String  @map("publishing_house") @db.VarChar(50)
+  coverImageUrl   String? @map("cover_image_url") @db.VarChar(255)
+  contentPdfUrl   String? @map("content_pdf_url") @db.VarChar(255)
+  evaluate        Int?
+
+  @@map("books")
+}
