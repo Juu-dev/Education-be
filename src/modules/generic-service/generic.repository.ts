@@ -21,6 +21,9 @@ export class GenericRepository<T> {
     return this.prisma[this.model].findMany({
       skip,
       take: limit,
+      orderBy: {
+        createdAt: 'desc',
+      },
       include: includesConfig[this.model] || {},
     });
   }

@@ -13,6 +13,8 @@ export type Book = {
     coverImageUrl: string | null;
     contentPdfUrl: string | null;
     evaluate: number | null;
+    createdAt: Generated<Timestamp>;
+    updatedAt: Generated<Timestamp>;
 };
 export type BorrowedLog = {
     id: Generated<string>;

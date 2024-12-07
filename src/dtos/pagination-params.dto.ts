@@ -8,12 +8,12 @@ export class PaginationParamsDto {
   @IsNumber()
   @Min(1)
   @ApiProperty({ required: false, example: 1 })
-    page?: number;
+  page: number = 1;
 
   @IsOptional()
   @Transform(({ value }) => Number(value))
   @IsNumber()
   @Min(1)
   @ApiProperty({ required: false, example: 10 })
-    pageSize?: number;
+  pageSize: number = 10;
 }
