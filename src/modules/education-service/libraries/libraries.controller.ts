@@ -1,15 +1,25 @@
 import {
   Controller,
-  Get,
+  Post,
   HttpException,
   HttpStatus,
+  UploadedFile,
+  UseInterceptors,
   Res,
 } from "@nestjs/common";
+import { FileInterceptor } from "@nestjs/platform-express";
 import { LibrariesService } from "./libraries.service";
-import { ApiTags, ApiOkResponse } from "@nestjs/swagger";
-import { AuthClaims, Roles } from "@n-decorators";
-import { Permission } from "@n-constants";
+import { ApiTags, ApiConsumes, ApiBody, ApiOkResponse } from "@nestjs/swagger";
 import { Response } from "express";
+
+interface IExcelFile {
+  encoding: string;
+  buffer: Buffer | Uint8Array;
+  fieldname: string;
+  mimetype: string;
+  originalname: string;
+  size: number;
+}
 
 @Controller("libraries")
 @ApiTags("Library")
@@ -17,32 +27,53 @@ export class LibrariesController {
   constructor(private readonly librariesService: LibrariesService) {}
 
   /**
-   * Get all library books.
-   */
-  @Get()
-  @Roles([Permission.GET_CATEGORIES])
-  @AuthClaims()
-  @ApiOkResponse({
-    description: "Get a list of all library books",
-  })
-  async getLibraryBooks() {
-    return this.librariesService.getLibraryBooks();
-  }
-
-  /**
-   * Generate a chart of library book statistics.
+   * Upload an Excel file to update library data and generate a chart.
+   *
    * @param res - Response object to send the chart as an image.
+   * @param file - Uploaded Excel file containing library data.
    */
-  @Get("chart")
-  @Roles([Permission.GET_CATEGORIES])
-  @AuthClaims()
-  @ApiOkResponse({
-    description: "Get a chart of library book statistics",
+  @Post("chart")
+  @UseInterceptors(FileInterceptor("file"))
+  @ApiConsumes("multipart/form-data")
+  @ApiBody({
+    description:
+      "Upload an Excel file to update library data and generate a chart",
+    schema: {
+      type: "object",
+      properties: {
+        file: {
+          type: "string",
+          format: "binary", 
+        },
+      },
+    },
   })
-  async getLibraryBooksChart(@Res() res: Response) {
+  @ApiOkResponse({
+    description: "Chart generated successfully",
+    content: {
+      "image/png": {
+        schema: {
+          type: "string",
+          format: "binary", 
+        },
+      },
+    },
+  })
+  async uploadAndGenerateChart(
+    @Res() res: Response,
+    @UploadedFile() file: IExcelFile
+  ) {
     try {
-      const chartBuffer = await this.librariesService.getVisualizeData();
+      if (!file || !file.buffer) {
+        throw new HttpException("No file provided", HttpStatus.BAD_REQUEST);
+      }
 
+      const fileBuffer = Buffer.isBuffer(file.buffer)
+        ? file.buffer
+        : Buffer.from(file.buffer);
+
+      const chartBuffer =
+        await this.librariesService.processExcelAndGenerateChart(fileBuffer);
       res.setHeader("Content-Type", "image/png");
       res.send(chartBuffer);
     } catch (error) {

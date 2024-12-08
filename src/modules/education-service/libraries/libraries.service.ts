@@ -6,16 +6,24 @@ import { CreateLibBookDto } from "./dto";
 import { LibrariesRepository } from "./libraries.repository";
 import { plainToInstance } from "class-transformer";
 import { validate } from "class-validator";
-import { ChartJSNodeCanvas } from "chartjs-node-canvas";
-
+import { v4 as uuidv4 } from "uuid";
+import puppeteer from "puppeteer";
 @Injectable()
 export class LibrariesService {
-  private chartJsNodeCanvas: ChartJSNodeCanvas;
-  constructor(private readonly librariansRepository: LibrariesRepository) {}
 
-  //Đọc file excel và lưu dữ liệu vào database theo định dạng của file output.xlsx
-  async createLibraryBooks(fileBuffer: Buffer) {
+  constructor(private readonly librariansRepository: LibrariesRepository) {
+    
+  }
+
+  /**
+   * Process Excel file to update library data and generate a chart image.
+   *
+   * @param fileBuffer - Buffer of the uploaded Excel file.
+   * @returns - A buffer of the generated chart image.
+   */
+  async processExcelAndGenerateChart(fileBuffer: Buffer) {
     try {
+      // Read Excel file
       const workbook = XLSX.read(fileBuffer, { type: "buffer" });
       const sheetName = workbook.SheetNames[0];
       const sheet = workbook.Sheets[sheetName];
@@ -26,19 +34,35 @@ export class LibrariesService {
         throw new BaseException(Errors.UPLOAD.FILE_EMPTY);
       }
 
+      // Map and validate data
       const libBooks: CreateLibBookDto[] = [];
       for (const item of data) {
-        const dto = plainToInstance(CreateLibBookDto, item);
-        const error = await validate(dto);
-        if (error.length > 0) {
-          throw new BaseException(Errors.UPLOAD.FILE_CONTENT_INVALID);
+        try {
+          const mappedItem = {
+            id: uuidv4(),
+            bookTitle: item["Tên sách"],
+            remainingBooks: Number(item["Tổng số sách"]),
+            borrowedBooks: Number(item["Đã mượn"]),
+            publisher: item["Nhà xuất bản"],
+            publishedYear: Number(item["Năm xuất bản"]),
+          };
+
+          const dto = plainToInstance(CreateLibBookDto, mappedItem);
+          const errors = await validate(dto);
+          if (errors.length > 0) {
+            console.error("Validation errors:", errors);
+            continue; 
+          }
+          libBooks.push(dto);
+        } catch (err) {
+          console.error("Error processing item:", err);
         }
-        libBooks.push(dto);
       }
 
+      // Save to database
       await this.librariansRepository.deleteAll();
       const libraryBooks = libBooks.map((book) => ({
-        id: book.id || "",
+        id: book.id,
         bookTitle: book.bookTitle,
         remainingBooks: book.remainingBooks,
         borrowedBooks: book.borrowedBooks,
@@ -47,60 +71,70 @@ export class LibrariesService {
         createdAt: new Date(),
         updatedAt: new Date(),
       }));
-      return this.librariansRepository.createMany(libraryBooks);
+
+      await this.librariansRepository.createMany(libraryBooks);
+
+      // Fetch updated data
+      const books = await this.librariansRepository.findAll();
+      // Prepare chart data
+      const labels = books.map((book) => book.bookTitle); // Book titles
+      const totalBooks = books.map((book) => book.remainingBooks); // Total books
+      const borrowedBooks = books.map((book) => book.borrowedBooks); // Borrowed books
+
+      // Chart configuration
+      const chartHTML = `
+        <html>
+          <head>
+            <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+          </head>
+          <body>
+            <canvas id="myChart" width="800" height="600"></canvas>
+            <script>
+              const ctx = document.getElementById('myChart').getContext('2d');
+              new Chart(ctx, {
+                type: 'bar',
+                data: {
+                  labels: ${JSON.stringify(labels)},
+                  datasets: [
+                    {
+                      label: 'Total Books',
+                      data: ${JSON.stringify(totalBooks)},
+                      backgroundColor: 'rgba(54, 162, 235, 0.5)',
+                      borderColor: 'rgba(54, 162, 235, 1)',
+                      borderWidth: 1,
+                    },
+                    {
+                      label: 'Borrowed Books',
+                      data: ${JSON.stringify(borrowedBooks)},
+                      backgroundColor: 'rgba(255, 99, 132, 0.5)',
+                      borderColor: 'rgba(255, 99, 132, 1)',
+                      borderWidth: 1,
+                    }
+                  ],
+                },
+                options: {
+                  scales: {
+                    y: {
+                      beginAtZero: true,
+                    },
+                  },
+                },
+              });
+            </script>
+          </body>
+        </html>
+      `;
+
+      // Use Puppeteer to render the chart
+      const browser = await puppeteer.launch();
+      const page = await browser.newPage();
+      await page.setContent(chartHTML);
+      const chartBuffer = await page.screenshot();
+      await browser.close();
+
+      return chartBuffer;
     } catch (error) {
       throw new BaseException(Errors.UPLOAD.FILE_CONTENT_INVALID);
     }
-  }
-
-  async getLibraryBooks() {
-    return this.librariansRepository.findAll();
-  }
-
-  /**
-   * Tạo biểu đồ từ dữ liệu sách trong database
-   */
-  async getVisualizeData() {
-    // Lấy dữ liệu từ database
-    const books = await this.librariansRepository.findAll();
-
-    // Chuẩn bị dữ liệu cho biểu đồ
-    const labels = books.map((book) => book.bookTitle); // Tên sách
-    const totalBooks = books.map((book) => book.remainingBooks); // Tổng số sách
-    const borrowedBooks = books.map((book) => book.borrowedBooks); // Số sách đã mượn
-
-    // Cấu hình biểu đồ
-    const configuration = {
-      type: "bar" as const,
-      data: {
-        labels: labels,
-        datasets: [
-          {
-            label: "Tổng số sách",
-            data: totalBooks,
-            backgroundColor: "rgba(54, 162, 235, 0.5)",
-            borderColor: "rgba(54, 162, 235, 1)",
-            borderWidth: 1,
-          },
-          {
-            label: "Số sách đã mượn",
-            data: borrowedBooks,
-            backgroundColor: "rgba(255, 99, 132, 0.5)",
-            borderColor: "rgba(255, 99, 132, 1)",
-            borderWidth: 1,
-          },
-        ],
-      },
-      options: {
-        scales: {
-          y: {
-            beginAtZero: true,
-          },
-        },
-      },
-    };
-
-    // Tạo hình ảnh biểu đồ
-    return this.chartJsNodeCanvas.renderToBuffer(configuration);
   }
 }

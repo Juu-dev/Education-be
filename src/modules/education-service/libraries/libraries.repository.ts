@@ -11,7 +11,9 @@ export class LibrariesRepository extends GenericRepository<LibraryBooks> {
   }
 
   async createMany(data: LibraryBooks[]) {
-    return this.prismaService.libraryBooks.createMany();
+    return this.prismaService.libraryBooks.createMany({
+      data,
+    });
   }
 
   async deleteAll() {
