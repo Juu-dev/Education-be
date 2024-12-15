@@ -2,20 +2,26 @@ import {decode} from 'iconv-lite';
 import { Injectable } from '@nestjs/common';
 import { S3 } from 'aws-sdk';
 
+const ENV_S3 = {
+    accessKeyId: "AKIAVA5YLB7S735L52N3",
+    secretAccessKey: "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",
+    bucketName: "miraischools"
+}
+
 @Injectable()
 export class FileUploadService {
   // eslint-disable-next-line consistent-return
   async uploadFile(file) {
     const s3 = new S3({
-      accessKeyId: 'AKIA6GBMDQLJE6X3VKSZ',
-      secretAccessKey: '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',
+      accessKeyId: ENV_S3.accessKeyId,
+      secretAccessKey: ENV_S3.secretAccessKey,
     });
 
     const originalName = decode(Buffer.from(file.originalname, 'binary'), 'utf-8');
 
     const params =
             {
-              Bucket: 'mydocumenteducation',
+              Bucket: ENV_S3.bucketName,
               Key: originalName,
               Body: file.buffer,
               ACL: 'public-read',
