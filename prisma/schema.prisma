@@ -338,10 +338,11 @@ model ExerciseStudent {
 model LibraryBooks {
   id             String   @id @default(uuid()) 
   bookTitle      String   @map("book_title")
-  remainingBooks Int?     @map("remaining_books")
+  totalBooks     Int?     @map("total_books")
   borrowedBooks  Int?     @map("borrowed_books")
   publisher      String   @map("publisher")
-  publishedYear  Int       @map("published_year")
+  publishedYear  Int      @map("published_year")
+  bookType       String   @map("book_type") @default("Unknown")
   createdAt      DateTime @default(now()) @map("created_at")
   updatedAt      DateTime @updatedAt @map("updated_at")
 

@@ -1,16 +1,23 @@
 import {
   Controller,
   Post,
+  Get,
   HttpException,
   HttpStatus,
   UploadedFile,
   UseInterceptors,
   Res,
+  Body,
 } from "@nestjs/common";
+import { CategoryEntity } from './entities/category.entity';
 import { FileInterceptor } from "@nestjs/platform-express";
 import { LibrariesService } from "./libraries.service";
-import { ApiTags, ApiConsumes, ApiBody, ApiOkResponse } from "@nestjs/swagger";
+import { ApiTags, ApiConsumes, ApiBody, ApiOkResponse, ApiCreatedResponse } from "@nestjs/swagger";
 import { Response } from "express";
+import { CreateLibBookDto } from "./dto";
+import { Roles } from "@n-decorators/roles.decorator";
+import { Permission } from "@n-constants";
+import { AuthClaims } from "@n-decorators/claims-auth.decorator";
 
 interface IExcelFile {
   encoding: string;
@@ -24,60 +31,53 @@ interface IExcelFile {
 @Controller("libraries")
 @ApiTags("Library")
 export class LibrariesController {
-  constructor(private readonly librariesService: LibrariesService) {}
-
+  constructor(
+    private readonly librariesService: LibrariesService,
+  ) {}
   /**
-   * Upload an Excel file to update library data and generate a chart.
+   * Get all book entries from the library.
    *
-   * @param res - Response object to send the chart as an image.
-   * @param file - Uploaded Excel file containing library data.
+   * @returns - All book entries from the library.
    */
-  @Post("chart")
-  @UseInterceptors(FileInterceptor("file"))
-  @ApiConsumes("multipart/form-data")
-  @ApiBody({
-    description:
-      "Upload an Excel file to update library data and generate a chart",
-    schema: {
-      type: "object",
-      properties: {
-        file: {
-          type: "string",
-          format: "binary", 
-        },
-      },
-    },
-  })
+
+  @Get()
+  @Roles([Permission.GET_CATEGORIES])
+  @AuthClaims()
   @ApiOkResponse({
-    description: "Chart generated successfully",
-    content: {
-      "image/png": {
-        schema: {
-          type: "string",
-          format: "binary", 
-        },
-      },
-    },
+    type: CategoryEntity,
+    isArray: true,
   })
-  async uploadAndGenerateChart(
-    @Res() res: Response,
-    @UploadedFile() file: IExcelFile
+  findAll() {
+    return this.librariesService.getBook();
+  }
+  /**
+   * Save a new book entry to the library.
+   *
+   * @param createCategoryDto - Data to create a new book entry.
+   * @returns - The created book entry.
+   */
+
+  @Post("save")
+  @Roles([Permission.CREATE_CATEGORY])
+  @AuthClaims()
+  @ApiCreatedResponse({ type: CategoryEntity })
+  create(
+  @Body() createCategoryDto: CreateLibBookDto,
   ) {
-    try {
-      if (!file || !file.buffer) {
-        throw new HttpException("No file provided", HttpStatus.BAD_REQUEST);
-      }
+    return this.librariesService.saveBook(createCategoryDto);
+  }
 
-      const fileBuffer = Buffer.isBuffer(file.buffer)
-        ? file.buffer
-        : Buffer.from(file.buffer);
-
-      const chartBuffer =
-        await this.librariesService.processExcelAndGenerateChart(fileBuffer);
-      res.setHeader("Content-Type", "image/png");
-      res.send(chartBuffer);
-    } catch (error) {
-      throw new HttpException(error.message, HttpStatus.INTERNAL_SERVER_ERROR);
-    }
+  @Get("chartData")
+  @Roles([Permission.GET_CATEGORIES])
+  @AuthClaims()
+  @ApiOkResponse({
+    type: CategoryEntity,
+    isArray: true,
+  })
+  getDataForChart(
+  @Body() query: Record<string, string>,
+  ) 
+{
+    return this.librariesService.getDataForChart(query);
   }
 }

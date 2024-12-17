@@ -16,6 +16,16 @@ export class LibrariesRepository extends GenericRepository<LibraryBooks> {
     });
   }
 
+  async findByFilter(filters: Record<string, any>) : Promise<LibraryBooks[]> {
+    return this.prismaService.libraryBooks.findMany({
+      where :{ 
+        ...filters,
+      },
+    });
+  }
+
+ 
+
   async deleteAll() {
     return this.prismaService.libraryBooks.deleteMany();
   }

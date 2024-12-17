@@ -94,10 +94,11 @@ export type Librarian = {
 export type LibraryBooks = {
     id: Generated<string>;
     bookTitle: string;
-    remainingBooks: number | null;
+    totalBooks: number | null;
     borrowedBooks: number | null;
     publisher: string;
     publishedYear: number;
+    bookType: Generated<string>;
     createdAt: Generated<Timestamp>;
     updatedAt: Timestamp;
 };

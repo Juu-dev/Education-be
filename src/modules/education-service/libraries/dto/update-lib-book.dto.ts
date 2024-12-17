@@ -2,7 +2,7 @@ import { ApiProperty } from '@nestjs/swagger';
 import { Transform } from 'class-transformer';
 import { IsDate, IsOptional, IsString, IsInt, IsUUID } from 'class-validator';
 
-export class CreateLibBookDto {
+export class UpdateLibBookDto {
   @IsUUID()
   @IsOptional()
   @ApiProperty({
@@ -23,9 +23,9 @@ export class CreateLibBookDto {
   @IsOptional()
   @ApiProperty({
     example: 10,
-    description: 'Tổng số lượng sách trong thư viện',
+    description: 'Số lượng sách còn lại trong thư viện',
   })
-  totalBooks?: number;
+  remainingBooks?: number;
 
   @IsInt()
   @IsOptional()
@@ -50,6 +50,14 @@ export class CreateLibBookDto {
     description: 'Năm xuất bản sách',
   })
   publishedYear?: number;
+
+  @IsString()
+  @IsOptional()
+  @ApiProperty({
+    example: 'Sách giáo khoa',
+    description: 'Loại sách',
+  })
+  bookType?: string;
 
   @IsDate()
   @IsOptional()
