@@ -25,7 +25,7 @@ export class UpdateLibBookDto {
     example: 10,
     description: 'Số lượng sách còn lại trong thư viện',
   })
-  remainingBooks?: number;
+  totalBooks?: number;
 
   @IsInt()
   @IsOptional()

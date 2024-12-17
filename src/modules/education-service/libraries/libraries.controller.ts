@@ -67,17 +67,4 @@ export class LibrariesController {
     return this.librariesService.saveBook(createCategoryDto);
   }
 
-  @Get("chartData")
-  @Roles([Permission.GET_CATEGORIES])
-  @AuthClaims()
-  @ApiOkResponse({
-    type: CategoryEntity,
-    isArray: true,
-  })
-  getDataForChart(
-  @Body() query: Record<string, string>,
-  ) 
-{
-    return this.librariesService.getDataForChart(query);
-  }
 }
