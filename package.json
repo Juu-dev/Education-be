@@ -51,6 +51,7 @@
     "colorette": "^2.0.20",
     "cookie-parser": "^1.4.6",
     "dotenv": "^16.3.1",
+    "education-backend": "file:",
     "express": "^4.17.1",
     "fastify-multer": "^2.0.3",
     "form-data": "^4.0.1",

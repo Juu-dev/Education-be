@@ -19,8 +19,6 @@ export class AuthController {
   }
 
   @Post('register')
-  @Permissions([Permission.CREATE_USER])
-  @AuthClaims()
   async register(@Body() registrationData: RegisterDto) {
     return this.authService.register(registrationData);
   }

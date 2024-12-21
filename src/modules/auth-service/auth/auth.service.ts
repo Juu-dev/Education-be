@@ -9,7 +9,9 @@ import { BaseException } from '@n-exceptions';
 import { JwtPayloadModel } from '@n-models';
 import { RefreshTokensRepository } from './refresh-tokens.repository';
 import { UsersRepository } from '../users/users.repository';
-
+import { StudentsRepository } from '../../education-service/students/students.repository';
+import { ClassesRepository } from './../../education-service/classes/classes.repository';
+import { v4 as uuid} from 'uuid';
 import {
   ForgotPasswordDto, LoginDto, RegisterDto, ResetPasswordDto,
 } from './dtos';
@@ -18,6 +20,8 @@ import {
 export class AuthService {
   constructor(
     private readonly usersRepository: UsersRepository,
+    private readonly studentsRepository: StudentsRepository,
+    private readonly classesRepository: ClassesRepository,
     private readonly refreshTokensRepository: RefreshTokensRepository,
     private readonly jwtService: JwtService,
     private readonly configService: ConfigService,
@@ -29,15 +33,27 @@ export class AuthService {
       registrationData.password,
       COMMON_CONSTANT.SALT_ROUND,
     );
+    const classId = await this.classesRepository.findByClassName(registrationData.class);
 
     const dataUser: any = {
-      ...registrationData,
+      id: uuid(),
+      username: registrationData.email,
+      email: registrationData.email,
       password: hashedPassword,
+    };
+    
+    const dataStudent: any = {
+      id: uuid(),
+      name : registrationData.name,
+      parentName : registrationData.parentName,
+      classId: classId.id,
     };
 
     try {
       const createdUser = await this.usersRepository.create(dataUser);
+      const createdStudent = await this.studentsRepository.create(dataStudent);
       createdUser.password = undefined;
+      createdStudent.userId = createdUser.id;
       return createdUser;
     } catch (error) {
       if (

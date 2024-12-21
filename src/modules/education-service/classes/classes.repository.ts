@@ -9,4 +9,15 @@ export class ClassesRepository extends GenericRepository<Class> {
   constructor(private readonly prismaService: PrismaService) {
     super(prismaService, 'class');
   }
+
+  async findByClassName(name: string){
+    return this.prismaService.class.findFirst({
+      where: {
+        name,
+      },
+      select: {
+        id: true,
+      },
+    });
+  }
 }
