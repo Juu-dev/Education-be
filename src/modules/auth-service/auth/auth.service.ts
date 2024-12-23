@@ -44,6 +44,7 @@ export class AuthService {
     
     const dataStudent: any = {
       id: uuid(),
+      userId : dataUser.id,
       name : registrationData.name,
       parentName : registrationData.parentName,
       classId: classId.id,
@@ -53,7 +54,6 @@ export class AuthService {
       const createdUser = await this.usersRepository.create(dataUser);
       const createdStudent = await this.studentsRepository.create(dataStudent);
       createdUser.password = undefined;
-      createdStudent.userId = createdUser.id;
       return createdUser;
     } catch (error) {
       if (
