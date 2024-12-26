@@ -25,5 +25,5 @@ export class RegisterDto {
   @IsString()
   @IsOptional()
   @ApiProperty({ example: '1A' })
-    class?: string;
+    className?: string;
 }

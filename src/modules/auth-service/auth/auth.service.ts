@@ -11,7 +11,6 @@ import { RefreshTokensRepository } from './refresh-tokens.repository';
 import { UsersRepository } from '../users/users.repository';
 import { StudentsRepository } from '../../education-service/students/students.repository';
 import { ClassesRepository } from './../../education-service/classes/classes.repository';
-import { v4 as uuid} from 'uuid';
 import {
   ForgotPasswordDto, LoginDto, RegisterDto, ResetPasswordDto,
 } from './dtos';
@@ -20,7 +19,6 @@ import {
 export class AuthService {
   constructor(
     private readonly usersRepository: UsersRepository,
-    private readonly studentsRepository: StudentsRepository,
     private readonly classesRepository: ClassesRepository,
     private readonly refreshTokensRepository: RefreshTokensRepository,
     private readonly jwtService: JwtService,
@@ -28,42 +26,38 @@ export class AuthService {
   ) {
   }
 
-  public async register(registrationData: RegisterDto) {
+  public async registerForStudent(registrationData: RegisterDto) {
     const hashedPassword = await bcrypt.hash(
       registrationData.password,
       COMMON_CONSTANT.SALT_ROUND,
     );
-    const classId = await this.classesRepository.findByClassName(registrationData.class);
+    const indentClass = await this.classesRepository.findByClassName(registrationData.className);
 
-    const dataUser: any = {
-      id: uuid(),
+    const data= {
       username: registrationData.email,
-      email: registrationData.email,
       password: hashedPassword,
-    };
-    
-    const dataStudent: any = {
-      id: uuid(),
-      name : registrationData.name,
-      parentName : registrationData.parentName,
-      classId: classId.id,
-    };
-
-    try {
-      const createdUser = await this.usersRepository.create(dataUser);
-      const createdStudent = await this.studentsRepository.create(dataStudent);
-      createdUser.password = undefined;
-      createdStudent.userId = createdUser.id;
-      return createdUser;
-    } catch (error) {
-      if (
-        error instanceof Prisma.PrismaClientKnownRequestError &&
-                error?.code === PrismaError.UniqueConstraintFailed
-      ) {
-        throw new BaseException(Errors.AUTH.PHONE_EXISTED);
+      email: registrationData.email,
+      roles: {
+        create: [
+          {
+            role: {
+              connect: {
+                name: "student",
+              },
+            },
+          },
+        ],
+      },
+      Student: {
+        create: {
+          classId: indentClass.id,
+          parentName: "Nguyễn Văn B",
+          name: "Nguyễn Văn A",
+        },
       }
-      throw new BaseException(Errors.DEFAULT);
     }
+
+    return await this.usersRepository.create(data as any);
   }
 
   public async login(loginData: LoginDto) {
