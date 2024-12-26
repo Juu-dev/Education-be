@@ -3,9 +3,9 @@ import { IsNotEmpty, IsOptional, IsString } from 'class-validator';
 
 export class RegisterDto {
   @IsString()
-  @IsNotEmpty()
-  @ApiProperty({ example: 'admin' })
-    username: string;
+  @IsOptional()
+  @ApiProperty({ example: 'test@gmail.com' })
+    email?: string;
 
   @IsString()
   @IsNotEmpty()
@@ -14,6 +14,16 @@ export class RegisterDto {
 
   @IsString()
   @IsOptional()
-  @ApiProperty({ example: 'test@gmail.com' })
-    email?: string;
+  @ApiProperty({ example: 'Nguyễn Văn A' })
+    name?: string;
+
+  @IsString()
+  @IsOptional()
+  @ApiProperty({ example: 'Nguyễn Văn B' })
+    parentName?: string;
+
+  @IsString()
+  @IsOptional()
+  @ApiProperty({ example: '1A' })
+    className?: string;
 }

@@ -9,7 +9,8 @@ import { BaseException } from '@n-exceptions';
 import { JwtPayloadModel } from '@n-models';
 import { RefreshTokensRepository } from './refresh-tokens.repository';
 import { UsersRepository } from '../users/users.repository';
-
+import { StudentsRepository } from '../../education-service/students/students.repository';
+import { ClassesRepository } from './../../education-service/classes/classes.repository';
 import {
   ForgotPasswordDto, LoginDto, RegisterDto, ResetPasswordDto,
 } from './dtos';
@@ -18,36 +19,45 @@ import {
 export class AuthService {
   constructor(
     private readonly usersRepository: UsersRepository,
+    private readonly classesRepository: ClassesRepository,
     private readonly refreshTokensRepository: RefreshTokensRepository,
     private readonly jwtService: JwtService,
     private readonly configService: ConfigService,
   ) {
   }
 
-  public async register(registrationData: RegisterDto) {
+  public async registerForStudent(registrationData: RegisterDto) {
     const hashedPassword = await bcrypt.hash(
       registrationData.password,
       COMMON_CONSTANT.SALT_ROUND,
     );
+    const indentClass = await this.classesRepository.findByClassName(registrationData.className);
 
-    const dataUser: any = {
-      ...registrationData,
+    const data= {
+      username: registrationData.email,
       password: hashedPassword,
-    };
-
-    try {
-      const createdUser = await this.usersRepository.create(dataUser);
-      createdUser.password = undefined;
-      return createdUser;
-    } catch (error) {
-      if (
-        error instanceof Prisma.PrismaClientKnownRequestError &&
-                error?.code === PrismaError.UniqueConstraintFailed
-      ) {
-        throw new BaseException(Errors.AUTH.PHONE_EXISTED);
+      email: registrationData.email,
+      roles: {
+        create: [
+          {
+            role: {
+              connect: {
+                name: "student",
+              },
+            },
+          },
+        ],
+      },
+      Student: {
+        create: {
+          classId: indentClass.id,
+          parentName: "Nguyễn Văn B",
+          name: "Nguyễn Văn A",
+        },
       }
-      throw new BaseException(Errors.DEFAULT);
     }
+
+    return await this.usersRepository.create(data as any);
   }
 
   public async login(loginData: LoginDto) {

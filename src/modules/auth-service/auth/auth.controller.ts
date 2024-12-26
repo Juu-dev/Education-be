@@ -18,11 +18,9 @@ export class AuthController {
   constructor(private readonly authService: AuthService) {
   }
 
-  @Post('register')
-  @Permissions([Permission.CREATE_USER])
-  @AuthClaims()
+  @Post('register/student')
   async register(@Body() registrationData: RegisterDto) {
-    return this.authService.register(registrationData);
+    return this.authService.registerForStudent(registrationData);
   }
 
   @Post('login')
