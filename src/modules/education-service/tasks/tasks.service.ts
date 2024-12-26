@@ -1,33 +1,29 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { BaseException } from '@n-exceptions';
 import { Errors } from '@n-constants';
 import { CreateTaskDto, UpdateTaskDto } from './dto';
 import { TasksRepository } from './tasks.repository';
-import { StudentsService } from '../students/students.service';
-import { TeachersService } from '../teachers/teachers.service';
+import { TeachersRepository } from '../teachers/teachers.repository';
+import {StudentsRepository} from "@n-modules/education-service/students/students.repository";
 
 @Injectable()
 export class TasksService {
   constructor(
     private readonly tasksRepository: TasksRepository,
-    private readonly studentsService: StudentsService,
-    private readonly teachersService: TeachersService,
+    private readonly studentsRepository: StudentsRepository,
+    private readonly teachersRepository: TeachersRepository,
   ) {
   }
 
   async createTask(createTaskDto: CreateTaskDto) {
-    //Check if the assignee exists
-    const assigneeExists = await this.teachersService.getTeacherById(createTaskDto.assigneeId);
+    const assigneeExists = await this.teachersRepository.findById(createTaskDto.assigneeId);
     if (!assigneeExists) {
-        console.log(`Assignee with ID ${createTaskDto.assigneeId} does not exist`)
-        throw new NotFoundException(`Assignee with ID ${createTaskDto.assigneeId} does not exist`);
+      throw new BaseException(Errors.TASK.ASSIGNEE_NOT_EXISTS);
     }
 
-    // Check if the assigner exists
-    const assignerExists = await this.studentsService.getStudentById(createTaskDto.assignerId) //await this.tasksRepository.findUserById(createTaskDto.assignerId);
+    const assignerExists = await this.studentsRepository.findById(createTaskDto.assignerId)
     if (!assignerExists) {
-        console.log(`Assignee with ID ${createTaskDto.assigneeId} does not exist`)
-        throw new NotFoundException(`Assigner with ID ${createTaskDto.assignerId} does not exist`);
+      throw new BaseException(Errors.TASK.ASSIGNER_NOT_EXISTS);
     }
 
     return this.tasksRepository.create(createTaskDto as any);
@@ -37,18 +33,20 @@ export class TasksService {
     page?: number,
     pageSize?: number,
   ) {
-    const count = await this.tasksRepository.count();
+    const count = this.tasksRepository.count();
 
-    const items = await this.tasksRepository.findAllPagination(page, pageSize);
+    const items = this.tasksRepository.findAllPagination(page, pageSize);
+
+    const parallelPromise = await Promise.all([count, items])
 
     return {
       pagination: {
         page,
         pageSize,
-        totalPage: Math.ceil(count / pageSize),
+        totalPage: Math.ceil(parallelPromise[0] / pageSize),
       },
       count,
-      data: items,
+      data: parallelPromise[1],
     };
   }
 
@@ -56,7 +54,7 @@ export class TasksService {
     const task = await this.tasksRepository.findById(id);
 
     if (!task) {
-      throw new BaseException(Errors.CATEGORY.CATEGORY_NOT_FOUND);
+      throw new BaseException(Errors.TASK.TASK_NOT_FOUND);
     }
 
     return task;
@@ -65,7 +63,7 @@ export class TasksService {
   async updateTask(id: string, UpdateTaskDto: UpdateTaskDto) {
     const task = await this.tasksRepository.findById(id);
     if (!task) {
-      throw new BaseException(Errors.CATEGORY.CATEGORY_NOT_FOUND);
+      throw new BaseException(Errors.TASK.TASK_NOT_FOUND);
     }
 
     return this.tasksRepository.updateById(
@@ -77,7 +75,7 @@ export class TasksService {
   async deleteTask(id: string) {
     const task = await this.tasksRepository.findById(id);
     if (!task) {
-      throw new BaseException(Errors.CATEGORY.CATEGORY_NOT_FOUND);
+      throw new BaseException(Errors.TASK.TASK_NOT_FOUND);
     }
 
     return this.tasksRepository.deleteById(id);

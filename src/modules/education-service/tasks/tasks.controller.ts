@@ -18,7 +18,7 @@ export class TasksController {
   }
 
   @Post()
-  @Roles([Permission.CREATE_CATEGORY])
+  // @Roles([Permission.CREATE_CATEGORY])
   @AuthClaims()
   @ApiCreatedResponse({ type: CategoryEntity })
   create(
@@ -28,7 +28,7 @@ export class TasksController {
   }
 
   @Get('pagination')
-  @Roles([Permission.GET_CATEGORIES])
+  // @Roles([Permission.GET_CATEGORIES])
   @AuthClaims()
   @ApiOkResponse({
     type: CategoryEntity,
@@ -47,7 +47,7 @@ export class TasksController {
   }
 
   @Get(':id')
-  @Roles([Permission.GET_CATEGORY])
+  // @Roles([Permission.GET_CATEGORY])
   @AuthClaims()
   @ApiOkResponse({ type: CategoryEntity })
   findOne(@Param('id') id: string) {
@@ -55,7 +55,7 @@ export class TasksController {
   }
 
   @Patch(':id')
-  @Roles([Permission.UPDATE_CATEGORY])
+  // @Roles([Permission.UPDATE_CATEGORY])
   @AuthClaims()
   @ApiOkResponse({ type: CategoryEntity })
   update(@Param('id') id: string, @Body() updateTaskDto: UpdateTaskDto) {
@@ -63,7 +63,7 @@ export class TasksController {
   }
 
   @Delete(':id')
-  @Roles([Permission.UPDATE_CATEGORY])
+  // @Roles([Permission.UPDATE_CATEGORY])
   @AuthClaims()
   @ApiOkResponse({ type: CategoryEntity })
   remove(@Param('id') id: string) {
