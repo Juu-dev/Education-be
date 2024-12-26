@@ -16,12 +16,12 @@ export class TasksService {
   }
 
   async createTask(createTaskDto: CreateTaskDto) {
-    const assigneeExists = await this.teachersRepository.findById(createTaskDto.assigneeId);
+    const assigneeExists = await this.teachersRepository.findById(createTaskDto.assignerId);
     if (!assigneeExists) {
       throw new BaseException(Errors.TASK.ASSIGNEE_NOT_EXISTS);
     }
 
-    const assignerExists = await this.studentsRepository.findById(createTaskDto.assignerId)
+    const assignerExists = await this.studentsRepository.findById(createTaskDto.assigneeId)
     if (!assignerExists) {
       throw new BaseException(Errors.TASK.ASSIGNER_NOT_EXISTS);
     }
