@@ -2,28 +2,33 @@ import { Permission } from '@n-constants';
 import { AuthClaims, Roles } from '@n-decorators';
 import { PaginationParamsDto } from '@n-dtos';
 import {
-  Body, Controller, Delete, Get, Param, Patch, Post, Query,
+  Body, Controller, Delete, Get, Param, Patch, Post, Query, UploadedFiles
 } from '@nestjs/common';
 import { ApiCreatedResponse, ApiOkResponse, ApiTags } from '@nestjs/swagger';
 
 import { CreateDocumentDto, UpdateDocumentDto } from '@n-modules/education-service/documents/dto';
 import { DocumentsService } from '@n-modules/education-service/documents/documents.service';
 import { CategoryEntity } from './entities/category.entity';
+import {ApiFile} from "@n-decorators/api-file.decorator";
+import {IFile} from "../../../interfaces";
 
 @Controller('documents')
 @ApiTags('Document')
 export class DocumentsController {
-  constructor(private readonly documentsService: DocumentsService) {
-  }
+  constructor(
+    private readonly documentsService: DocumentsService
+  ) {}
 
   @Post()
+  @ApiFile({ name: 'files', isArray: true })
   @Roles([Permission.CREATE_CATEGORY])
   @AuthClaims()
-  @ApiCreatedResponse({ type: CategoryEntity })
+  @ApiOkResponse({ description: 'Upload document thành công.' })
   create(
-  @Body() createCategoryDto: CreateDocumentDto,
+    @Body() createDocumentDto: CreateDocumentDto,
+    @UploadedFiles() files: IFile[],
   ) {
-    return this.documentsService.createDocument(createCategoryDto);
+    return this.documentsService.createDocument(createDocumentDto, files);
   }
 
   @Get('pagination')

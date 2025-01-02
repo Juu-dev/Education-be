@@ -25,10 +25,10 @@ export class BooksController {
   @AuthClaims()
   @ApiOkResponse({ description: 'Upload sách thành công.' })
   async create(
-    @Body() createCategoryDto: CreateBookDto,
+    @Body() createBookDto: CreateBookDto,
     @UploadedFiles() files: IFile[],
   ) {
-    return this.booksService.createBook(createCategoryDto, files);
+    return this.booksService.createBook(createBookDto, files);
   }
 
   @Get('pagination')

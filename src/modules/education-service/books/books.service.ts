@@ -41,9 +41,9 @@ export class BooksService {
   }
 
   private async uploadFiles({
-                              coverImage,
-                              contentPdf,
-                            }: {
+    coverImage,
+    contentPdf,
+  }: {
     coverImage: IFile;
     contentPdf: IFile;
   }): Promise<[string, string]> {
