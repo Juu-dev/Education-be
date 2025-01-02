@@ -5,14 +5,6 @@ import {
 } from 'class-validator';
 
 export class CreateDocumentDto {
-  @IsUUID()
-  @IsOptional()
-  @ApiProperty({
-    example: 'f47ac10b-58cc-4372-a567-0e02b2c3d479',
-    description: 'ID của tài liệu',
-  })
-    id?: string;
-
   @IsString()
   @IsOptional()
   @ApiProperty({
@@ -56,13 +48,4 @@ export class CreateDocumentDto {
     description: 'URL dẫn đến tài liệu',
   })
     url?: string;
-
-  @IsString()
-  @IsOptional()
-  @Transform(({ value }) => value.trim())
-  @ApiProperty({
-    example: 'https://example.com/metadata.json',
-    description: 'URL của metadata liên quan đến tài liệu',
-  })
-    metadataUrl?: string;
 }

@@ -3,14 +3,26 @@ import { BaseException } from '@n-exceptions';
 import { Errors } from '@n-constants';
 import { CreateDocumentDto, UpdateDocumentDto } from './dto';
 import { DocumentsRepository } from './documents.repository';
+import {FileUploadService} from "@n-modules/file-upload/file-upload.service";
+import {IFile} from "../../../interfaces";
 
 @Injectable()
 export class DocumentsService {
-  constructor(private readonly documentsRepository: DocumentsRepository) {
+  constructor(
+    private readonly documentsRepository: DocumentsRepository,
+    private readonly fileUploadService: FileUploadService
+  ) {
   }
 
-  async createDocument(createDocumentDto: CreateDocumentDto) {
-    return this.documentsRepository.create(createDocumentDto as any);
+  async createDocument(createDocumentDto: CreateDocumentDto, files: IFile[]) {    
+    const file = await this.fileUploadService.uploadFile(files[0]);
+
+    const uploadData = {
+      ...createDocumentDto,
+      url: file.Location
+    }
+
+    return this.documentsRepository.create(uploadData as any);
   }
 
   async getListDocument(
