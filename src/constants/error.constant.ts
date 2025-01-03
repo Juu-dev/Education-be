@@ -139,5 +139,12 @@ export const Errors = {
       statusCode: HttpStatus.NOT_FOUND,
       errorCode: 'TA3',
     }
+  },
+  DOCUMENT: {
+    DOCUMENT_NOT_FOUND: {
+      message: 'Document not found. <Ref: TA3>',
+      statusCode: HttpStatus.NOT_FOUND,
+      errorCode: 'TA4',
+    }
   }
 };

@@ -6,7 +6,7 @@ import {
 } from '@nestjs/common';
 import { ApiCreatedResponse, ApiOkResponse, ApiTags } from '@nestjs/swagger';
 
-import { CreateDocumentDto, UpdateDocumentDto } from '@n-modules/education-service/documents/dto';
+import {CreateDocumentDto, FilterDocumentDto, SearchDocumentDto, UpdateDocumentDto} from '@n-modules/education-service/documents/dto';
 import { DocumentsService } from '@n-modules/education-service/documents/documents.service';
 import { CategoryEntity } from './entities/category.entity';
 import {ApiFile} from "@n-decorators/api-file.decorator";
@@ -43,10 +43,16 @@ export class DocumentsController {
     page,
     pageSize,
   }: PaginationParamsDto,
+  @Query() filter: FilterDocumentDto,
+  @Query() {search}: SearchDocumentDto,
   ) {
     return this.documentsService.getListDocument(
-      page,
-      pageSize,
+        {
+          page,
+          pageSize,
+          filter,
+          search
+        },
     );
   }
 
@@ -62,12 +68,18 @@ export class DocumentsController {
     page,
     pageSize,
   }: PaginationParamsDto,
+  @Query() filter: FilterDocumentDto,
+  @Query() {search}: SearchDocumentDto,
   @Param('teacherId') teacherId: string,
   ) {
     return this.documentsService.getListDocument(
-      page,
-      pageSize,
-      teacherId,
+        {
+          page,
+          pageSize,
+          teacherId,
+          filter,
+          search
+        }
     );
   }
 
