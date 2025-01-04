@@ -29,7 +29,7 @@ export type BorrowedLog = {
 export type Class = {
     id: Generated<string>;
     name: string;
-    amount: number | null;
+    amount: Generated<number | null>;
     createdAt: Generated<Timestamp>;
     updatedAt: Generated<Timestamp>;
 };
@@ -186,6 +186,9 @@ export type User = {
     email: string;
     createdAt: Generated<Timestamp>;
     updatedAt: Generated<Timestamp>;
+    ethnicity: Generated<string>;
+    gender: Generated<string>;
+    phone: Generated<string>;
 };
 export type UserRole = {
     userId: string;

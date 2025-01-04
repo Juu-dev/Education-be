@@ -1,0 +1,14 @@
+[
+  {
+    "name": "admin"
+  },
+  {
+    "name": "teacher"
+  },
+  {
+    "name": "librarian"
+  },
+  {
+    "name": "student"
+  }
+]

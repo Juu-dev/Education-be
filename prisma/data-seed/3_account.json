@@ -6,7 +6,7 @@
         "ethnicity": "Kinh",
         "phone": "0915775667",
         "jobPosition": "Giáo viên",
-        "classId": 1,
+        "className": "1A",
         "email": "an.ptb@g.com",
         "password": "$2a$10$9CtWDff4uH5jUQcLqpgobObQqrp5EYVdhnr.5EMa4/oKwPrepihPS",
         "role": "teacher"
@@ -18,7 +18,7 @@
         "ethnicity": "Kinh",
         "phone": "0977315276",
         "jobPosition": "Giáo viên",
-        "classId": 1,
+        "className": "2E",
         "email": "anh.ntv@g.com",
         "password": "$2a$10$9CtWDff4uH5jUQcLqpgobObQqrp5EYVdhnr.5EMa4/oKwPrepihPS",
         "role": "teacher"
@@ -30,23 +30,12 @@
         "ethnicity": "Kinh",
         "phone": "0983237275",
         "jobPosition": "Cán bộ quản lý",
-        "classId": 1,
+        "className": "HP",
         "email": "anh.ntv1@g.com",
         "password": "$2a$10$9CtWDff4uH5jUQcLqpgobObQqrp5EYVdhnr.5EMa4/oKwPrepihPS",
         "role": "teacher"
     },
-    {
-        "fullName": "Đặng Thị Báu",
-        "birthDate": "1982-11-23",
-        "gender": "Nữ",
-        "ethnicity": "Kinh",
-        "phone": "0915678795",
-        "jobPosition": "Nhân viên",
-        "classId": 1,
-        "email": "bau.dt@g.com",
-        "password": "$2a$10$9CtWDff4uH5jUQcLqpgobObQqrp5EYVdhnr.5EMa4/oKwPrepihPS",
-        "role": "librarian"
-    },
+
     {
         "fullName": "Tống Thị Thanh Bình",
         "birthDate": "1973-03-27",
@@ -54,7 +43,7 @@
         "ethnicity": "Kinh",
         "phone": "0914549798",
         "jobPosition": "Cán bộ quản lý",
-        "classId": 1,
+        "className": "HT",
         "email": "binh.ttt@g.com",
         "password": "$2a$10$9CtWDff4uH5jUQcLqpgobObQqrp5EYVdhnr.5EMa4/oKwPrepihPS",
         "role": "admin"
@@ -66,7 +55,7 @@
         "ethnicity": "Kinh",
         "phone": "0913745557",
         "jobPosition": "Giáo viên",
-        "classId": 1,
+        "className": "3D",
         "email": "dung.ntm@g.com",
         "password": "$2a$10$9CtWDff4uH5jUQcLqpgobObQqrp5EYVdhnr.5EMa4/oKwPrepihPS",
         "role": "teacher"
@@ -78,7 +67,7 @@
         "ethnicity": "Kinh",
         "phone": "0912183669",
         "jobPosition": "Giáo viên",
-        "classId": 1,
+        "className": "2B",
         "email": "ha.ht@g.com",
         "password": "$2a$10$9CtWDff4uH5jUQcLqpgobObQqrp5EYVdhnr.5EMa4/oKwPrepihPS",
         "role": "teacher"
@@ -90,7 +79,7 @@
         "ethnicity": "Kinh",
         "phone": "0975445778",
         "jobPosition": "Giáo viên",
-        "classId": 1,
+        "className": "1G",
         "email": "ha.ltv77@g.com",
         "password": "$2a$10$9CtWDff4uH5jUQcLqpgobObQqrp5EYVdhnr.5EMa4/oKwPrepihPS",
         "role": "teacher"
@@ -102,7 +91,7 @@
         "ethnicity": "Kinh",
         "phone": "0917145568",
         "jobPosition": "Giáo viên",
-        "classId": 1,
+        "className": "4B",
         "email": "ha.lt76@g.com",
         "password": "$2a$10$9CtWDff4uH5jUQcLqpgobObQqrp5EYVdhnr.5EMa4/oKwPrepihPS",
         "role": "teacher"
@@ -114,7 +103,7 @@
         "ethnicity": "Kinh",
         "phone": "0911097279",
         "jobPosition": "Giáo viên",
-        "classId": 1,
+        "className": "2G",
         "email": "ha.ntt@g.com",
         "password": "$2a$10$9CtWDff4uH5jUQcLqpgobObQqrp5EYVdhnr.5EMa4/oKwPrepihPS",
         "role": "teacher"
@@ -126,7 +115,7 @@
         "ethnicity": "Kinh",
         "phone": "0935282456",
         "jobPosition": "Giáo viên",
-        "classId": 1,
+        "className": "2A",
         "email": "hai.ltt@g.com",
         "password": "$2a$10$9CtWDff4uH5jUQcLqpgobObQqrp5EYVdhnr.5EMa4/oKwPrepihPS",
         "role": "teacher"
@@ -138,7 +127,7 @@
         "ethnicity": "Kinh",
         "phone": "0916013799",
         "jobPosition": "Giáo viên",
-        "classId": 1,
+        "className":"4E",
         "email": "hang.dtb@g.com",
         "password": "$2a$10$9CtWDff4uH5jUQcLqpgobObQqrp5EYVdhnr.5EMa4/oKwPrepihPS",
         "role": "teacher"
@@ -150,7 +139,7 @@
         "ethnicity": "Kinh",
         "phone": "0943763528",
         "jobPosition": "Giáo viên",
-        "classId": 1,
+        "className": "MT",
         "email": "hang.ntl@g.com",
         "password": "$2a$10$9CtWDff4uH5jUQcLqpgobObQqrp5EYVdhnr.5EMa4/oKwPrepihPS",
         "role": "teacher"
@@ -162,7 +151,7 @@
         "ethnicity": "Kinh",
         "phone": "0835447058",
         "jobPosition": "Giáo viên",
-        "classId": 1,
+        "className": "1B",
         "email": "hang.ntt@g.com",
         "password": "$2a$10$9CtWDff4uH5jUQcLqpgobObQqrp5EYVdhnr.5EMa4/oKwPrepihPS",
         "role": "teacher"
@@ -174,7 +163,7 @@
         "ethnicity": "Kinh",
         "phone": "0948988279",
         "jobPosition": "Giáo viên",
-        "classId": 1,
+        "className": "5C",
         "email": "hien.dtt@g.com",
         "password": "$2a$10$9CtWDff4uH5jUQcLqpgobObQqrp5EYVdhnr.5EMa4/oKwPrepihPS",
         "role": "teacher"
@@ -186,7 +175,7 @@
         "ethnicity": "Kinh",
         "phone": "0948184780",
         "jobPosition": "Giáo viên",
-        "classId": 1,
+        "className": "3A",
         "email": "hien.htt@g.com",
         "password": "$2a$10$9CtWDff4uH5jUQcLqpgobObQqrp5EYVdhnr.5EMa4/oKwPrepihPS",
         "role": "teacher"
@@ -198,7 +187,7 @@
         "ethnicity": "Kinh",
         "phone": "0946086129",
         "jobPosition": "Giáo viên",
-        "classId": 1,
+        "className":"TH",
         "email": "hien.ltt@g.com",
         "password": "$2a$10$9CtWDff4uH5jUQcLqpgobObQqrp5EYVdhnr.5EMa4/oKwPrepihPS",
         "role": "teacher"
@@ -210,7 +199,7 @@
         "ethnicity": "Kinh",
         "phone": "0911076368",
         "jobPosition": "Giáo viên",
-        "classId": 1,
+        "className": "4A",
         "email": "hien.nt@g.com",
         "password": "$2a$10$9CtWDff4uH5jUQcLqpgobObQqrp5EYVdhnr.5EMa4/oKwPrepihPS",
         "role": "teacher"
@@ -222,7 +211,7 @@
         "ethnicity": "Kinh",
         "phone": "0963626816",
         "jobPosition": "Giáo viên",
-        "classId": 1,
+        "className":"3",
         "email": "hoai.pta@g.com",
         "password": "$2a$10$9CtWDff4uH5jUQcLqpgobObQqrp5EYVdhnr.5EMa4/oKwPrepihPS",
         "role": "teacher"
@@ -234,10 +223,10 @@
         "ethnicity": "Kinh",
         "phone": "0989836068",
         "jobPosition": "Nhân viên",
-        "classId": 1,
+        "className": "TV",
         "email": "huong.lt@g.com",
         "password": "$2a$10$9CtWDff4uH5jUQcLqpgobObQqrp5EYVdhnr.5EMa4/oKwPrepihPS",
-        "role": "teacher"
+        "role": "librarian"
     },
     {
         "fullName": "Phạm Thị Quế Hương",
@@ -246,7 +235,7 @@
         "ethnicity": "Kinh",
         "phone": "0977377661",
         "jobPosition": "Cán bộ quản lý",
-        "classId": 1,
+        "className": "HP",
         "email": "huong.ptq@g.com",
         "password": "$2a$10$9CtWDff4uH5jUQcLqpgobObQqrp5EYVdhnr.5EMa4/oKwPrepihPS",
         "role": "teacher"
@@ -258,7 +247,7 @@
         "ethnicity": "Kinh",
         "phone": "0919969726",
         "jobPosition": "Giáo viên",
-        "classId": 1,
+        "className":"TD",
         "email": "huong.tt@g.com",
         "password": "$2a$10$9CtWDff4uH5jUQcLqpgobObQqrp5EYVdhnr.5EMa4/oKwPrepihPS",
         "role": "teacher"
@@ -270,7 +259,7 @@
         "ethnicity": "Kinh",
         "phone": "0912435738",
         "jobPosition": "Giáo viên",
-        "classId": 1,
+        "className":"4D",
         "email": "lam.nt@g.com",
         "password": "$2a$10$9CtWDff4uH5jUQcLqpgobObQqrp5EYVdhnr.5EMa4/oKwPrepihPS",
         "role": "teacher"
@@ -282,7 +271,7 @@
         "ethnicity": "Kinh",
         "phone": "0917713588",
         "jobPosition": "Giáo viên",
-        "classId": 1,
+        "className":"4G",
         "email": "lan.ntp@g.com",
         "password": "$2a$10$9CtWDff4uH5jUQcLqpgobObQqrp5EYVdhnr.5EMa4/oKwPrepihPS",
         "role": "teacher"
@@ -294,7 +283,7 @@
         "ethnicity": "Kinh",
         "phone": "0915983274",
         "jobPosition": "Giáo viên",
-        "classId": 1,
+        "className": "5B",
         "email": "le.ttm@g.com",
         "password": "$2a$10$9CtWDff4uH5jUQcLqpgobObQqrp5EYVdhnr.5EMa4/oKwPrepihPS",
         "role": "teacher"
@@ -306,7 +295,7 @@
         "ethnicity": "Kinh",
         "phone": "0904347677",
         "jobPosition": "Giáo viên",
-        "classId": 1,
+        "className": "1D",
         "email": "luong.ltt@g.com",
         "password": "$2a$10$9CtWDff4uH5jUQcLqpgobObQqrp5EYVdhnr.5EMa4/oKwPrepihPS",
         "role": "teacher"
@@ -318,7 +307,7 @@
         "ethnicity": "Kinh",
         "phone": "0915192364",
         "jobPosition": "Giáo viên",
-        "classId": 1,
+        "className": "2C",
         "email": "minh.tth@g.com",
         "password": "$2a$10$9CtWDff4uH5jUQcLqpgobObQqrp5EYVdhnr.5EMa4/oKwPrepihPS",
         "role": "teacher"
@@ -330,7 +319,7 @@
         "ethnicity": "Kinh",
         "phone": "0855511498",
         "jobPosition": "Giáo viên",
-        "classId": 1,
+        "className": "3B",
         "email": "ngoc.pt@g.com",
         "password": "$2a$10$9CtWDff4uH5jUQcLqpgobObQqrp5EYVdhnr.5EMa4/oKwPrepihPS",
         "role": "teacher"
@@ -342,7 +331,7 @@
         "ethnicity": "Kinh",
         "phone": "0912268587",
         "jobPosition": "Giáo viên",
-        "classId": 1,
+        "className": "TA",
         "email": "nguyet.nt@g.com",
         "password": "$2a$10$9CtWDff4uH5jUQcLqpgobObQqrp5EYVdhnr.5EMa4/oKwPrepihPS",
         "role": "teacher"
@@ -354,7 +343,7 @@
         "ethnicity": "Kinh",
         "phone": "0948013275",
         "jobPosition": "Giáo viên",
-        "classId": 1,
+        "className": "5G",
         "email": "oanh.pt@g.com",
         "password": "$2a$10$9CtWDff4uH5jUQcLqpgobObQqrp5EYVdhnr.5EMa4/oKwPrepihPS",
         "role": "teacher"
@@ -366,7 +355,7 @@
         "ethnicity": "Kinh",
         "phone": "0386960929",
         "jobPosition": "Giáo viên",
-        "classId": 1,
+        "className": "2D",
         "email": "phuoc.nt@g.com",
         "password": "$2a$10$9CtWDff4uH5jUQcLqpgobObQqrp5EYVdhnr.5EMa4/oKwPrepihPS",
         "role": "teacher"
@@ -378,7 +367,7 @@
         "ethnicity": "Kinh",
         "phone": "0941262255",
         "jobPosition": "Giáo viên",
-        "classId": 1,
+        "className": "5E",
         "email": "phuong.htt@g.com",
         "password": "$2a$10$9CtWDff4uH5jUQcLqpgobObQqrp5EYVdhnr.5EMa4/oKwPrepihPS",
         "role": "teacher"
@@ -390,7 +379,7 @@
         "ethnicity": "Kinh",
         "phone": "0946740967",
         "jobPosition": "Giáo viên",
-        "classId": 1,
+        "className": "TA",
         "email": "quyen.nth@g.com",
         "password": "$2a$10$9CtWDff4uH5jUQcLqpgobObQqrp5EYVdhnr.5EMa4/oKwPrepihPS",
         "role": "teacher"
@@ -402,7 +391,7 @@
         "ethnicity": "Kinh",
         "phone": "0983212576",
         "jobPosition": "Giáo viên",
-        "classId": 1,
+        "className": "1C",
         "email": "sen.ntt@g.com",
         "password": "$2a$10$9CtWDff4uH5jUQcLqpgobObQqrp5EYVdhnr.5EMa4/oKwPrepihPS",
         "role": "teacher"
@@ -414,7 +403,7 @@
         "ethnicity": "Kinh",
         "phone": "0977644778",
         "jobPosition": "Giáo viên",
-        "classId": 1,
+        "className":"MT",
         "email": "tham.nt@g.com",
         "password": "$2a$10$9CtWDff4uH5jUQcLqpgobObQqrp5EYVdhnr.5EMa4/oKwPrepihPS",
         "role": "teacher"
@@ -426,7 +415,7 @@
         "ethnicity": "Kinh",
         "phone": "0916881651",
         "jobPosition": "Giáo viên",
-        "classId": 1,
+        "className":"5D",
         "email": "thao.ltb@g.com",
         "password": "$2a$10$9CtWDff4uH5jUQcLqpgobObQqrp5EYVdhnr.5EMa4/oKwPrepihPS",
         "role": "teacher"
@@ -438,7 +427,7 @@
         "ethnicity": "Kinh",
         "phone": "0948223881",
         "jobPosition": "Giáo viên",
-        "classId": 1,
+        "className": "1E",
         "email": "thoa.vt@g.com",
         "password": "$2a$10$9CtWDff4uH5jUQcLqpgobObQqrp5EYVdhnr.5EMa4/oKwPrepihPS",
         "role": "teacher"
@@ -450,7 +439,7 @@
         "ethnicity": "Kinh",
         "phone": "0915420345",
         "jobPosition": "Giáo viên",
-        "classId": 1,
+        "className": "1",
         "email": "thuan.tt@g.com",
         "password": "$2a$10$9CtWDff4uH5jUQcLqpgobObQqrp5EYVdhnr.5EMa4/oKwPrepihPS",
         "role": "teacher"
@@ -462,7 +451,7 @@
         "ethnicity": "Kinh",
         "phone": "0919649379",
         "jobPosition": "Giáo viên",
-        "classId": 1,
+        "className": "3E",
         "email": "thuy.ltd@g.com",
         "password": "$2a$10$9CtWDff4uH5jUQcLqpgobObQqrp5EYVdhnr.5EMa4/oKwPrepihPS",
         "role": "teacher"
@@ -474,7 +463,7 @@
         "ethnicity": "Kinh",
         "phone": "0988436551",
         "jobPosition": "Giáo viên",
-        "classId": 1,
+        "className": "4C",
         "email": "tinh.pt@g.com",
         "password": "$2a$10$9CtWDff4uH5jUQcLqpgobObQqrp5EYVdhnr.5EMa4/oKwPrepihPS",
         "role": "teacher"
@@ -486,7 +475,7 @@
         "ethnicity": "Kinh",
         "phone": "0814337596",
         "jobPosition": "Giáo viên",
-        "classId": 1,
+        "className": "PTD",
         "email": "trinh.htt@g.com",
         "password": "$2a$10$9CtWDff4uH5jUQcLqpgobObQqrp5EYVdhnr.5EMa4/oKwPrepihPS",
         "role": "teacher"
@@ -498,7 +487,7 @@
         "ethnicity": "Kinh",
         "phone": "0942734592",
         "jobPosition": "Giáo viên",
-        "classId": 1,
+        "className": "TD",
         "email": "vinh.nth@g.com",
         "password": "$2a$10$9CtWDff4uH5jUQcLqpgobObQqrp5EYVdhnr.5EMa4/oKwPrepihPS",
         "role": "teacher"
@@ -510,7 +499,7 @@
         "ethnicity": "Kinh",
         "phone": "0913638660",
         "jobPosition": "Giáo viên",
-        "classId": 1,
+        "className": "3C",
         "email": "yen.bth@g.com",
         "password": "$2a$10$9CtWDff4uH5jUQcLqpgobObQqrp5EYVdhnr.5EMa4/oKwPrepihPS",
         "role": "teacher"
@@ -522,7 +511,7 @@
         "ethnicity": "Kinh",
         "phone": "0915860678",
         "jobPosition": "Giáo viên",
-        "classId": 1,
+        "className": "AN",
         "email": "yen.lth@g.com",
         "password": "$2a$10$9CtWDff4uH5jUQcLqpgobObQqrp5EYVdhnr.5EMa4/oKwPrepihPS",
         "role": "teacher"
@@ -534,7 +523,7 @@
         "ethnicity": "Kinh",
         "phone": "0918265667",
         "jobPosition": "Giáo viên",
-        "classId": 1,
+        "className": "TA",
         "email": "yen.lth1@g.com",
         "password": "$2a$10$9CtWDff4uH5jUQcLqpgobObQqrp5EYVdhnr.5EMa4/oKwPrepihPS",
         "role": "teacher"
@@ -546,7 +535,7 @@
         "ethnicity": "Kinh",
         "phone": "0941335419",
         "jobPosition": "Giáo viên",
-        "classId": 1,
+        "className": "5A",
         "email": "yen.tt@g.com",
         "password": "$2a$10$9CtWDff4uH5jUQcLqpgobObQqrp5EYVdhnr.5EMa4/oKwPrepihPS",
         "role": "teacher"
@@ -558,7 +547,7 @@
         "ethnicity": "Kinh",
         "phone": "0555987654",
         "jobPosition": "Student",
-        "classId": null,
+        "className": "5A",
         "email": "student1@example.com",
         "password": "$2a$10$9CtWDff4uH5jUQcLqpgobObQqrp5EYVdhnr.5EMa4/oKwPrepihPS",
         "role": "student"
@@ -570,7 +559,7 @@
         "ethnicity": "Kinh",
         "phone": "0555123987",
         "jobPosition": "Student",
-        "classId": null,
+        "className": "5A",
         "email": "student2@example.com",
         "password": "$2a$10$9CtWDff4uH5jUQcLqpgobObQqrp5EYVdhnr.5EMa4/oKwPrepihPS",
         "role": "student"
@@ -582,7 +571,7 @@
         "ethnicity": "Kinh",
         "phone": "0555987123",
         "jobPosition": "Student",
-        "classId": 1,
+        "className": "5A",
         "email": "stud3@a.com",
         "password": "$2a$10$9CtWDff4uH5jUQcLqpgobObQqrp5EYVdhnr.5EMa4/oKwPrepihPS",
         "role": "student"

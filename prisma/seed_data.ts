@@ -4,16 +4,29 @@ import path from 'path';
 
 const prisma = new PrismaClient();
 
+const readFileJson = (pathFile: string) => {
+    const pathRefer = path.join(__dirname, pathFile);
+    const data = fs.readFileSync(pathRefer, 'utf-8');
+    return JSON.parse(data);
+}
+
+const getAccount = () => {
+    return readFileJson('data-seed/3_account.json')
+}
+
+const getClasses = () => {
+    return readFileJson('data-seed/1_classes.json')
+}
+
+const getRoles = () => {
+    return readFileJson('data-seed/2_roles.json')
+}
+
 const seedRoles = async () => {
-    const roles = [
-        { name: 'admin' },
-        { name: 'teacher' },
-        { name: 'librarian' },
-        { name: 'student' },
-    ];
+    const roles = getRoles();
 
     await Promise.all(
-        roles.map(async (role) => {
+        roles.map(async (role: any) => {
             await prisma.role.upsert({
                 where: { name: role.name },
                 update: {},
@@ -23,17 +36,33 @@ const seedRoles = async () => {
     );
 };
 
-const readDataFromFile = () => {
-    const accountsPath = path.join(__dirname, 'account.json');
-    const accountsData = fs.readFileSync(accountsPath, 'utf-8');
-    return JSON.parse(accountsData);
+const seedClasses = async () => {
+    const classes = getClasses();
+
+    const createdClasses = await Promise.all(
+        classes.map(async (classData: any) => {
+            return prisma.class.create({
+                data: classData,
+            });
+        })
+    );
+
+    return createdClasses.map((e) => ({
+        id: e.id,
+        name: e.name,
+    }));
+};
+
+interface seedUsersProps {
+    id: string;
+    name: string;
 }
 
-const seedUsers = async (createdClassIds: string[]) => {
-    const accounts = readDataFromFile();
+const seedUsers = async (createdClass: seedUsersProps[]) => {
+    const accounts = getAccount();
 
     const users = await Promise.all(
-        accounts.map(async (account) => {
+        accounts.map(async (account: any) => {
             return prisma.user.create({
                 data: {
                     username: account.email,
@@ -59,7 +88,7 @@ const seedUsers = async (createdClassIds: string[]) => {
                                 level: account.class || null,
                                 class: {
                                     connect : {
-                                        id: createdClassIds[0]
+                                        id: createdClass.find((e) => e.name === account?.className).id
                                     }
                                 }
                             },
@@ -73,7 +102,7 @@ const seedUsers = async (createdClassIds: string[]) => {
                                 position: account.jobPosition || null,
                                 class: {
                                     connect : {
-                                        id: createdClassIds[0]
+                                        id: createdClass.find((e) => e.name === account?.className).id
                                     }
                                 }
                             },
@@ -106,24 +135,6 @@ const seedUsers = async (createdClassIds: string[]) => {
     return users;
 };
 
-
-const seedClasses = async () => {
-    const classes = [
-        { name: 'Class 1' },
-        { name: 'Class 2' },
-    ];
-
-    const createdClasses = await Promise.all(
-        classes.map(async (classData) => {
-            return prisma.class.create({
-                data: classData,
-            });
-        })
-    );
-
-    return createdClasses.map((e) => e.id);
-};
-
 const seedDocuments = async () => {
     const teachers = await prisma.teacher.findMany();
 
@@ -148,13 +159,29 @@ const seedDocuments = async () => {
     await Promise.all(documentPromises);
 };
 
+const clearDatabase = async () => {
+    const tables = await prisma.$queryRaw<
+        { tablename: string }[]
+    >`SELECT tablename FROM pg_tables WHERE schemaname = 'public'`;
+
+    for (const table of tables) {
+        await prisma.$executeRawUnsafe(`TRUNCATE TABLE "${table.tablename}" CASCADE`);
+    }
+
+    console.log('All tables cleared!');
+};
+
+
 const main = async () => {
+    // Clear Database
+    // await clearDatabase();
+    // console.log('Clearing database completed!');
+
     // Seed roles
     await seedRoles();
     console.log('Seeding roles completed!');
 
-
-    // Seed class
+    // Seed classes
     const createdClassIds = await seedClasses();
     console.log('Seeding classes completed!');
 
@@ -162,6 +189,7 @@ const main = async () => {
     await seedUsers(createdClassIds)
     console.log('Seeding users completed!');
 
+    // Done
     console.log('Seeding All completed!');
 };
 
