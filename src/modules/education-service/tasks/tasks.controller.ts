@@ -1,8 +1,7 @@
-import { Permission } from '@n-constants';
-import { AuthClaims, Roles } from '@n-decorators';
+import { AuthClaims } from '@n-decorators';
 import { PaginationParamsDto } from '@n-dtos';
 import {
-  Body, Controller, Delete, Get, Param, Patch, Post, Query, UseGuards,
+  Body, Controller, Delete, Get, Param, Patch, Post, Query,
 } from '@nestjs/common';
 import { ApiCreatedResponse, ApiOkResponse, ApiTags } from '@nestjs/swagger';
 

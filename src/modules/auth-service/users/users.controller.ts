@@ -43,14 +43,11 @@ export class UsersController {
     @Query() filter?: FilterUserDto,
     @Query() search?: SearchUserDto,
   ) {
-    const user: any = request?.user;
-
     return this.usersService.getListUser(
       page,
       pageSize,
-      filter,
-      search,
-      user?.platformId,
+      // filter,
+      // search,
     );
   }
 
@@ -62,16 +59,24 @@ export class UsersController {
     isArray: true,
   })
   findAllNotPagination(
-  @Req() request: Request,
     @Query() filter?: FilterUserDto,
     @Query() search?: SearchUserDto,
   ) {
-    const user: any = request?.user;
     return this.usersService.getListUserNotPagination(
-      filter,
-      search,
-      user?.platformId,
+      // filter,
+      // search,
     );
+  }
+
+  @Get('except-student')
+  @Permissions([Permission.EXPORT_USERS])
+  @AuthClaims()
+  @ApiOkResponse({
+    type: UserEntity,
+    isArray: true,
+  })
+  findAllUserExceptStudent() {
+    return this.usersService.getListUserExceptStudent();
   }
 
   @Get(':id')

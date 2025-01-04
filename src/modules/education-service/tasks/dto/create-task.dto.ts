@@ -3,6 +3,12 @@ import {Transform} from 'class-transformer';
 import {IsDate, IsNotEmpty, IsOptional, IsString, IsUUID,} from 'class-validator';
 
 export class CreateTaskDto {
+    @IsString()
+    @IsNotEmpty()
+    @Transform(({value}) => value.trim())
+    @ApiProperty({example: 'Tên task', description: 'Tên của task'})
+    title: string;
+
     @IsUUID()
     @IsNotEmpty()
     @ApiProperty({example: '429860cf-d4c7-4439-b94e-def5bec2179f', description: 'ID của người giao task'})
@@ -22,28 +28,30 @@ export class CreateTaskDto {
     @IsString()
     @IsOptional()
     @Transform(({value}) => value.trim())
-    @ApiProperty({example: 'Thu xếp hành lý', description: 'Miêu tả của task'})
-    taskDescription?: string;
+    @ApiProperty({example: 'Giảng dạy', description: 'Loại của task'})
+    type?: string;
 
-    @IsDate()
-    @IsNotEmpty()
-    @ApiProperty({
-        example: '2024-11-03T10:15:30Z',
-        description: 'Thời điểm giao task',
-        type: String
-    })
-    @Transform(({value}) => new Date(value))
-    assignedAt: Date;
+    @IsString()
+    @IsOptional()
+    @Transform(({value}) => value.trim())
+    @ApiProperty({example: 'Thu xếp hành lý', description: 'Miêu tả của task'})
+    description?: string;
+
+    @IsString()
+    @IsOptional()
+    @Transform(({value}) => value.trim())
+    @ApiProperty({example: 'Bình thường', description: 'Độ ưu tiên của task'})
+    priority?: string;
 
     @IsDate()
     @IsOptional()
     @ApiProperty({
         example: '2024-11-03T10:15:30Z',
-        description: 'Thời điểm bắt đầu task',
+        description: 'Thời điểm giao task',
         type: String
     })
-    @Transform(({value}) => new Date(value))
-    startTime?: Date;
+    @Transform(() => new Date())
+    assignedAt?: Date;
 
     @IsDate()
     @IsOptional()

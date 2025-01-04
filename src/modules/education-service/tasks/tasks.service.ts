@@ -3,25 +3,23 @@ import { BaseException } from '@n-exceptions';
 import { Errors } from '@n-constants';
 import { CreateTaskDto, UpdateTaskDto } from './dto';
 import { TasksRepository } from './tasks.repository';
-import { TeachersRepository } from '../teachers/teachers.repository';
-import {StudentsRepository} from "@n-modules/education-service/students/students.repository";
+import {UsersRepository} from "@n-modules/auth-service/users/users.repository";
 
 @Injectable()
 export class TasksService {
   constructor(
     private readonly tasksRepository: TasksRepository,
-    private readonly studentsRepository: StudentsRepository,
-    private readonly teachersRepository: TeachersRepository,
+    private readonly usersRepository: UsersRepository,
   ) {
   }
 
   async createTask(createTaskDto: CreateTaskDto) {
-    const assigneeExists = await this.teachersRepository.findById(createTaskDto.assignerId);
+    const assigneeExists = await this.usersRepository.findById(createTaskDto.assignerId);
     if (!assigneeExists) {
       throw new BaseException(Errors.TASK.ASSIGNEE_NOT_EXISTS);
     }
 
-    const assignerExists = await this.studentsRepository.findById(createTaskDto.assigneeId)
+    const assignerExists = await this.usersRepository.findById(createTaskDto.assigneeId)
     if (!assignerExists) {
       throw new BaseException(Errors.TASK.ASSIGNER_NOT_EXISTS);
     }

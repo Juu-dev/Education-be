@@ -29,4 +29,28 @@ export class UsersRepository extends GenericRepository<User> {
       },
     });
   }
+
+  findAllExceptStudent(): Promise<User[]> {
+    return this.prismaService.user.findMany({
+      where: {
+        roles: {
+          none: {
+            role: {
+              name: {
+                in: ['student', 'librarian'],
+              },
+            },
+          },
+        },
+      },
+      include: {
+        Teacher: true,
+        roles: {
+          include: {
+            role: true,
+          },
+        }
+      }
+    });
+  }
 }
