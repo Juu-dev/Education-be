@@ -27,8 +27,8 @@ export class ClassesController {
   }
 
   @Get('pagination')
-  @Roles([Permission.GET_CATEGORIES])
-  @AuthClaims()
+  // @Roles([Permission.GET_CATEGORIES])
+  // @AuthClaims()
   @ApiOkResponse({
     type: CategoryEntity,
     isArray: true,

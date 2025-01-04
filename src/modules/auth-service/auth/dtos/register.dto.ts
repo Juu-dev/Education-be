@@ -19,11 +19,6 @@ export class RegisterDto {
 
   @IsString()
   @IsOptional()
-  @ApiProperty({ example: 'Nguyễn Văn B' })
-    parentName?: string;
-
-  @IsString()
-  @IsOptional()
   @ApiProperty({ example: '1A' })
-    className?: string;
+    classId?: string;
 }

@@ -3,13 +3,11 @@ import { ConfigService } from '@nestjs/config';
 import { JwtService } from '@nestjs/jwt';
 import * as bcrypt from 'bcryptjs';
 
-import { COMMON_CONSTANT, Errors, PrismaError } from '@n-constants';
-import { Prisma } from '@prisma/client';
+import { COMMON_CONSTANT, Errors } from '@n-constants';
 import { BaseException } from '@n-exceptions';
 import { JwtPayloadModel } from '@n-models';
 import { RefreshTokensRepository } from './refresh-tokens.repository';
 import { UsersRepository } from '../users/users.repository';
-import { StudentsRepository } from '../../education-service/students/students.repository';
 import { ClassesRepository } from './../../education-service/classes/classes.repository';
 import {
   ForgotPasswordDto, LoginDto, RegisterDto, ResetPasswordDto,
@@ -27,16 +25,15 @@ export class AuthService {
   }
 
   public async registerForStudent(registrationData: RegisterDto) {
+    const {email, password, name, classId} = registrationData;
     const hashedPassword = await bcrypt.hash(
-      registrationData.password,
+        password,
       COMMON_CONSTANT.SALT_ROUND,
     );
-    const indentClass = await this.classesRepository.findByClassName(registrationData.className);
-
     const data= {
-      username: registrationData.email,
+      username: email,
       password: hashedPassword,
-      email: registrationData.email,
+      email: email,
       roles: {
         create: [
           {
@@ -50,9 +47,8 @@ export class AuthService {
       },
       Student: {
         create: {
-          classId: indentClass.id,
-          parentName: "Nguyễn Văn B",
-          name: "Nguyễn Văn A",
+          classId: classId,
+          name: name
         },
       }
     }
