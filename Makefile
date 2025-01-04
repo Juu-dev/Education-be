@@ -88,6 +88,9 @@ login-db:
 delete-db:
 	docker exec -it $(DB_NAME) psql -U education_username -d postgres -c "DROP DATABASE education_db;"
 
+create-db:
+	docker exec -it $(DB_NAME) psql -U education_username -d postgres -c "CREATE DATABASE education_db;"
+
 login-check:
 	docker exec -it $(DB_NAME) psql -U postgres
 
@@ -104,6 +107,11 @@ root-connect:
 
 start-server:
 	docker exec -d education-backend npm run start:dev
+
+restart-server:
+	make stop-all
+	make up
+	make start-server
 
 
 # combo
