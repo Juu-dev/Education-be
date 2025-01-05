@@ -30,9 +30,12 @@ export class UsersRepository extends GenericRepository<User> {
     });
   }
 
-  findAllExceptStudent(): Promise<User[]> {
+  findAllExceptStudent(id: string): Promise<User[]> {
     return this.prismaService.user.findMany({
       where: {
+        id: {
+          not: id
+        },
         roles: {
           none: {
             role: {

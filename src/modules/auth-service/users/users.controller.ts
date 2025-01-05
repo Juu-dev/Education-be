@@ -1,5 +1,5 @@
 import { ApiCreatedResponse, ApiOkResponse, ApiTags } from '@nestjs/swagger';
-import { AuthClaims, Permissions } from '@n-decorators';
+import {AuthClaims, GetUser, Permissions} from '@n-decorators';
 import { Permission } from '@n-constants';
 import { PaginationParamsDto } from '@n-dtos';
 import { Request } from 'express';
@@ -75,8 +75,10 @@ export class UsersController {
     type: UserEntity,
     isArray: true,
   })
-  findAllUserExceptStudent() {
-    return this.usersService.getListUserExceptStudent();
+  findAllUserExceptStudent(
+      @GetUser() user: any,
+  ) {
+    return this.usersService.getListUserExceptStudent(user?.id);
   }
 
   @Get(':id')

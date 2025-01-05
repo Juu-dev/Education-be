@@ -5,6 +5,13 @@ import { CreateTaskDto, UpdateTaskDto } from './dto';
 import { TasksRepository } from './tasks.repository';
 import {UsersRepository} from "@n-modules/auth-service/users/users.repository";
 
+export interface IGetListTaskWithSpecificModeDTO {
+  page?: number,
+  pageSize?: number,
+  mode?: string,
+  id?: string
+}
+
 @Injectable()
 export class TasksService {
   constructor(
@@ -34,6 +41,25 @@ export class TasksService {
     const count = this.tasksRepository.count();
 
     const items = this.tasksRepository.findAllPagination(page, pageSize);
+
+    const parallelPromise = await Promise.all([count, items])
+
+    return {
+      pagination: {
+        page,
+        pageSize,
+        totalPage: Math.ceil(parallelPromise[0] / pageSize),
+      },
+      count,
+      data: parallelPromise[1],
+    };
+  }
+
+  async getListTaskWithSpecificMode(props: IGetListTaskWithSpecificModeDTO) {
+    const { page, pageSize } = props;
+    const count = this.tasksRepository.count();
+
+    const items = this.tasksRepository.findAllPaginationWithSpecificMode(props);
 
     const parallelPromise = await Promise.all([count, items])
 
