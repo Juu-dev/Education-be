@@ -39,6 +39,8 @@ model User {
   Student      Student?
   Teacher      Teacher?
   RefreshToken RefreshToken[]
+  assignerTask Task[]         @relation("assigner")
+  assigneeTask Task[]         @relation("assignee")
 
   @@map("users")
 }
@@ -109,7 +111,6 @@ model Student {
   goals        Goal[]
   marks        Mark[]
   ratings      Rating[]
-  tasks        Task[]
   exercises    ExerciseStudent[]
   borrowedLogs BorrowedLog[]
   Comment      Comment[]
@@ -132,7 +133,6 @@ model Teacher {
   user      User?      @relation(fields: [userId], references: [id])
   class     Class?     @relation(fields: [classId], references: [id])
   documents Document[]
-  tasks     Task[]
   exercises Exercise[]
 
   @@map("teachers")
@@ -257,19 +257,21 @@ model Mark {
 }
 
 model Task {
-  id              String    @id @default(uuid())
-  assignerId      String    @map("assigner_id") @db.VarChar(36)
-  assigneeId      String    @map("assignee_id") @db.VarChar(36)
-  status          String?   @map("status") @db.VarChar(255)
-  taskDescription String?   @map("task_description") @db.Text
-  assignedAt      DateTime  @map("assigned_at") @db.Timestamp(6)
-  startTime       DateTime? @map("start_time") @db.Timestamp(6)
-  endTime         DateTime? @map("end_time") @db.Timestamp(6)
-  createdAt       DateTime  @default(now()) @map("created_at")
-  updatedAt       DateTime  @default(now()) @updatedAt @map("updated_at")
+  id          String    @id @default(uuid())
+  title       String    @map("title") @db.VarChar(36)
+  assignerId  String    @map("assigner_id") @db.VarChar(36)
+  assigneeId  String    @map("assignee_id") @db.VarChar(36)
+  status      String?   @map("status") @db.VarChar(255)
+  description String?   @map("description") @db.Text
+  assignedAt  DateTime  @default(now()) @map("assigned_at") @db.Timestamp(6)
+  type        String?   @map("type") @db.VarChar(255)
+  priority    String?   @map("priority") @db.VarChar(255)
+  endTime     DateTime? @map("end_time") @db.Timestamp(6)
+  createdAt   DateTime  @default(now()) @map("created_at")
+  updatedAt   DateTime  @default(now()) @updatedAt @map("updated_at")
 
-  assigner Teacher @relation(fields: [assignerId], references: [id])
-  assignee Student @relation(fields: [assigneeId], references: [id])
+  assigner User @relation("assigner", fields: [assignerId], references: [id])
+  assignee User @relation("assignee", fields: [assigneeId], references: [id])
 
   @@map("tasks")
 }

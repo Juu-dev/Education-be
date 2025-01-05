@@ -158,12 +158,14 @@ export type Student = {
 };
 export type Task = {
     id: Generated<string>;
+    title: string;
     assignerId: string;
     assigneeId: string;
     status: string | null;
-    taskDescription: string | null;
-    assignedAt: Timestamp;
-    startTime: Timestamp | null;
+    description: string | null;
+    assignedAt: Generated<Timestamp>;
+    type: string | null;
+    priority: string | null;
     endTime: Timestamp | null;
     createdAt: Generated<Timestamp>;
     updatedAt: Generated<Timestamp>;

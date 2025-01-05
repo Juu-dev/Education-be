@@ -1,8 +1,7 @@
-import { Permission } from '@n-constants';
-import { AuthClaims, Roles } from '@n-decorators';
+import {AuthClaims, GetUser} from '@n-decorators';
 import { PaginationParamsDto } from '@n-dtos';
 import {
-  Body, Controller, Delete, Get, Param, Patch, Post, Query, UseGuards,
+  Body, Controller, Delete, Get, Param, Patch, Post, Query,
 } from '@nestjs/common';
 import { ApiCreatedResponse, ApiOkResponse, ApiTags } from '@nestjs/swagger';
 
@@ -43,6 +42,54 @@ export class TasksController {
     return this.tasksService.getListTask(
       page,
       pageSize,
+    );
+  }
+
+  @Get('sent-mode')
+  // @Roles([Permission.GET_CATEGORIES])
+  @AuthClaims()
+  @ApiOkResponse({
+    type: CategoryEntity,
+    isArray: true,
+  })
+  findAllWithSentMode(
+      @GetUser() user: any,
+      @Query() {
+        page,
+        pageSize,
+      }: PaginationParamsDto,
+  ) {
+    return this.tasksService.getListTaskWithSpecificMode(
+        {
+          page,
+          pageSize,
+          mode :"sent",
+          id: user?.id
+        }
+    );
+  }
+
+  @Get('received-mode')
+  // @Roles([Permission.GET_CATEGORIES])
+  @AuthClaims()
+  @ApiOkResponse({
+    type: CategoryEntity,
+    isArray: true,
+  })
+  findAllWithReceivedMode(
+      @GetUser() user: any,
+      @Query() {
+        page,
+        pageSize,
+      }: PaginationParamsDto,
+  ) {
+    return this.tasksService.getListTaskWithSpecificMode(
+        {
+          page,
+          pageSize,
+          mode: "received",
+          id: user?.id
+        }
     );
   }
 

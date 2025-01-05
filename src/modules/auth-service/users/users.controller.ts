@@ -1,5 +1,5 @@
 import { ApiCreatedResponse, ApiOkResponse, ApiTags } from '@nestjs/swagger';
-import { AuthClaims, Permissions } from '@n-decorators';
+import {AuthClaims, GetUser, Permissions} from '@n-decorators';
 import { Permission } from '@n-constants';
 import { PaginationParamsDto } from '@n-dtos';
 import { Request } from 'express';
@@ -43,14 +43,11 @@ export class UsersController {
     @Query() filter?: FilterUserDto,
     @Query() search?: SearchUserDto,
   ) {
-    const user: any = request?.user;
-
     return this.usersService.getListUser(
       page,
       pageSize,
-      filter,
-      search,
-      user?.platformId,
+      // filter,
+      // search,
     );
   }
 
@@ -62,16 +59,26 @@ export class UsersController {
     isArray: true,
   })
   findAllNotPagination(
-  @Req() request: Request,
     @Query() filter?: FilterUserDto,
     @Query() search?: SearchUserDto,
   ) {
-    const user: any = request?.user;
     return this.usersService.getListUserNotPagination(
-      filter,
-      search,
-      user?.platformId,
+      // filter,
+      // search,
     );
+  }
+
+  @Get('except-student')
+  @Permissions([Permission.EXPORT_USERS])
+  @AuthClaims()
+  @ApiOkResponse({
+    type: UserEntity,
+    isArray: true,
+  })
+  findAllUserExceptStudent(
+      @GetUser() user: any,
+  ) {
+    return this.usersService.getListUserExceptStudent(user?.id);
   }
 
   @Get(':id')

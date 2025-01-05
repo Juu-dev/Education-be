@@ -59,6 +59,15 @@ export class UsersService {
     };
   }
 
+  async getListUserExceptStudent(id?: string) {
+    const items = await this.usersRepository.findAllExceptStudent(id);
+
+    return {
+      count: items.length,
+      data: items,
+    };
+  }
+
   async getUserById(id: string) {
     const user = await this.usersRepository.findById(id);
     if (!user) {
