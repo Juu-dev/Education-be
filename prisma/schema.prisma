@@ -24,17 +24,18 @@ datasource db {
 // schema.prisma
 
 model User {
-  id        String   @id @default(uuid()) @map("id")
-  username  String   @unique @map("username") @db.VarChar(50)
-  password  String   @map("password") @db.VarChar(120)
-  email     String   @unique @map("email") @db.VarChar(50)
-  createdAt DateTime @default(now()) @map("created_at")
-  updatedAt DateTime @default(now()) @updatedAt @map("updated_at")
-  ethnicity String   @default("") @map("ethnicity") @db.VarChar(50)
-  gender    String   @default("") @map("gender") @db.VarChar(50)
-  phone     String   @default("") @map("phone") @db.VarChar(50)
-  name      String   @map("name") @db.VarChar(255)
-  classId   String?  @map("class_id") @db.VarChar(255)
+  id        String    @id @default(uuid()) @map("id")
+  username  String    @unique @map("username") @db.VarChar(50)
+  password  String    @map("password") @db.VarChar(120)
+  email     String    @unique @map("email") @db.VarChar(50)
+  createdAt DateTime  @default(now()) @map("created_at")
+  updatedAt DateTime  @default(now()) @updatedAt @map("updated_at")
+  ethnicity String    @default("") @map("ethnicity") @db.VarChar(50)
+  gender    String    @default("") @map("gender") @db.VarChar(50)
+  phone     String    @default("") @map("phone") @db.VarChar(50)
+  name      String    @map("name") @db.VarChar(255)
+  birthDate DateTime? @map("birth_date") @db.Timestamp(6)
+  classId   String?   @map("class_id") @db.VarChar(36)
 
   librarian Librarian?
   student   Student?
@@ -108,15 +109,13 @@ model Class {
 }
 
 model Student {
-  id          String    @id @default(uuid()) @map("id")
-  userId      String    @unique @map("user_id") @db.VarChar(36)
-  classId     String    @map("class_id") @db.VarChar(36)
-  metadataUrl String?   @map("metadata_url") @db.VarChar(255)
-  birthDate   DateTime? @map("birth_date") @db.Timestamp(6)
-  parentName  String?   @map("parent_name") @db.VarChar(255)
-  level       String?   @map("level") @db.VarChar(255)
-  createdAt   DateTime  @default(now()) @map("created_at")
-  updatedAt   DateTime  @default(now()) @updatedAt @map("updated_at")
+  id          String   @id @default(uuid()) @map("id")
+  userId      String   @unique @map("user_id") @db.VarChar(36)
+  metadataUrl String?  @map("metadata_url") @db.VarChar(255)
+  parentName  String?  @map("parent_name") @db.VarChar(255)
+  level       String?  @map("level") @db.VarChar(255)
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @default(now()) @updatedAt @map("updated_at")
 
   user User @relation(fields: [userId], references: [id])
 
@@ -124,14 +123,12 @@ model Student {
 }
 
 model Teacher {
-  id          String    @id @default(uuid())
-  userId      String    @unique @map("user_id") @db.VarChar(36)
-  classId     String    @map("class_id") @db.VarChar(36)
-  metadataUrl String?   @map("metadata_url") @db.VarChar(255)
-  dob         DateTime? @map("dob") @db.Timestamp(6)
-  position    String?   @map("position") @db.VarChar(255)
-  createdAt   DateTime  @default(now()) @map("created_at")
-  updatedAt   DateTime  @default(now()) @updatedAt @map("updated_at")
+  id          String   @id @default(uuid())
+  userId      String   @unique @map("user_id") @db.VarChar(36)
+  metadataUrl String?  @map("metadata_url") @db.VarChar(255)
+  position    String?  @map("position") @db.VarChar(255)
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @default(now()) @updatedAt @map("updated_at")
 
   user User @relation(fields: [userId], references: [id])
 
@@ -139,13 +136,12 @@ model Teacher {
 }
 
 model Librarian {
-  id          String    @id @default(uuid())
-  userId      String    @unique @map("user_id") @db.VarChar(36)
-  metadataUrl String?   @map("metadata_url") @db.VarChar(255)
-  dob         DateTime? @map("dob") @db.Timestamp(6)
-  position    String?   @map("position") @db.VarChar(255)
-  createdAt   DateTime  @default(now()) @map("created_at")
-  updatedAt   DateTime  @default(now()) @updatedAt @map("updated_at")
+  id          String   @id @default(uuid())
+  userId      String   @unique @map("user_id") @db.VarChar(36)
+  metadataUrl String?  @map("metadata_url") @db.VarChar(255)
+  position    String?  @map("position") @db.VarChar(255)
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @default(now()) @updatedAt @map("updated_at")
 
   user User @relation(fields: [userId], references: [id])
 

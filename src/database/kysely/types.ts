@@ -97,7 +97,6 @@ export type Librarian = {
     id: Generated<string>;
     userId: string;
     metadataUrl: string | null;
-    dob: Timestamp | null;
     position: string | null;
     createdAt: Generated<Timestamp>;
     updatedAt: Generated<Timestamp>;
@@ -146,9 +145,7 @@ export type Role = {
 export type Student = {
     id: Generated<string>;
     userId: string;
-    classId: string;
     metadataUrl: string | null;
-    birthDate: Timestamp | null;
     parentName: string | null;
     level: string | null;
     createdAt: Generated<Timestamp>;
@@ -171,9 +168,7 @@ export type Task = {
 export type Teacher = {
     id: Generated<string>;
     userId: string;
-    classId: string;
     metadataUrl: string | null;
-    dob: Timestamp | null;
     position: string | null;
     createdAt: Generated<Timestamp>;
     updatedAt: Generated<Timestamp>;
@@ -189,6 +184,7 @@ export type User = {
     gender: Generated<string>;
     phone: Generated<string>;
     name: string;
+    birthDate: Timestamp | null;
     classId: string | null;
 };
 export type UserRole = {

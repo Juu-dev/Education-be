@@ -69,6 +69,7 @@ const seedUsers = async (createdClass: seedUsersProps[]) => {
                     password: account.password,
                     email: account.email,
                     name: account.fullName,
+                    birthDate: new Date(account.birthDate),
                     class: {
                         connect : {
                             id: createdClass.find((e) => e.name === account?.className).id
@@ -89,7 +90,6 @@ const seedUsers = async (createdClass: seedUsersProps[]) => {
                     ...(account.role === "student" && {
                         student: {
                             create: {
-                                birthDate: new Date(account.birthDate),
                                 level: account.class || null,
                             },
                         },
@@ -97,16 +97,13 @@ const seedUsers = async (createdClass: seedUsersProps[]) => {
                     ...(account.role === "teacher" && {
                         teacher: {
                             create: {
-                                dob: new Date(account.birthDate),
                                 position: account.jobPosition || null,
-
                             },
                         },
                     }),
                     ...(account.role === "librarian" && {
                         librarian: {
                             create: {
-                                dob: new Date(account.birthDate),
                                 position: account.jobPosition || null,
                             },
                         },
@@ -136,11 +133,11 @@ const main = async () => {
     console.log('Seeding roles completed!');
 
     // Seed classes
-    const createdClassIds = await seedClasses();
+    const createdClass = await seedClasses();
     console.log('Seeding classes completed!');
 
     // Seed users
-    await seedUsers(createdClassIds)
+    await seedUsers(createdClass)
     console.log('Seeding users completed!');
 
     // Done

@@ -15,7 +15,25 @@ export class UsersRepository extends GenericRepository<User> {
         username,
       },
       include: {
-        class: true,
+        class: {
+          include: {
+            _count: {
+              select: {
+                user: {
+                  where: {
+                    roles: {
+                      some: {
+                        role: {
+                          name: 'student',
+                        },
+                      },
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
         librarian: true,
         student: true,
         teacher: true,

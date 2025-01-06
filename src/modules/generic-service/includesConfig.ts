@@ -6,9 +6,10 @@ export const includesConfig = {
         role: true,
       },
     },
-    librarians: true,
-    Student: true,
-    Teacher: true,
+    librarian: true,
+    student: true,
+    teacher: true,
+    class: true,
   },
   Role: {
     users: {
@@ -22,30 +23,15 @@ export const includesConfig = {
     role: true,
   },
   Class: {
-    students: true,
-    teachers: true,
+    users: true,
     exercises: true,
   },
-  Student: {
-    user: true,
-    class: true,
-    documents: {
+  student: {
+    user: {
       include: {
-        document: true,
-      },
+        class: true,
+      }
     },
-    goals: true,
-    marks: true,
-    ratings: true,
-    tasks: true,
-    exercises: {
-      include: {
-        exercise: true,
-      },
-    },
-    borrowedLogs: true,
-    Comment: true,
-    Request: true,
   },
   Teacher: {
     user: true,

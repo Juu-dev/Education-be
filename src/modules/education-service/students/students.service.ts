@@ -36,7 +36,7 @@ export class StudentsService {
     const student = await this.studentsRepository.findById(id);
 
     if (!student) {
-      throw new BaseException(Errors.CATEGORY.CATEGORY_NOT_FOUND);
+      throw new BaseException(Errors.USER.USER_NOT_FOUND);
     }
 
     return student;
@@ -46,7 +46,7 @@ export class StudentsService {
     const students = await this.studentsRepository.findByClassId(id);
 
     if (!students) {
-      throw new BaseException(Errors.CATEGORY.CATEGORY_NOT_FOUND);
+      throw new BaseException(Errors.USER.USER_NOT_FOUND);
     }
 
     return { data: students };
@@ -55,7 +55,7 @@ export class StudentsService {
   async updateStudent(id: string, updateStudentDto: UpdateStudentDto) {
     const student = await this.studentsRepository.findById(id);
     if (!student) {
-      throw new BaseException(Errors.CATEGORY.CATEGORY_NOT_FOUND);
+      throw new BaseException(Errors.USER.USER_NOT_FOUND);
     }
 
     return this.studentsRepository.updateById(
