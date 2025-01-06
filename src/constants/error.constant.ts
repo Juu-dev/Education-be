@@ -146,5 +146,12 @@ export const Errors = {
       statusCode: HttpStatus.NOT_FOUND,
       errorCode: 'TA4',
     }
+  },
+  BOOK: {
+    BOOK_NOT_FOUND: {
+      message: 'Book not found. <Ref: TA3>',
+      statusCode: HttpStatus.NOT_FOUND,
+      errorCode: 'TA4',
+    }
   }
 };

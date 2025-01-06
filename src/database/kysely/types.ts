@@ -18,7 +18,7 @@ export type Book = {
 };
 export type BorrowedLog = {
     id: Generated<string>;
-    studentId: string;
+    userId: string | null;
     documentId: string;
     borrowDate: Timestamp;
     returnDate: Timestamp | null;
@@ -36,7 +36,7 @@ export type Class = {
 export type Comment = {
     id: Generated<string>;
     documentId: string;
-    studentId: string;
+    userId: string;
     parentId: string | null;
     content: string;
     createdAt: Generated<Timestamp>;
@@ -44,7 +44,7 @@ export type Comment = {
 };
 export type Document = {
     id: Generated<string>;
-    teacherId: string | null;
+    userId: string;
     type: string | null;
     description: string | null;
     url: string | null;
@@ -55,7 +55,7 @@ export type Document = {
 export type DocumentStudent = {
     id: Generated<string>;
     documentId: string;
-    studentId: string;
+    userId: string;
     percentage: number | null;
     status: string | null;
     marked: boolean | null;
@@ -72,12 +72,12 @@ export type Exercise = {
     metadataUrl: string | null;
     createdAt: Generated<Timestamp>;
     updatedAt: Generated<Timestamp>;
-    teacherId: string | null;
+    userId: string | null;
 };
 export type ExerciseStudent = {
     id: Generated<string>;
     exerciseId: string;
-    studentId: string;
+    userId: string;
     grade: number | null;
     markedAt: Timestamp;
     createdAt: Generated<Timestamp>;
@@ -86,7 +86,7 @@ export type ExerciseStudent = {
 export type Goal = {
     id: Generated<string>;
     documentId: string;
-    studentId: string;
+    userId: string;
     description: string | null;
     dueDate: Timestamp | null;
     status: string | null;
@@ -95,9 +95,8 @@ export type Goal = {
 };
 export type Librarian = {
     id: Generated<string>;
-    userId: string | null;
+    userId: string;
     metadataUrl: string | null;
-    name: string;
     dob: Timestamp | null;
     position: string | null;
     createdAt: Generated<Timestamp>;
@@ -106,7 +105,7 @@ export type Librarian = {
 export type Mark = {
     id: Generated<string>;
     documentId: string;
-    studentId: string;
+    userId: string;
     page: number | null;
     markedAt: Timestamp;
     createdAt: Generated<Timestamp>;
@@ -115,7 +114,7 @@ export type Mark = {
 export type Rating = {
     id: Generated<string>;
     documentId: string;
-    studentId: string;
+    userId: string;
     star: number | null;
     ratedAt: Timestamp;
     createdAt: Generated<Timestamp>;
@@ -131,7 +130,7 @@ export type RefreshToken = {
 export type Request = {
     id: Generated<string>;
     librarianId: string | null;
-    studentId: string | null;
+    userId: string | null;
     bookTitle: string | null;
     description: string | null;
     status: string | null;
@@ -146,10 +145,9 @@ export type Role = {
 };
 export type Student = {
     id: Generated<string>;
-    userId: string | null;
-    classId: string | null;
+    userId: string;
+    classId: string;
     metadataUrl: string | null;
-    name: string;
     birthDate: Timestamp | null;
     parentName: string | null;
     level: string | null;
@@ -172,10 +170,9 @@ export type Task = {
 };
 export type Teacher = {
     id: Generated<string>;
-    userId: string | null;
-    classId: string | null;
+    userId: string;
+    classId: string;
     metadataUrl: string | null;
-    name: string;
     dob: Timestamp | null;
     position: string | null;
     createdAt: Generated<Timestamp>;
@@ -191,6 +188,8 @@ export type User = {
     ethnicity: Generated<string>;
     gender: Generated<string>;
     phone: Generated<string>;
+    name: string;
+    classId: string | null;
 };
 export type UserRole = {
     userId: string;

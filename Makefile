@@ -29,6 +29,9 @@ seed:
 seed_data:
 	npx ts-node prisma/seed_data.ts
 
+clear_data:
+	npx ts-node prisma/clear_data.ts
+
 category:
 	npx ts-node prisma/2_seed_category.ts
 

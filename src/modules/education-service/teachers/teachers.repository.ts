@@ -14,8 +14,11 @@ export class TeachersRepository extends GenericRepository<Teacher> {
     return this.prismaService.teacher.findFirst({
       where: { userId },
       include: {
-        class: true,
-        user: true,
+        user: {
+          include: {
+            class: true,
+          }
+        }
       },
     });
   }
@@ -23,9 +26,9 @@ export class TeachersRepository extends GenericRepository<Teacher> {
   async findAllWithClass(): Promise<Teacher[] | null> {
     return this.prismaService.teacher.findMany({
       include: {
-        class: {
-          select: {
-            name: true
+        user: {
+          include: {
+            class: true,
           }
         },
       },

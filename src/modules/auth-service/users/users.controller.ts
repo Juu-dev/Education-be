@@ -81,6 +81,17 @@ export class UsersController {
     return this.usersService.getListUserExceptStudent(user?.id);
   }
 
+  @Get('librarian-and-teacher')
+  @Permissions([Permission.EXPORT_USERS])
+  @AuthClaims()
+  @ApiOkResponse({
+    type: UserEntity,
+    isArray: true,
+  })
+  findAllLibrarianAndTeacher() {
+    return this.usersService.getListLibrarianAndTeacher();
+  }
+
   @Get(':id')
   @Permissions([Permission.GET_USER])
   @AuthClaims()

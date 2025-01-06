@@ -15,7 +15,7 @@ export class TasksRepository extends GenericRepository<Task> {
     const { page, pageSize: limit, mode, id } = props;
     const skip = (page - 1) * limit;
 
-    const where = {}
+    const where: any = {}
 
     if (mode === "sent") {
       where.assignerId = id

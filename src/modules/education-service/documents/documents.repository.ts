@@ -11,10 +11,10 @@ export class DocumentsRepository extends GenericRepository<Document> {
     super(prismaService, 'document');
   }
 
-  async countByTeacherId(id: string): Promise<number> {
+  async countByUserId(id: string): Promise<number> {
     return this.prismaService.document.count({
       where: {
-        teacherId: id,
+        userId: id,
       },
     });
   }
@@ -42,16 +42,16 @@ export class DocumentsRepository extends GenericRepository<Document> {
       take: limit,
       where,
       include: {
-        teacher: true,
+        user: true,
       },
     });
   }
 
   async findAllPaginationByTeacherId(props: IGetListDocumentsDTO): Promise<Document[]> {
-    const {teacherId, pageSize: limit, page, filter, search} = props
+    const {userId, pageSize: limit, page, filter, search} = props
     const skip = (page - 1) * limit;
 
-    const where: any = {teacherId}
+    const where: any = {userId}
 
     if (filter?.type?.length > 0) {
       where.type = {
@@ -70,7 +70,7 @@ export class DocumentsRepository extends GenericRepository<Document> {
       take: limit,
       where,
       include: {
-        teacher: true,
+        user: true,
       },
     });
   }

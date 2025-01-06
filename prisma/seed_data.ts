@@ -68,6 +68,12 @@ const seedUsers = async (createdClass: seedUsersProps[]) => {
                     username: account.email,
                     password: account.password,
                     email: account.email,
+                    name: account.fullName,
+                    class: {
+                        connect : {
+                            id: createdClass.find((e) => e.name === account?.className).id
+                        }
+                    },
                     roles: {
                         create: [
                             {
@@ -81,37 +87,25 @@ const seedUsers = async (createdClass: seedUsersProps[]) => {
                         ],
                     },
                     ...(account.role === "student" && {
-                        Student: {
+                        student: {
                             create: {
-                                name: account.fullName,
                                 birthDate: new Date(account.birthDate),
                                 level: account.class || null,
-                                class: {
-                                    connect : {
-                                        id: createdClass.find((e) => e.name === account?.className).id
-                                    }
-                                }
                             },
                         },
                     }),
                     ...(account.role === "teacher" && {
-                        Teacher: {
+                        teacher: {
                             create: {
-                                name: account.fullName,
                                 dob: new Date(account.birthDate),
                                 position: account.jobPosition || null,
-                                class: {
-                                    connect : {
-                                        id: createdClass.find((e) => e.name === account?.className).id
-                                    }
-                                }
+
                             },
                         },
                     }),
                     ...(account.role === "librarian" && {
-                        librarians: {
+                        librarian: {
                             create: {
-                                name: account.fullName,
                                 dob: new Date(account.birthDate),
                                 position: account.jobPosition || null,
                             },
@@ -124,9 +118,10 @@ const seedUsers = async (createdClass: seedUsersProps[]) => {
                             role: true,
                         },
                     },
-                    Student: true,
-                    Teacher: true,
-                    librarians: true,
+                    student: true,
+                    teacher: true,
+                    librarian: true,
+                    class: true,
                 },
             });
         })
@@ -135,48 +130,7 @@ const seedUsers = async (createdClass: seedUsersProps[]) => {
     return users;
 };
 
-const seedDocuments = async () => {
-    const teachers = await prisma.teacher.findMany();
-
-    const documentPromises = [];
-
-    teachers.forEach((teacher) => {
-        for (let i = 1; i <= 10; i++) {
-            documentPromises.push(
-                prisma.document.create({
-                    data: {
-                        teacherId: teacher.id,
-                        type: 'Assignment',
-                        description: `Homework assignment ${i} for ${teacher.name}`,
-                        createdAt: new Date(),
-                        url: `http://example.com/homework${i}.pdf`,
-                    },
-                })
-            );
-        }
-    });
-
-    await Promise.all(documentPromises);
-};
-
-const clearDatabase = async () => {
-    const tables = await prisma.$queryRaw<
-        { tablename: string }[]
-    >`SELECT tablename FROM pg_tables WHERE schemaname = 'public'`;
-
-    for (const table of tables) {
-        await prisma.$executeRawUnsafe(`TRUNCATE TABLE "${table.tablename}" CASCADE`);
-    }
-
-    console.log('All tables cleared!');
-};
-
-
 const main = async () => {
-    // Clear Database
-    // await clearDatabase();
-    // console.log('Clearing database completed!');
-
     // Seed roles
     await seedRoles();
     console.log('Seeding roles completed!');

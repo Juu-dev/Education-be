@@ -33,14 +33,29 @@ model User {
   ethnicity String   @default("") @map("ethnicity") @db.VarChar(50)
   gender    String   @default("") @map("gender") @db.VarChar(50)
   phone     String   @default("") @map("phone") @db.VarChar(50)
+  name      String   @map("name") @db.VarChar(255)
+  classId   String?  @map("class_id") @db.VarChar(255)
+
+  librarian Librarian?
+  student   Student?
+  teacher   Teacher?
 
   roles        UserRole[]
-  librarians   Librarian[]
-  Student      Student?
-  Teacher      Teacher?
-  RefreshToken RefreshToken[]
+  document     Document[]
+  refreshToken RefreshToken[]
   assignerTask Task[]         @relation("assigner")
   assigneeTask Task[]         @relation("assignee")
+
+  class           Class?            @relation(fields: [classId], references: [id])
+  rating          Rating[]
+  comment         Comment[]
+  documentStudent DocumentStudent[]
+  goal            Goal[]
+  mark            Mark[]
+  request         Request[]
+  borrowedLog     BorrowedLog[]
+  exercise        Exercise[]
+  exerciseStudent ExerciseStudent[]
 
   @@map("users")
 }
@@ -52,7 +67,7 @@ model RefreshToken {
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @default(now()) @updatedAt @map("updated_at")
 
-  User User? @relation(fields: [userId], references: [id])
+  user User @relation(fields: [userId], references: [id])
 
   @@map("refresh_tokens")
 }
@@ -86,69 +101,53 @@ model Class {
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @default(now()) @updatedAt @map("updated_at")
 
-  students  Student[]
-  teachers  Teacher[]
   exercises Exercise[]
+  user      User[]
 
   @@map("classes")
 }
 
 model Student {
   id          String    @id @default(uuid()) @map("id")
-  userId      String?   @unique @map("user_id") @db.VarChar(36)
-  classId     String?   @map("class_id") @db.VarChar(36)
+  userId      String    @unique @map("user_id") @db.VarChar(36)
+  classId     String    @map("class_id") @db.VarChar(36)
   metadataUrl String?   @map("metadata_url") @db.VarChar(255)
-  name        String    @map("name") @db.VarChar(255)
   birthDate   DateTime? @map("birth_date") @db.Timestamp(6)
   parentName  String?   @map("parent_name") @db.VarChar(255)
   level       String?   @map("level") @db.VarChar(255)
   createdAt   DateTime  @default(now()) @map("created_at")
   updatedAt   DateTime  @default(now()) @updatedAt @map("updated_at")
 
-  user         User?             @relation(fields: [userId], references: [id])
-  class        Class?            @relation(fields: [classId], references: [id])
-  documents    DocumentStudent[]
-  goals        Goal[]
-  marks        Mark[]
-  ratings      Rating[]
-  exercises    ExerciseStudent[]
-  borrowedLogs BorrowedLog[]
-  Comment      Comment[]
-  Request      Request[]
+  user User @relation(fields: [userId], references: [id])
 
   @@map("students")
 }
 
 model Teacher {
   id          String    @id @default(uuid())
-  userId      String?   @unique @map("user_id") @db.VarChar(36)
-  classId     String?   @map("class_id") @db.VarChar(36)
+  userId      String    @unique @map("user_id") @db.VarChar(36)
+  classId     String    @map("class_id") @db.VarChar(36)
   metadataUrl String?   @map("metadata_url") @db.VarChar(255)
-  name        String    @map("name") @db.VarChar(255)
   dob         DateTime? @map("dob") @db.Timestamp(6)
   position    String?   @map("position") @db.VarChar(255)
   createdAt   DateTime  @default(now()) @map("created_at")
   updatedAt   DateTime  @default(now()) @updatedAt @map("updated_at")
 
-  user      User?      @relation(fields: [userId], references: [id])
-  class     Class?     @relation(fields: [classId], references: [id])
-  documents Document[]
-  exercises Exercise[]
+  user User @relation(fields: [userId], references: [id])
 
   @@map("teachers")
 }
 
 model Librarian {
   id          String    @id @default(uuid())
-  userId      String?   @map("user_id") @db.VarChar(36)
+  userId      String    @unique @map("user_id") @db.VarChar(36)
   metadataUrl String?   @map("metadata_url") @db.VarChar(255)
-  name        String    @map("name") @db.VarChar(255)
   dob         DateTime? @map("dob") @db.Timestamp(6)
   position    String?   @map("position") @db.VarChar(255)
   createdAt   DateTime  @default(now()) @map("created_at")
   updatedAt   DateTime  @default(now()) @updatedAt @map("updated_at")
 
-  user User? @relation(fields: [userId], references: [id])
+  user User @relation(fields: [userId], references: [id])
 
   // requests Request[]
   @@map("librarians")
@@ -156,7 +155,7 @@ model Librarian {
 
 model Document {
   id          String   @id @default(uuid())
-  teacherId   String?  @map("teacher_id") @db.VarChar(36)
+  userId      String   @map("user_id") @db.VarChar(36)
   type        String?  @map("type") @db.VarChar(255)
   description String?  @map("description") @db.Text
   url         String?  @map("url") @db.VarChar(255)
@@ -164,13 +163,13 @@ model Document {
   createdAt   DateTime @default(now()) @map("created_at")
   updatedAt   DateTime @default(now()) @updatedAt @map("updated_at")
 
-  teacher          Teacher?          @relation(fields: [teacherId], references: [id])
+  user             User              @relation(fields: [userId], references: [id])
   ratings          Rating[]
   comments         Comment[]
   goals            Goal[]
   marks            Mark[]
   documentStudents DocumentStudent[]
-  BorrowedLog      BorrowedLog[]
+  borrowedLog      BorrowedLog[]
 
   @@map("documents")
 }
@@ -178,14 +177,14 @@ model Document {
 model Rating {
   id         String   @id @default(uuid())
   documentId String   @map("document_id") @db.VarChar(36)
-  studentId  String   @map("student_id") @db.VarChar(36)
+  userId     String   @map("user_id") @db.VarChar(36)
   star       Int?
   ratedAt    DateTime @map("rated_at") @db.Timestamp(6)
   createdAt  DateTime @default(now()) @map("created_at")
   updatedAt  DateTime @default(now()) @updatedAt @map("updated_at")
 
   document Document @relation(fields: [documentId], references: [id])
-  student  Student  @relation(fields: [studentId], references: [id])
+  user     User     @relation(fields: [userId], references: [id])
 
   @@map("ratings")
 }
@@ -193,14 +192,14 @@ model Rating {
 model Comment {
   id         String   @id @default(uuid())
   documentId String   @map("document_id") @db.VarChar(36)
-  studentId  String   @map("student_id") @db.VarChar(36)
+  userId     String   @map("user_id") @db.VarChar(36)
   parentId   String?  @map("parent_id") @db.VarChar(36)
   content    String   @map("content") @db.Text
   createdAt  DateTime @default(now()) @map("created_at")
   updatedAt  DateTime @default(now()) @updatedAt @map("updated_at")
 
   document Document @relation(fields: [documentId], references: [id])
-  student  Student  @relation(fields: [studentId], references: [id])
+  user     User     @relation(fields: [userId], references: [id])
 
   // parent   Comment?  @relation(fields: [parentId], references: [id])
   // Comment  Comment[]
@@ -210,7 +209,7 @@ model Comment {
 model DocumentStudent {
   id             String    @id @default(uuid())
   documentId     String    @map("document_id") @db.VarChar(36)
-  studentId      String    @map("student_id") @db.VarChar(36)
+  userId         String    @map("user_id") @db.VarChar(36)
   percentage     Int?
   status         String?   @map("status") @db.VarChar(255)
   marked         Boolean?
@@ -220,7 +219,7 @@ model DocumentStudent {
   updatedAt      DateTime  @default(now()) @updatedAt @map("updated_at")
 
   document Document @relation(fields: [documentId], references: [id])
-  student  Student  @relation(fields: [studentId], references: [id])
+  user     User     @relation(fields: [userId], references: [id])
 
   @@map("document_students")
 }
@@ -228,7 +227,7 @@ model DocumentStudent {
 model Goal {
   id          String    @id @default(uuid())
   documentId  String    @map("document_id") @db.VarChar(36)
-  studentId   String    @map("student_id") @db.VarChar(36)
+  userId      String    @map("user_id") @db.VarChar(36)
   description String?   @map("description") @db.Text
   dueDate     DateTime? @map("due_date") @db.Timestamp(6)
   status      String?   @map("status") @db.VarChar(255)
@@ -236,7 +235,7 @@ model Goal {
   updatedAt   DateTime  @default(now()) @updatedAt @map("updated_at")
 
   document Document @relation(fields: [documentId], references: [id])
-  student  Student  @relation(fields: [studentId], references: [id])
+  user     User     @relation(fields: [userId], references: [id])
 
   @@map("goals")
 }
@@ -244,14 +243,14 @@ model Goal {
 model Mark {
   id         String   @id @default(uuid())
   documentId String   @map("document_id") @db.VarChar(36)
-  studentId  String   @map("student_id") @db.VarChar(36)
+  userId     String   @map("user_id") @db.VarChar(36)
   page       Int?
   markedAt   DateTime @map("marked_at") @db.Timestamp(6)
   createdAt  DateTime @default(now()) @map("created_at")
   updatedAt  DateTime @default(now()) @updatedAt @map("updated_at")
 
   document Document @relation(fields: [documentId], references: [id])
-  student  Student  @relation(fields: [studentId], references: [id])
+  user     User     @relation(fields: [userId], references: [id])
 
   @@map("marks")
 }
@@ -279,7 +278,7 @@ model Task {
 model Request {
   id          String   @id @default(uuid())
   librarianId String?  @map("librarian_id") @db.VarChar(36)
-  studentId   String?  @map("student_id") @db.VarChar(36)
+  userId      String?  @map("user_id") @db.VarChar(36)
   bookTitle   String?  @map("book_title") @db.VarChar(255)
   description String?  @map("description") @db.Text
   status      String?  @map("status") @db.VarChar(255)
@@ -287,14 +286,14 @@ model Request {
   updatedAt   DateTime @default(now()) @updatedAt @map("updated_at")
 
   // librarian Librarian @relation(fields: [librarianId], references: [id])
-  student Student? @relation(fields: [studentId], references: [id])
+  user User? @relation(fields: [userId], references: [id])
 
   @@map("requests")
 }
 
 model BorrowedLog {
   id         String    @id @default(uuid())
-  studentId  String    @map("student_id") @db.VarChar(36)
+  userId     String?   @map("user_id") @db.VarChar(36)
   documentId String    @map("document_id") @db.VarChar(36)
   borrowDate DateTime  @map("borrow_date") @db.Timestamp(6)
   returnDate DateTime? @map("return_date") @db.Timestamp(6)
@@ -302,7 +301,7 @@ model BorrowedLog {
   createdAt  DateTime  @default(now()) @map("created_at")
   updatedAt  DateTime  @default(now()) @updatedAt @map("updated_at")
 
-  student  Student  @relation(fields: [studentId], references: [id])
+  user     User?    @relation(fields: [userId], references: [id])
   document Document @relation(fields: [documentId], references: [id])
 
   @@map("borrowed_logs")
@@ -319,8 +318,8 @@ model Exercise {
 
   class            Class             @relation(fields: [classId], references: [id])
   exerciseStudents ExerciseStudent[]
-  Teacher          Teacher?          @relation(fields: [teacherId], references: [id])
-  teacherId        String?           @db.VarChar(36)
+  userId           String?           @db.VarChar(36)
+  user             User?             @relation(fields: [userId], references: [id])
 
   @@map("exercises")
 }
@@ -328,14 +327,14 @@ model Exercise {
 model ExerciseStudent {
   id         String   @id @default(uuid())
   exerciseId String   @map("exercise_id") @db.VarChar(36)
-  studentId  String   @map("student_id") @db.VarChar(36)
+  userId     String   @map("user_id") @db.VarChar(36)
   grade      Int?
   markedAt   DateTime @map("marked_at") @db.Timestamp(6)
   createdAt  DateTime @default(now()) @map("created_at")
   updatedAt  DateTime @default(now()) @updatedAt @map("updated_at")
 
   exercise Exercise @relation(fields: [exerciseId], references: [id])
-  student  Student  @relation(fields: [studentId], references: [id])
+  user     User?    @relation(fields: [userId], references: [id])
 
   @@map("exercise_students")
 }

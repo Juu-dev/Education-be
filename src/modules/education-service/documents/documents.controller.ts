@@ -56,7 +56,7 @@ export class DocumentsController {
     );
   }
 
-  @Get('pagination/:teacherId')
+  @Get('pagination/:userId')
   @Roles([Permission.GET_CATEGORIES])
   @AuthClaims()
   @ApiOkResponse({
@@ -70,13 +70,13 @@ export class DocumentsController {
   }: PaginationParamsDto,
   @Query() filter: FilterDocumentDto,
   @Query() {search}: SearchDocumentDto,
-  @Param('teacherId') teacherId: string,
+  @Param('userId') userId: string,
   ) {
     return this.documentsService.getListDocument(
         {
           page,
           pageSize,
-          teacherId,
+          userId,
           filter,
           search
         }

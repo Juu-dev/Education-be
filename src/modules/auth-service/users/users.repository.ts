@@ -15,12 +15,10 @@ export class UsersRepository extends GenericRepository<User> {
         username,
       },
       include: {
-        Student: true,
-        Teacher: {
-          include: {
-            class: true
-          }
-        },
+        class: true,
+        librarian: true,
+        student: true,
+        teacher: true,
         roles: {
           include: {
             role: true,
@@ -47,13 +45,29 @@ export class UsersRepository extends GenericRepository<User> {
         },
       },
       include: {
-        Teacher: true,
+        teacher: true,
         roles: {
           include: {
             role: true,
           },
         }
       }
+    });
+  }
+
+  findAllLibrarianAndTeacher(): Promise<User[]> {
+    return this.prismaService.user.findMany({
+      where: {
+        roles: {
+          some: {
+            role: {
+              name: {
+                in: ['teacher', 'librarian'],
+              },
+            },
+          },
+        },
+      },
     });
   }
 }

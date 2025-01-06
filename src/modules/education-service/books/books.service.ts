@@ -78,7 +78,7 @@ export class BooksService {
     const book = await this.booksRepository.findById(id);
 
     if (!book) {
-      throw new BaseException(Errors.CATEGORY.CATEGORY_NOT_FOUND);
+      throw new BaseException(Errors.BOOK.BOOK_NOT_FOUND);
     }
 
     return { data: book };
@@ -87,7 +87,7 @@ export class BooksService {
   async updateBook(id: string, updateBookDto: UpdateBookDto) {
     const book = await this.booksRepository.findById(id);
     if (!book) {
-      throw new BaseException(Errors.CATEGORY.CATEGORY_NOT_FOUND);
+      throw new BaseException(Errors.BOOK.BOOK_NOT_FOUND);
     }
 
     return this.booksRepository.updateById(

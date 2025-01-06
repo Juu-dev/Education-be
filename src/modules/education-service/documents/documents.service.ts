@@ -9,7 +9,7 @@ import {IFile} from "../../../interfaces";
 export interface IGetListDocumentsDTO {
   page?: number,
   pageSize?: number,
-  teacherId?: string,
+  userId?: string,
   filter?: { type: string[] },
   search?: string
 }
@@ -34,13 +34,13 @@ export class DocumentsService {
   }
 
   async getListDocument(props: IGetListDocumentsDTO) {
-    const {teacherId, pageSize, page} = props
+    const {userId, pageSize, page} = props
 
-    const count = teacherId
-      ? await this.documentsRepository.countByTeacherId(teacherId)
+    const count = userId
+      ? await this.documentsRepository.countByUserId(userId)
       : await this.documentsRepository.count();
 
-    const items = teacherId
+    const items = userId
       ? await this.documentsRepository.findAllPaginationByTeacherId(props)
       : await this.documentsRepository.findAllPaginationWithFilter(props);
     return {
