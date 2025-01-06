@@ -29,6 +29,25 @@ export class BooksService {
     }
   }
 
+  async createBookFromExcel(createBookDto :CreateBookDto[]) {
+    const books = [];
+    for (const book of createBookDto) {
+      const bookData = {
+        ...book,
+        totalBooks: Number(book.totalBooks),
+        borrowedBooks: Number(book.borrowedBooks),
+        evaluate: Number(book.evaluate),
+      };
+      await this.booksRepository.create(bookData as any);
+      books.push(bookData);
+    }
+
+    return {
+      data: books,
+    }
+  }
+
+
   private mapFiles(files: IFile[]): { coverImage: IFile; contentPdf: IFile } {
     const coverImage = files.find(file => file.mimetype.startsWith('image/'));
     const contentPdf = files.find(file => file.mimetype === 'application/pdf');
@@ -54,6 +73,24 @@ export class BooksService {
 
     return [coverImageUpload.Location, contentPdfUpload.Location];
   }
+
+  async getAllBooks() {
+    const books = await this.booksRepository.findAll();
+    return {
+      data: {
+        books,
+      }
+    }
+  }
+
+  async getBooksGroupedByType() {
+    const chartData = await this.booksRepository.getBooksGroupedByType();
+    return {
+      data: {
+        chartData,
+      }
+  }
+}
 
   async getListBook(
     page?: number,
