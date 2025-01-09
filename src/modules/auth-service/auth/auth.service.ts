@@ -25,35 +25,17 @@ export class AuthService {
   }
 
   public async registerForStudent(registrationData: RegisterDto) {
-    const {email, password, name, classId} = registrationData;
+    const {password} = registrationData;
     const hashedPassword = await bcrypt.hash(
         password,
       COMMON_CONSTANT.SALT_ROUND,
     );
     const data= {
-      username: email,
+      ...registrationData,
       password: hashedPassword,
-      email: email,
-      roles: {
-        create: [
-          {
-            role: {
-              connect: {
-                name: "student",
-              },
-            },
-          },
-        ],
-      },
-      Student: {
-        create: {
-          classId: classId,
-          name: name
-        },
-      }
     }
 
-    return await this.usersRepository.create(data as any);
+    return this.usersRepository.createStudent(data as any);
   }
 
   public async login(loginData: LoginDto) {
