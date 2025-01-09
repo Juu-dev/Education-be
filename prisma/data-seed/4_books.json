@@ -1,0 +1,47 @@
+[
+  {
+    "title": "The Great Gatsby",
+    "description": "A novel written by American author F. Scott Fitzgerald.",
+    "author": "F. Scott Fitzgerald",
+    "publishingHouse": "Charles Scribner's Sons",
+    "coverImageUrl": "https://example.com/images/great-gatsby.jpg",
+    "contentPdfUrl": "https://example.com/pdfs/great-gatsby.pdf",
+    "evaluate": 5
+  },
+  {
+    "title": "1984",
+    "description": "A dystopian social science fiction novel by George Orwell.",
+    "author": "George Orwell",
+    "publishingHouse": "Secker & Warburg",
+    "coverImageUrl": "https://example.com/images/1984.jpg",
+    "contentPdfUrl": "https://example.com/pdfs/1984.pdf",
+    "evaluate": 4
+  },
+  {
+    "title": "To Kill a Mockingbird",
+    "description": "A novel by Harper Lee published in 1960.",
+    "author": "Harper Lee",
+    "publishingHouse": "J.B. Lippincott & Co.",
+    "coverImageUrl": "https://example.com/images/to-kill-a-mockingbird.jpg",
+    "contentPdfUrl": null,
+    "evaluate": 5
+  },
+  {
+    "title": "Pride and Prejudice",
+    "description": "A romantic novel of manners written by Jane Austen.",
+    "author": "Jane Austen",
+    "publishingHouse": "T. Egerton",
+    "coverImageUrl": null,
+    "contentPdfUrl": "https://example.com/pdfs/pride-and-prejudice.pdf",
+    "evaluate": 4
+  },
+  {
+    "title": "Moby-Dick",
+    "description": "A novel by Herman Melville about the voyage of the whaling ship Pequod.",
+    "author": "Herman Melville",
+    "publishingHouse": "Harper & Brothers",
+    "coverImageUrl": "https://example.com/images/moby-dick.jpg",
+    "contentPdfUrl": null,
+    "evaluate": 3
+  }
+]

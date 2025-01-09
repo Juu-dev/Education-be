@@ -10,16 +10,20 @@ const readFileJson = (pathFile: string) => {
     return JSON.parse(data);
 }
 
-const getAccount = () => {
-    return readFileJson('data-seed/3_account.json')
-}
-
 const getClasses = () => {
     return readFileJson('data-seed/1_classes.json')
 }
 
 const getRoles = () => {
     return readFileJson('data-seed/2_roles.json')
+}
+
+const getAccount = () => {
+    return readFileJson('data-seed/3_accounts.json')
+}
+
+const getBooks = () => {
+    return readFileJson('data-seed/4_books.json')
 }
 
 const seedRoles = async () => {
@@ -127,18 +131,36 @@ const seedUsers = async (createdClass: seedUsersProps[]) => {
     return users;
 };
 
+const seedBooks = async () => {
+    const books = getBooks();
+
+    const createdBooks = await Promise.all(
+        books.map(async (book: any) => {
+            return prisma.book.create({
+                data: book,
+            })
+        })
+    )
+
+    return createdBooks;
+}
+
 const main = async () => {
-    // Seed roles
-    await seedRoles();
-    console.log('Seeding roles completed!');
+    // // Seed roles
+    // await seedRoles();
+    // console.log('Seeding roles completed!');
+    //
+    // // Seed classes
+    // const createdClass = await seedClasses();
+    // console.log('Seeding classes completed!');
+    //
+    // // Seed users
+    // await seedUsers(createdClass)
+    // console.log('Seeding users completed!');
 
-    // Seed classes
-    const createdClass = await seedClasses();
-    console.log('Seeding classes completed!');
-
-    // Seed users
-    await seedUsers(createdClass)
-    console.log('Seeding users completed!');
+    // Seed books
+    await seedBooks()
+    console.log('Seeding books completed!');
 
     // Done
     console.log('Seeding All completed!');
