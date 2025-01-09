@@ -36,16 +36,21 @@ export class ClassesService {
     const classResult = await this.classesRepository.findById(id);
 
     if (!classResult) {
-      throw new BaseException(Errors.CATEGORY.CATEGORY_NOT_FOUND);
+      throw new BaseException(Errors.CLASS.CLASS_NOT_FOUND);
     }
 
     return classResult;
   }
 
+  async getCountStudentByClassId (classId: string) {
+    const count = await this.classesRepository.countStudentByClassId(classId);
+    return {data: count}
+  }
+
   async updateClass(id: string, updateClassDto: UpdateClassDto) {
     const classResult = await this.classesRepository.findById(id);
     if (!classResult) {
-      throw new BaseException(Errors.CATEGORY.CATEGORY_NOT_FOUND);
+      throw new BaseException(Errors.CLASS.CLASS_NOT_FOUND);
     }
 
     return this.classesRepository.updateById(

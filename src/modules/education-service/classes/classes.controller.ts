@@ -53,6 +53,14 @@ export class ClassesController {
     return this.classesService.getClassById(id);
   }
 
+  @Get(':id/count-student')
+  @Roles([Permission.GET_CATEGORY])
+  @AuthClaims()
+  @ApiOkResponse({ type: CategoryEntity })
+  countStudent(@Param('id') id: string) {
+    return this.classesService.getCountStudentByClassId(id);
+  }
+
   @Patch(':id')
   @Roles([Permission.UPDATE_CATEGORY])
   @AuthClaims()
