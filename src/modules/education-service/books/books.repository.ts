@@ -9,4 +9,14 @@ export class BooksRepository extends GenericRepository<Book> {
   constructor(private readonly prismaService: PrismaService) {
     super(prismaService, 'book');
   }
+
+  async getBooksGroupedByType() {
+    return this.prismaService.book.groupBy({
+      by: ['bookType'],
+      _sum: {
+        totalBooks: true,
+        borrowedBooks: true,
+      },
+    });
+  }
 }

@@ -343,7 +343,10 @@ model Book {
   publishingHouse String   @map("publishing_house") @db.VarChar(50)
   coverImageUrl   String?  @map("cover_image_url") @db.VarChar(255)
   contentPdfUrl   String?  @map("content_pdf_url") @db.VarChar(255)
+  totalBooks      Int?      @map("total_books") 
+  borrowedBooks   Int?     @map("borrowed_books")
   evaluate        Int?
+  bookType        String   @map("book_type") @db.VarChar(50)
   createdAt       DateTime @default(now()) @map("created_at")
   updatedAt       DateTime @default(now()) @updatedAt @map("updated_at")
 

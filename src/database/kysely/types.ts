@@ -12,7 +12,10 @@ export type Book = {
     publishingHouse: string;
     coverImageUrl: string | null;
     contentPdfUrl: string | null;
+    totalBooks: number | null;
+    borrowedBooks: number | null;
     evaluate: number | null;
+    bookType: string;
     createdAt: Generated<Timestamp>;
     updatedAt: Generated<Timestamp>;
 };

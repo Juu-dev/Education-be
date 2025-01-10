@@ -1,3 +1,4 @@
+import { IsArray } from 'class-validator';
 import { Permission } from '@n-constants';
 import { AuthClaims, Roles } from '@n-decorators';
 import { PaginationParamsDto } from '@n-dtos';
@@ -29,6 +30,38 @@ export class BooksController {
     @UploadedFiles() files: IFile[],
   ) {
     return this.booksService.createBook(createBookDto, files);
+  }
+
+  @Post('excel')
+  @Roles([Permission.CREATE_CATEGORY])
+  @AuthClaims()
+  @ApiOkResponse({ description: 'Upload sách từ excel thành công.' })
+  async createFromExcel(
+    @Body() createCategoryDto: CreateBookDto[],
+  ) {
+    return this.booksService.createBookFromExcel(createCategoryDto);
+  }
+
+  @Get('all')
+  @Roles([Permission.GET_CATEGORIES])
+  @AuthClaims()
+  @ApiOkResponse({
+    type: CategoryEntity,
+    isArray: true,
+  })
+  findAllBook() {
+    return this.booksService.getAllBooks();
+  }
+
+  @Get('type')
+  @Roles([Permission.GET_CATEGORIES])
+  @AuthClaims()
+  @ApiOkResponse({
+    type: CategoryEntity,
+    isArray: true,
+  })
+  groupBooksByType(){
+    return this.booksService.getBooksGroupedByType();
   }
 
   @Get('pagination')
