@@ -9,6 +9,10 @@ export class GenericRepository<T> {
     return this.prisma[this.model].create({ data });
   }
 
+  async createMany(data: T[]): Promise<T[]> {
+    return this.prisma[this.model].createMany({data})
+  }
+
   async findAll(): Promise<T[]> {
     return this.prisma[this.model].findMany();
   }

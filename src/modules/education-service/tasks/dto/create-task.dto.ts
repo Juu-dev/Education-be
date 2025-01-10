@@ -14,7 +14,7 @@ export class CreateTaskDto {
     @ApiProperty({example: '429860cf-d4c7-4439-b94e-def5bec2179f', description: 'ID của người giao task'})
     assignerId: string;
 
-    @IsUUID()
+    // @IsUUID()
     @IsNotEmpty()
     @ApiProperty({example: 'eee47eda-75bc-4c6b-8937-511a20fbe863', description: 'ID của người nhận task'})
     assigneeId: string;

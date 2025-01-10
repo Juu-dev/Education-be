@@ -21,6 +21,8 @@ export class TasksService {
   }
 
   async createTask(createTaskDto: CreateTaskDto) {
+    if (createTaskDto.assigneeId === "all") return this.bulkCreateTask(createTaskDto);
+
     const assigneeExists = await this.usersRepository.findById(createTaskDto.assignerId);
     if (!assigneeExists) {
       throw new BaseException(Errors.TASK.ASSIGNEE_NOT_EXISTS);
@@ -32,6 +34,23 @@ export class TasksService {
     }
 
     return this.tasksRepository.create(createTaskDto as any);
+  }
+
+  async bulkCreateTask(createTaskDto: CreateTaskDto) {
+    const assigneeExists = await this.usersRepository.findById(createTaskDto.assignerId);
+    if (!assigneeExists) {
+      throw new BaseException(Errors.TASK.ASSIGNEE_NOT_EXISTS);
+    }
+
+    const assignees = await this.usersRepository.findAllExceptStudent(createTaskDto.assignerId);
+    const assigneeIds = assignees.map((e) => e.id)
+
+    const tasks = assigneeIds.map((id: string) => ({
+      ...createTaskDto,
+      assigneeId: id
+    }))
+
+    return this.tasksRepository.createMany(tasks as any)
   }
 
   async getListTask(
