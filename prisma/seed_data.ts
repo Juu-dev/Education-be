@@ -146,17 +146,17 @@ const seedBooks = async () => {
 }
 
 const main = async () => {
-    // // Seed roles
-    // await seedRoles();
-    // console.log('Seeding roles completed!');
-    //
-    // // Seed classes
-    // const createdClass = await seedClasses();
-    // console.log('Seeding classes completed!');
-    //
-    // // Seed users
-    // await seedUsers(createdClass)
-    // console.log('Seeding users completed!');
+    // Seed roles
+    await seedRoles();
+    console.log('Seeding roles completed!');
+
+    // Seed classes
+    const createdClass = await seedClasses();
+    console.log('Seeding classes completed!');
+
+    // Seed users
+    await seedUsers(createdClass)
+    console.log('Seeding users completed!');
 
     // Seed books
     await seedBooks()
