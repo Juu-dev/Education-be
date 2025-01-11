@@ -86,15 +86,20 @@ export class UsersRepository extends GenericRepository<User> {
           },
         },
       },
+      include: {
+        class: true,
+      }
     });
   }
 
   createStudent(props: any) {
     const {email, password, classId, name} = props
-    const data= {
+    const data:  any= {
       username: email,
       password: password,
       email: email,
+      name: name,
+      classId: classId,
       roles: {
         create: [
           {
@@ -108,12 +113,11 @@ export class UsersRepository extends GenericRepository<User> {
       },
       student: {
         create: {
-          classId: classId,
-          name: name
+          metadataUrl: ""
         },
       }
     }
 
-    return this.prismaService.user.create(data as any)
+    return this.prismaService.user.create({data})
   }
 }

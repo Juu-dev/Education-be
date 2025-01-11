@@ -110,4 +110,13 @@ export class UsersService {
 
     return this.usersRepository.updateById(id, updateUserData);
   }
+
+  async deleteStudentById(id: string) {
+    const student = await this.usersRepository.findById(id);
+    if (!student) {
+      throw new BaseException(Errors.USER.USER_NOT_FOUND);
+    }
+
+    return this.usersRepository.softDeleteById(id);
+  }
 }

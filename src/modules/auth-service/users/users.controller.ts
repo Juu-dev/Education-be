@@ -1,17 +1,18 @@
 import { ApiCreatedResponse, ApiOkResponse, ApiTags } from '@nestjs/swagger';
-import {AuthClaims, GetUser, Permissions} from '@n-decorators';
+import {AuthClaims, GetUser, Permissions, Roles} from '@n-decorators';
 import { Permission } from '@n-constants';
 import { PaginationParamsDto } from '@n-dtos';
 import { Request } from 'express';
 
 import {
-  Body, Controller, Get, Param, Patch, Post, Query, Req,
+  Body, Controller, Delete, Get, Param, Patch, Post, Query, Req,
 } from '@nestjs/common';
 import { UserEntity } from './entities/user.entity';
 import { UsersService } from './users.service';
 import {
   CreateUserDto, FilterUserDto, SearchUserDto, UpdateUserDto,
 } from './dto';
+import {CategoryEntity} from "@n-modules/education-service/students/entities/category.entity";
 
 @Controller('users')
 @ApiTags('User')
@@ -112,5 +113,13 @@ export class UsersController {
       id,
       updateUserDto,
     );
+  }
+
+  @Delete(':id')
+  @Roles([Permission.UPDATE_CATEGORY])
+  @AuthClaims()
+  @ApiOkResponse({ type: CategoryEntity })
+  delete(@Param('id') id: string) {
+    return this.usersService.deleteStudentById(id);
   }
 }
