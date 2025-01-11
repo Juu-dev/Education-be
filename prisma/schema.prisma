@@ -60,6 +60,7 @@ model User {
   borrowedLog     BorrowedLog[]
   exercise        Exercise[]
   exerciseStudent ExerciseStudent[]
+  Response        Response[]
 
   @@map("users")
 }
@@ -352,4 +353,51 @@ model Book {
   updatedAt       DateTime @default(now()) @updatedAt @map("updated_at")
 
   @@map("books")
+}
+
+model Quiz {
+  id        String   @id @default(uuid())
+  title     String   @map("title") @db.VarChar(255)
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @default(now()) @updatedAt @map("updated_at")
+
+  questions Question[]
+}
+
+model Question {
+  id        String   @id @default(uuid())
+  quizId    String?  @map("quiz_id") @db.VarChar(36)
+  content   String   @map("content") @db.Text
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @default(now()) @updatedAt @map("updated_at")
+
+  quiz      Quiz?      @relation(fields: [quizId], references: [id])
+  options   Option[]
+  responses Response[]
+}
+
+model Option {
+  id         String   @id @default(uuid())
+  questionId String   @map("question_id") @db.VarChar(36)
+  content    String   @map("content") @db.Text
+  isCorrect  Boolean  @map("is_correct") @db.Boolean
+  createdAt  DateTime @default(now()) @map("created_at")
+  updatedAt  DateTime @default(now()) @updatedAt @map("updated_at")
+
+  question Question   @relation(fields: [questionId], references: [id])
+  Response Response[]
+}
+
+model Response {
+  id               String   @id @default(uuid())
+  questionId       String   @map("question_id") @db.VarChar(36)
+  userId           String   @map("user_id") @db.VarChar(36)
+  answer           String?  @map("answer") @db.Text
+  selectedOptionId String?  @map("selected_option_id") @db.VarChar(36)
+  createdAt        DateTime @default(now()) @map("created_at")
+  updatedAt        DateTime @default(now()) @updatedAt @map("updated_at")
+
+  user           User     @relation(fields: [userId], references: [id])
+  question       Question @relation(fields: [questionId], references: [id])
+  selectedOption Option?  @relation(fields: [selectedOptionId], references: [id])
 }

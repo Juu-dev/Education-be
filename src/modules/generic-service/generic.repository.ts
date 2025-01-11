@@ -31,6 +31,8 @@ export class GenericRepository<T> {
       createdAt: 'desc',
     }, ...orderBy] : defaultOrderBy
 
+    console.log("this.model: ", this.model, includesConfig[this.model])
+
     return this.prisma[this.model].findMany({
       skip,
       take: limit,

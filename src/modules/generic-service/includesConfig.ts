@@ -1,6 +1,6 @@
 // includesConfig.ts
 export const includesConfig = {
-  User: {
+  user: {
     roles: {
       include: {
         role: true,
@@ -33,16 +33,6 @@ export const includesConfig = {
       }
     },
   },
-  Teacher: {
-    user: true,
-    class: true,
-    documents: true,
-    tasks: true,
-    exercises: true,
-  },
-  Librarian: {
-    user: true,
-  },
   document: {
     teacher: true,
     ratings: true,
@@ -56,48 +46,14 @@ export const includesConfig = {
     },
     BorrowedLog: true,
   },
-  Rating: {
-    document: true,
-    student: true,
-  },
-  Comment: {
-    document: true,
-    student: true,
-  },
-  DocumentStudent: {
-    document: true,
-    student: true,
-  },
-  Goal: {
-    document: true,
-    student: true,
-  },
-  Mark: {
-    document: true,
-    student: true,
-  },
-  Task: {
-    assigner: true,
-    assignee: true,
-  },
-  Request: {
-    student: true,
-  },
-  BorrowedLog: {
-    student: true,
-    document: true,
-  },
-  Exercise: {
-    class: true,
-    exerciseStudents: {
-      include: {
-        student: true,
-      },
+  quiz: {
+    _count: {
+      select: { questions: true },
     },
-    Teacher: true,
-  },
-  ExerciseStudent: {
-    exercise: true,
-    student: true,
-  },
+    questions: {
+      include: {
+        options: true
+      }
+    }
+  }
 };

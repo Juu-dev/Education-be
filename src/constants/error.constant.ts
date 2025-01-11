@@ -160,5 +160,12 @@ export const Errors = {
       statusCode: HttpStatus.NOT_FOUND,
       errorCode: 'TA6',
     }
+  },
+  QUIZ: {
+    QUIZ_NOT_FOUND: {
+      message: 'Quiz not found. <Ref: TA3>',
+      statusCode: HttpStatus.NOT_FOUND,
+      errorCode: 'TA6',
+    }
   }
 };

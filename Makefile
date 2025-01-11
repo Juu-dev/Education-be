@@ -32,21 +32,6 @@ seed_data:
 clear_data:
 	npx ts-node prisma/clear_data.ts
 
-category:
-	npx ts-node prisma/2_seed_category.ts
-
-staff:
-	npx ts-node prisma/3_seed_staff.ts
-
-customer:
-	npx ts-node prisma/4_seed_customer.ts
-
-platform:
-	npx ts-node prisma/5_seed_platform.ts
-
-work_shift:
-	npx ts-node prisma/6_seed_work_shift.ts
-
 seed-default:
 	npx ts-node prisma/2_seed_category.ts
 	npx ts-node prisma/3_seed_staff.ts

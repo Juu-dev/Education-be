@@ -111,6 +111,27 @@ export type Mark = {
     createdAt: Generated<Timestamp>;
     updatedAt: Generated<Timestamp>;
 };
+export type Option = {
+    id: Generated<string>;
+    questionId: string;
+    content: string;
+    isCorrect: boolean;
+    createdAt: Generated<Timestamp>;
+    updatedAt: Generated<Timestamp>;
+};
+export type Question = {
+    id: Generated<string>;
+    quizId: string | null;
+    content: string;
+    createdAt: Generated<Timestamp>;
+    updatedAt: Generated<Timestamp>;
+};
+export type Quiz = {
+    id: Generated<string>;
+    title: string;
+    createdAt: Generated<Timestamp>;
+    updatedAt: Generated<Timestamp>;
+};
 export type Rating = {
     id: Generated<string>;
     documentId: string;
@@ -134,6 +155,15 @@ export type Request = {
     bookTitle: string | null;
     description: string | null;
     status: string | null;
+    createdAt: Generated<Timestamp>;
+    updatedAt: Generated<Timestamp>;
+};
+export type Response = {
+    id: Generated<string>;
+    questionId: string;
+    userId: string;
+    answer: string | null;
+    selectedOptionId: string | null;
     createdAt: Generated<Timestamp>;
     updatedAt: Generated<Timestamp>;
 };
@@ -206,9 +236,13 @@ export type DB = {
     goals: Goal;
     librarians: Librarian;
     marks: Mark;
+    Option: Option;
+    Question: Question;
+    Quiz: Quiz;
     ratings: Rating;
     refreshTokens: RefreshToken;
     requests: Request;
+    Response: Response;
     roles: Role;
     students: Student;
     tasks: Task;
