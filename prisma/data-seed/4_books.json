@@ -6,6 +6,7 @@
     "publishingHouse": "Charles Scribner's Sons",
     "coverImageUrl": "https://example.com/images/great-gatsby.jpg",
     "contentPdfUrl": "https://example.com/pdfs/great-gatsby.pdf",
+    "type": "Sách giáo khoa",
     "evaluate": 5
   },
   {
@@ -15,6 +16,7 @@
     "publishingHouse": "Secker & Warburg",
     "coverImageUrl": "https://example.com/images/1984.jpg",
     "contentPdfUrl": "https://example.com/pdfs/1984.pdf",
+    "type": "Sách bài tập",
     "evaluate": 4
   },
   {
@@ -24,6 +26,7 @@
     "publishingHouse": "J.B. Lippincott & Co.",
     "coverImageUrl": "https://example.com/images/to-kill-a-mockingbird.jpg",
     "contentPdfUrl": null,
+    "type": "Sách giáo khoa",
     "evaluate": 5
   },
   {
@@ -33,6 +36,7 @@
     "publishingHouse": "T. Egerton",
     "coverImageUrl": null,
     "contentPdfUrl": "https://example.com/pdfs/pride-and-prejudice.pdf",
+    "type": "Sách bài tập",
     "evaluate": 4
   },
   {
@@ -42,6 +46,7 @@
     "publishingHouse": "Harper & Brothers",
     "coverImageUrl": "https://example.com/images/moby-dick.jpg",
     "contentPdfUrl": null,
+    "type": "Sách tham khảo",
     "evaluate": 3
   }
 ]

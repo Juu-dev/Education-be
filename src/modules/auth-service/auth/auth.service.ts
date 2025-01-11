@@ -102,7 +102,7 @@ export class AuthService {
   }
 
   public async logOut(refreshTokenId: string) {
-    return this.refreshTokensRepository.deleteById(refreshTokenId);
+    return this.refreshTokensRepository.hardDeleteById(refreshTokenId);
   }
 
   public async forgotPassword(body: ForgotPasswordDto) {

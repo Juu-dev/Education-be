@@ -37,6 +37,9 @@ model User {
   birthDate DateTime? @map("birth_date") @db.Timestamp(6)
   classId   String?   @map("class_id") @db.VarChar(36)
 
+  isDeleted Boolean?  @default(false) @map("is_deleted")
+  deletedAt DateTime? @map("deleted_at")
+
   librarian Librarian?
   student   Student?
   teacher   Teacher?
@@ -343,6 +346,7 @@ model Book {
   publishingHouse String   @map("publishing_house") @db.VarChar(50)
   coverImageUrl   String?  @map("cover_image_url") @db.VarChar(255)
   contentPdfUrl   String?  @map("content_pdf_url") @db.VarChar(255)
+  type            String?  @map("type") @db.VarChar(255)
   evaluate        Int?
   createdAt       DateTime @default(now()) @map("created_at")
   updatedAt       DateTime @default(now()) @updatedAt @map("updated_at")

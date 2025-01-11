@@ -16,7 +16,8 @@ export class StudentsRepository extends GenericRepository<Student> {
         include: includesConfig["student"] || {},
         where: {
             user: {
-              classId: id
+              classId: id,
+              isDeleted: false,
             },
           }
         }

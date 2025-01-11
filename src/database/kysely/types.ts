@@ -12,6 +12,7 @@ export type Book = {
     publishingHouse: string;
     coverImageUrl: string | null;
     contentPdfUrl: string | null;
+    type: string | null;
     evaluate: number | null;
     createdAt: Generated<Timestamp>;
     updatedAt: Generated<Timestamp>;
@@ -186,6 +187,8 @@ export type User = {
     name: string;
     birthDate: Timestamp | null;
     classId: string | null;
+    isDeleted: Generated<boolean | null>;
+    deletedAt: Timestamp | null;
 };
 export type UserRole = {
     userId: string;
