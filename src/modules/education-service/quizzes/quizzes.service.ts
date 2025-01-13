@@ -13,16 +13,25 @@ export class QuizzesService {
     return this.quizzesRepository.createQuiz(createQuizDto as any);
   }
 
-  getListQuiz() {
-    return this.quizzesRepository.findAll();
+  async getListQuiz() {
+    const quizzes = await this.quizzesRepository.findAll();
+    return {
+      data: quizzes,
+    }
   }
 
   async getListPaginatedQuiz(
     page?: number,
     pageSize?: number,
+    userId?: string
   ) {
-    const count = this.quizzesRepository.count();
-    const items = this.quizzesRepository.findAllPagination(page, pageSize);
+    const condition = {where: {creatorId: userId}}
+    const count = this.quizzesRepository.count(condition);
+    const items = this.quizzesRepository.findAllPagination({
+      page,
+      pageSize,
+      ...condition
+    });
 
     const promise = await Promise.all([count, items])
 

@@ -17,6 +17,15 @@ export type Book = {
     createdAt: Generated<Timestamp>;
     updatedAt: Generated<Timestamp>;
 };
+export type BookImport = {
+    id: Generated<string>;
+    title: string;
+    yearOfPublication: string;
+    amount: number | null;
+    borrowedAmount: number | null;
+    createdAt: Generated<Timestamp>;
+    updatedAt: Generated<Timestamp>;
+};
 export type BorrowedLog = {
     id: Generated<string>;
     userId: string | null;
@@ -67,22 +76,14 @@ export type DocumentStudent = {
 };
 export type Exercise = {
     id: Generated<string>;
-    classId: string;
     name: string;
-    level: string | null;
-    metadataUrl: string | null;
+    description: string;
+    timeOut: number;
     createdAt: Generated<Timestamp>;
     updatedAt: Generated<Timestamp>;
-    userId: string | null;
-};
-export type ExerciseStudent = {
-    id: Generated<string>;
-    exerciseId: string;
-    userId: string;
-    grade: number | null;
-    markedAt: Timestamp;
-    createdAt: Generated<Timestamp>;
-    updatedAt: Generated<Timestamp>;
+    assignerId: string;
+    classAssigneeId: string;
+    quizId: string;
 };
 export type Goal = {
     id: Generated<string>;
@@ -131,6 +132,7 @@ export type Quiz = {
     title: string;
     createdAt: Generated<Timestamp>;
     updatedAt: Generated<Timestamp>;
+    creatorId: string | null;
 };
 export type Rating = {
     id: Generated<string>;
@@ -185,8 +187,6 @@ export type Student = {
 export type Task = {
     id: Generated<string>;
     title: string;
-    assignerId: string;
-    assigneeId: string;
     status: string | null;
     description: string | null;
     assignedAt: Generated<Timestamp>;
@@ -195,6 +195,8 @@ export type Task = {
     endTime: Timestamp | null;
     createdAt: Generated<Timestamp>;
     updatedAt: Generated<Timestamp>;
+    assignerId: string;
+    assigneeId: string;
 };
 export type Teacher = {
     id: Generated<string>;
@@ -226,12 +228,12 @@ export type UserRole = {
 };
 export type DB = {
     books: Book;
+    booksImports: BookImport;
     borrowedLogs: BorrowedLog;
     classes: Class;
     comments: Comment;
     documentStudents: DocumentStudent;
     documents: Document;
-    exerciseStudents: ExerciseStudent;
     exercises: Exercise;
     goals: Goal;
     librarians: Librarian;

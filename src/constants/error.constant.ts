@@ -167,5 +167,22 @@ export const Errors = {
       statusCode: HttpStatus.NOT_FOUND,
       errorCode: 'TA6',
     }
+  },
+  EXERCISE: {
+    EXERCISE_NOT_FOUND: {
+      message: 'Quiz not found. <Ref: TA3>',
+      statusCode: HttpStatus.NOT_FOUND,
+      errorCode: 'TA6',
+    },
+    ASSIGNER_NOT_EXISTS: {
+      message: 'Assigner not exists. <Ref: TA3>',
+      statusCode: HttpStatus.NOT_FOUND,
+      errorCode: 'TA3',
+    },
+    CLASS_NOT_EXISTS: {
+      message: 'Assigner not exists. <Ref: TA3>',
+      statusCode: HttpStatus.NOT_FOUND,
+      errorCode: 'TA3',
+    }
   }
 };

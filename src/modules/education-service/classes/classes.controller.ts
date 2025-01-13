@@ -26,6 +26,14 @@ export class ClassesController {
     return this.classesService.createClass(createCategoryDto);
   }
 
+  @Get()
+  @Roles([Permission.GET_CATEGORY])
+  @AuthClaims()
+  @ApiOkResponse({ type: CategoryEntity })
+  findAll() {
+    return this.classesService.getAllClass();
+  }
+
   @Get('pagination')
   // @Roles([Permission.GET_CATEGORIES])
   // @AuthClaims()
@@ -33,7 +41,7 @@ export class ClassesController {
     type: CategoryEntity,
     isArray: true,
   })
-  findAll(
+  findAllPagination(
   @Query() {
     page,
     pageSize,

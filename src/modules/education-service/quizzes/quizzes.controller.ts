@@ -4,7 +4,7 @@ import {
 } from '@nestjs/common';
 import { Permission } from '@n-constants';
 import { ApiTags } from '@nestjs/swagger';
-import { AuthClaims, Permissions } from '@n-decorators';
+import {AuthClaims, GetUser, Permissions} from '@n-decorators';
 import { PaginationParamsDto } from '@n-dtos';
 
 import { QuizzesService } from './quizzes.service';
@@ -26,11 +26,13 @@ export class QuizzesController {
   @Permissions([Permission.GET_USERS])
   @AuthClaims()
   findAllByPagination(
+    @GetUser() user: any,
     @Query() { page, pageSize }: PaginationParamsDto,
   ) {
     return this.quizzesService.getListPaginatedQuiz(
       page,
       pageSize,
+      user?.id
     );
   }
 

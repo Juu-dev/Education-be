@@ -1,5 +1,6 @@
 import { PrismaClient } from '@prisma/client';
 import { includesConfig } from '@n-modules/generic-service/includesConfig';
+import {ICount, IFindAll, IFindAllPagination} from "@n-modules/generic-service/generic.interface";
 
 export class GenericRepository<T> {
   constructor(private prisma: PrismaClient, private model: string) {
@@ -10,19 +11,29 @@ export class GenericRepository<T> {
   }
 
   async createMany(data: T[]): Promise<T[]> {
-    return this.prisma[this.model].createMany({data})
+    return this.prisma[this.model].createMany({data: data, skipDuplicates: true})
   }
 
-  async findAll(): Promise<T[]> {
+  async findAll(props?: IFindAll): Promise<T[]> {
+    const {where} = props;
+    const conditionParams = {}
+
+    if (where) {
+      conditionParams.where = where
+    }
+
     return this.prisma[this.model].findMany({
-      // where: {
-      //   isDeleted: true
-      // }
+      where: conditionParams
     });
   }
-
-  async findAllPagination(page: number = 1, limit: number = 10, orderBy?: {}[]): Promise<T[]> {
-    const skip = (page - 1) * limit;
+  async findAllPagination(props?: IFindAllPagination): Promise<T[]> {
+    const {
+      page = 1,
+      pageSize = 10,
+      orderBy,
+      where
+    } = props;
+    const skip = (page - 1) * pageSize;
     // console.log(this.model, includesConfig[this.model])
     const defaultOrderBy = {
       createdAt: 'desc',
@@ -31,11 +42,16 @@ export class GenericRepository<T> {
       createdAt: 'desc',
     }, ...orderBy] : defaultOrderBy
 
-    console.log("this.model: ", this.model, includesConfig[this.model])
+    const conditionParams = {}
+
+    if (where) {
+      conditionParams.where = where
+    }
 
     return this.prisma[this.model].findMany({
       skip,
-      take: limit,
+      take: pageSize,
+      ...conditionParams,
       orderBy: orderByBuild,
       include: includesConfig[this.model] || {},
     });
@@ -66,7 +82,13 @@ export class GenericRepository<T> {
     });
   }
 
-  async count(): Promise<number> {
-    return this.prisma[this.model].count();
+  async count(props?: ICount): Promise<number> {
+    const conditionParams = {}
+
+    if (props?.where) {
+      conditionParams.where = props?.where
+    }
+
+    return this.prisma[this.model].count(conditionParams);
   }
 }

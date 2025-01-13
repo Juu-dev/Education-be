@@ -1,8 +1,8 @@
 #!/bin/bash
 
-DIRECTORY="/Users/pham.minh.thong/Working/Binh_An/Education-be/src/modules/education-service/books"
-SEARCH_STRING="teacher"
-REPLACE_STRING="book"
+DIRECTORY="/Users/pham.minh.thong/Working/Binh_An/Education-be/src/modules/education-service/exercise/"
+SEARCH_STRING="exercise"
+REPLACE_STRING="exercises"
 
 # Hàm đổi tên file hoặc thư mục
 rename_files_and_folders() {

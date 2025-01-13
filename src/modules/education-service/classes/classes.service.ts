@@ -13,6 +13,13 @@ export class ClassesService {
     return this.classesRepository.create(createClassDto as any);
   }
 
+  async getAllClass() {
+    const classes = await this.classesRepository.findAll();
+    return {
+      data: classes,
+    }
+  }
+
   async getListClass(
     page?: number,
     pageSize?: number,

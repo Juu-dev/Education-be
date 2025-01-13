@@ -28,6 +28,7 @@ async function bootstrap() {
       transform: true,
       whitelist: true,
       exceptionFactory: (errors: ValidationError[]) => {
+        console.log("exceptionFactory: ", errors)
         const { constraints } = errors[0];
         let validationErrFormat = Errors.VALIDATION_ERROR;
         validationErrFormat = {

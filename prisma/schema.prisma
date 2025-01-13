@@ -59,8 +59,8 @@ model User {
   request         Request[]
   borrowedLog     BorrowedLog[]
   exercise        Exercise[]
-  exerciseStudent ExerciseStudent[]
   Response        Response[]
+  Quiz            Quiz[]
 
   @@map("users")
 }
@@ -258,8 +258,6 @@ model Mark {
 model Task {
   id          String    @id @default(uuid())
   title       String    @map("title") @db.VarChar(36)
-  assignerId  String    @map("assigner_id") @db.VarChar(36)
-  assigneeId  String    @map("assignee_id") @db.VarChar(36)
   status      String?   @map("status") @db.VarChar(255)
   description String?   @map("description") @db.Text
   assignedAt  DateTime  @default(now()) @map("assigned_at") @db.Timestamp(6)
@@ -269,8 +267,10 @@ model Task {
   createdAt   DateTime  @default(now()) @map("created_at")
   updatedAt   DateTime  @default(now()) @updatedAt @map("updated_at")
 
-  assigner User @relation("assigner", fields: [assignerId], references: [id])
-  assignee User @relation("assignee", fields: [assigneeId], references: [id])
+  assignerId String @map("assigner_id") @db.VarChar(36)
+  assigner   User   @relation("assigner", fields: [assignerId], references: [id])
+  assigneeId String @map("assignee_id") @db.VarChar(36)
+  assignee   User   @relation("assignee", fields: [assigneeId], references: [id])
 
   @@map("tasks")
 }
@@ -307,38 +307,6 @@ model BorrowedLog {
   @@map("borrowed_logs")
 }
 
-model Exercise {
-  id          String   @id @default(uuid())
-  classId     String   @map("class_id") @db.VarChar(36)
-  name        String   @map("name") @db.VarChar(255)
-  level       String?  @map("level") @db.VarChar(255)
-  metadataUrl String?  @map("metadata_url") @db.VarChar(255)
-  createdAt   DateTime @default(now()) @map("created_at")
-  updatedAt   DateTime @default(now()) @updatedAt @map("updated_at")
-
-  class            Class             @relation(fields: [classId], references: [id])
-  exerciseStudents ExerciseStudent[]
-  userId           String?           @db.VarChar(36)
-  user             User?             @relation(fields: [userId], references: [id])
-
-  @@map("exercises")
-}
-
-model ExerciseStudent {
-  id         String   @id @default(uuid())
-  exerciseId String   @map("exercise_id") @db.VarChar(36)
-  userId     String   @map("user_id") @db.VarChar(36)
-  grade      Int?
-  markedAt   DateTime @map("marked_at") @db.Timestamp(6)
-  createdAt  DateTime @default(now()) @map("created_at")
-  updatedAt  DateTime @default(now()) @updatedAt @map("updated_at")
-
-  exercise Exercise @relation(fields: [exerciseId], references: [id])
-  user     User?    @relation(fields: [userId], references: [id])
-
-  @@map("exercise_students")
-}
-
 model Book {
   id              String   @id @default(uuid())
   title           String   @db.VarChar(100)
@@ -355,13 +323,49 @@ model Book {
   @@map("books")
 }
 
+model BookImport {
+  id                String   @id @default(uuid())
+  title             String   @db.VarChar(100)
+  yearOfPublication String   @map("year_of_publication") @db.VarChar(50)
+  amount            Int?
+  borrowedAmount    Int?
+  createdAt         DateTime @default(now()) @map("created_at")
+  updatedAt         DateTime @default(now()) @updatedAt @map("updated_at")
+
+  @@map("books_imports")
+}
+
+model Exercise {
+  id          String   @id @default(uuid())
+  name        String   @map("name") @db.VarChar(255)
+  description String   @map("description") @db.VarChar(255)
+  timeOut     Int      @map("time_out")
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @default(now()) @updatedAt @map("updated_at")
+
+  assignerId String @map("assigner_id") @db.VarChar(36)
+  assigner   User   @relation(fields: [assignerId], references: [id])
+
+  classAssigneeId String @map("class_assignee_id") @db.VarChar(36)
+  classAssignee   Class  @relation(fields: [classAssigneeId], references: [id])
+
+  quizId String @map("quiz_id") @db.VarChar(36)
+  quiz   Quiz   @relation(fields: [quizId], references: [id])
+
+  @@map("exercises")
+}
+
 model Quiz {
   id        String   @id @default(uuid())
   title     String   @map("title") @db.VarChar(255)
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @default(now()) @updatedAt @map("updated_at")
 
+  creatorId String? @db.VarChar(36)
+  creator   User?   @relation(fields: [creatorId], references: [id])
+
   questions Question[]
+  Exercise  Exercise[]
 }
 
 model Question {
