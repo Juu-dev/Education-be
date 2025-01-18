@@ -166,7 +166,22 @@ export const Errors = {
       message: 'Quiz not found. <Ref: TA3>',
       statusCode: HttpStatus.NOT_FOUND,
       errorCode: 'TA6',
-    }
+    },
+    EXERCISE_EXISTEDS: {
+      message: 'Existing exercises are using this quiz. <Ref: TA3>',
+      statusCode: HttpStatus.NOT_FOUND,
+      errorCode: 'TA6',
+    },
+    QUESTION_NEED: {
+      message: 'Question IDs are required. <Ref: TA3>',
+      statusCode: HttpStatus.NOT_FOUND,
+      errorCode: 'TA6',
+    },
+    QUESTION_NOT_FOUND: {
+      message: 'Question not found. <Ref: TA3>',
+      statusCode: HttpStatus.NOT_FOUND,
+      errorCode: 'TA6',
+    },
   },
   EXERCISE: {
     EXERCISE_NOT_FOUND: {

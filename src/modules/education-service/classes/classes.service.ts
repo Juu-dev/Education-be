@@ -27,7 +27,11 @@ export class ClassesService {
     const count = await this.classesRepository.count();
 
     const orderBy = [{name: "asc"}]
-    const items = await this.classesRepository.findAllPagination(page, pageSize, orderBy);
+    const items = await this.classesRepository.findAllPagination({
+      page,
+      pageSize,
+      orderBy
+    });
 
     return {
       pagination: {

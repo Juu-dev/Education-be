@@ -53,6 +53,7 @@ export class AuthService {
     } = await this.generateToken({
       id: user.id,
       username: user.username,
+      classId: user.class.id
     });
 
     return {
@@ -89,6 +90,7 @@ export class AuthService {
       id: user.id,
       username: user.username,
       refreshTokenId: foundedRefreshToken.id,
+      classId: user.class.id
     });
 
     return {
