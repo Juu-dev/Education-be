@@ -15,8 +15,9 @@ export class QuizzesService {
     return this.quizzesRepository.createQuiz(createQuizDto as any);
   }
 
-  async getListQuiz() {
-    const quizzes = await this.quizzesRepository.findAll();
+  async getListQuiz(userId?: string) {
+    const condition = {where: {creatorId: userId}};
+    const quizzes = await this.quizzesRepository.findAll(condition);
     return {
       data: quizzes,
     };

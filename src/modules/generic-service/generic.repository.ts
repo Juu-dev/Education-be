@@ -22,7 +22,7 @@ export class GenericRepository<T> {
     }
 
     return this.prisma[this.model].findMany({
-      where: conditionParams
+      ...conditionParams
     });
   }
 

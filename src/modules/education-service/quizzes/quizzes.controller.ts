@@ -46,8 +46,10 @@ export class QuizzesController {
   @Get('')
   @Permissions([Permission.GET_USERS])
   @AuthClaims()
-  findAll() {
-    return this.quizzesService.getListQuiz();
+  findAll(
+    @GetUser() user: any,
+  ) {
+    return this.quizzesService.getListQuiz(user?.id);
   }
 
   @Get(':id')
