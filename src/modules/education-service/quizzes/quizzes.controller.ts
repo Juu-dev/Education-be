@@ -1,6 +1,6 @@
 import {
   Body,
-  Controller, Delete, Get, Param, Patch, Post, Query, Req,
+  Controller, Delete, Get, Param, Patch, Post, Query,
 } from '@nestjs/common';
 import { Permission } from '@n-constants';
 import { ApiTags } from '@nestjs/swagger';
@@ -18,8 +18,15 @@ export class QuizzesController {
   @Post()
   @Permissions([Permission.CREATE_USER])
   @AuthClaims()
-  create(@Body() createQuizDto: CreateQuizDto) {
-    return this.quizzesService.createQuiz(createQuizDto);
+  create(
+    @GetUser() user: any,
+    @Body() createQuizDto: CreateQuizDto
+  ) {
+
+    return this.quizzesService.createQuiz({
+      ...createQuizDto,
+      creatorId: user?.id
+    });
   }
 
   @Get('pagination')
@@ -53,7 +60,7 @@ export class QuizzesController {
   @Patch(':id')
   @Permissions([Permission.UPDATE_USER])
   @AuthClaims()
-  update( @Param('id') id: string, @Body() updateQuizDto: UpdateQuizDto) {
+  update(@Param('id') id: string, @Body() updateQuizDto: UpdateQuizDto) {
     return this.quizzesService.updateQuiz(id, updateQuizDto);
   }
 
@@ -62,5 +69,13 @@ export class QuizzesController {
   @AuthClaims()
   remove(@Param('id') id: string) {
     return this.quizzesService.deleteQuizById(id);
+  }
+
+  @Delete(':id/questions')
+  @Permissions([Permission.DELETE_USER])
+  @AuthClaims()
+  removeRelatedQuestions(@Param('id') quizId: string, @Body() questionIdsDto: { questionIds: string[] }) {
+    const { questionIds } = questionIdsDto;
+    return this.quizzesService.deleteQuestionsWithCascade(quizId, questionIds);
   }
 }

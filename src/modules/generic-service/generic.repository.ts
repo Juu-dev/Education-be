@@ -15,23 +15,22 @@ export class GenericRepository<T> {
   }
 
   async findAll(props?: IFindAll): Promise<T[]> {
-    const {where} = props;
     const conditionParams = {}
 
-    if (where) {
-      conditionParams.where = where
+    if (props?.where) {
+      conditionParams.where = props.where
     }
 
     return this.prisma[this.model].findMany({
       where: conditionParams
     });
   }
+
   async findAllPagination(props?: IFindAllPagination): Promise<T[]> {
     const {
       page = 1,
       pageSize = 10,
       orderBy,
-      where
     } = props;
     const skip = (page - 1) * pageSize;
     // console.log(this.model, includesConfig[this.model])
@@ -44,8 +43,38 @@ export class GenericRepository<T> {
 
     const conditionParams = {}
 
-    if (where) {
-      conditionParams.where = where
+    if (props?.where) {
+      conditionParams.where = props.where
+    }
+
+    return this.prisma[this.model].findMany({
+      skip,
+      take: pageSize,
+      ...conditionParams,
+      orderBy: orderByBuild,
+      include: includesConfig[this.model] || {},
+    });
+  }
+
+  async findAllPaginationModeStudent(props?: IFindAllPagination): Promise<T[]> {
+    const {
+      page = 1,
+      pageSize = 10,
+      orderBy,
+    } = props;
+    const skip = (page - 1) * pageSize;
+    // console.log(this.model, includesConfig[this.model])
+    const defaultOrderBy = {
+      createdAt: 'desc',
+    }
+    const orderByBuild = orderBy ? [{
+      createdAt: 'desc',
+    }, ...orderBy] : defaultOrderBy
+
+    const conditionParams = {}
+
+    if (props?.where) {
+      conditionParams.where = props.where
     }
 
     return this.prisma[this.model].findMany({
