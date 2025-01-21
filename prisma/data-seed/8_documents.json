@@ -1,0 +1,74 @@
+[
+  {
+    "type": "lecture-plan",
+    "description": "Description for document 1",
+    "url": "https://example.com/document1",
+    "metadataUrl": "https://example.com/metadata1"
+  },
+  {
+    "type": "continuation-education",
+    "description": "Description for document 2",
+    "url": "https://example.com/document2",
+    "metadataUrl": "https://example.com/metadata2"
+  },
+  {
+    "type": "meeting-plan",
+    "description": "Description for document 3",
+    "url": "https://example.com/document3",
+    "metadataUrl": "https://example.com/metadata3"
+  },
+  {
+    "type": "lecture-note",
+    "description": "Description for document 4",
+    "url": "https://example.com/document1",
+    "metadataUrl": "https://example.com/metadata1"
+  },
+  {
+    "type": "group-profile",
+    "description": "Description for document 5",
+    "url": "https://example.com/document2",
+    "metadataUrl": "https://example.com/metadata2"
+  },
+  {
+    "type": "others",
+    "description": "Description for document 6",
+    "url": "https://example.com/document3",
+    "metadataUrl": "https://example.com/metadata3"
+  },
+  {
+    "type": "lecture-plan",
+    "description": "Description for document 7",
+    "url": "https://example.com/document1",
+    "metadataUrl": "https://example.com/metadata1"
+  },
+  {
+    "type": "continuation-education",
+    "description": "Description for document 8",
+    "url": "https://example.com/document2",
+    "metadataUrl": "https://example.com/metadata2"
+  },
+  {
+    "type": "meeting-plan",
+    "description": "Description for document 9",
+    "url": "https://example.com/document3",
+    "metadataUrl": "https://example.com/metadata3"
+  },
+  {
+    "type": "lecture-note",
+    "description": "Description for document 10",
+    "url": "https://example.com/document1",
+    "metadataUrl": "https://example.com/metadata1"
+  },
+  {
+    "type": "group-profile",
+    "description": "Description for document 11",
+    "url": "https://example.com/document2",
+    "metadataUrl": "https://example.com/metadata2"
+  },
+  {
+    "type": "others",
+    "description": "Description for document 12",
+    "url": "https://example.com/document3",
+    "metadataUrl": "https://example.com/metadata3"
+  }
+]

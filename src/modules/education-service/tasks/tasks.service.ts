@@ -88,7 +88,7 @@ export class TasksService {
         pageSize,
         totalPage: Math.ceil(parallelPromise[0] / pageSize),
       },
-      count,
+      count: parallelPromise[0],
       data: parallelPromise[1],
     };
   }

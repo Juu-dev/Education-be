@@ -101,6 +101,20 @@ export class UsersController {
     return this.usersService.getUserById(id);
   }
 
+  @Patch('profile')
+  @Permissions([Permission.UPDATE_USER])
+  @AuthClaims()
+  @ApiOkResponse({ type: UserEntity })
+  updateProfile(
+      @GetUser() user: any,
+      @Body() updateUserDto: UpdateUserDto,
+  ) {
+    return this.usersService.updateUserById(
+        user?.id,
+        updateUserDto,
+    );
+  }
+
   @Patch(':id')
   @Permissions([Permission.UPDATE_USER])
   @AuthClaims()
