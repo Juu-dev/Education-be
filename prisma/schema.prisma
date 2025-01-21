@@ -59,7 +59,7 @@ model User {
   request         Request[]
   borrowedLog     BorrowedLog[]
   exercise        Exercise[]
-  Response        Response[]
+  Answer          Answer[]
   Quiz            Quiz[]
 
   @@map("users")
@@ -349,8 +349,9 @@ model Exercise {
   classAssigneeId String @map("class_assignee_id") @db.VarChar(36)
   classAssignee   Class  @relation(fields: [classAssigneeId], references: [id])
 
-  quizId String @map("quiz_id") @db.VarChar(36)
-  quiz   Quiz   @relation(fields: [quizId], references: [id])
+  quizId  String   @map("quiz_id") @db.VarChar(36)
+  quiz    Quiz     @relation(fields: [quizId], references: [id])
+  answers Answer[]
 
   @@map("exercises")
 }
@@ -366,6 +367,8 @@ model Quiz {
 
   questions Question[]
   exercise  Exercise[]
+
+  @@map("quizzes")
 }
 
 model Question {
@@ -375,9 +378,11 @@ model Question {
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @default(now()) @updatedAt @map("updated_at")
 
-  quiz      Quiz?      @relation(fields: [quizId], references: [id], onDelete: Cascade)
-  options   Option[]
-  responses Response[]
+  quiz           Quiz?            @relation(fields: [quizId], references: [id], onDelete: Cascade)
+  options        Option[]
+  questionAnswer QuestionAnswer[]
+
+  @@map("questions")
 }
 
 model Option {
@@ -388,20 +393,38 @@ model Option {
   createdAt  DateTime @default(now()) @map("created_at")
   updatedAt  DateTime @default(now()) @updatedAt @map("updated_at")
 
-  question Question   @relation(fields: [questionId], references: [id], onDelete: Cascade)
-  response Response[]
+  question       Question         @relation(fields: [questionId], references: [id], onDelete: Cascade)
+  questionAnswer QuestionAnswer[]
+
+  @@map("options")
 }
 
-model Response {
+model Answer {
+  id         String   @id @default(uuid())
+  userId     String   @map("user_id") @db.VarChar(36)
+  exerciseId String   @map("exercise_id") @db.VarChar(36)
+  mark       Float?   @map("mark")
+  createdAt  DateTime @default(now()) @map("created_at")
+  updatedAt  DateTime @default(now()) @updatedAt @map("updated_at")
+
+  user            User             @relation(fields: [userId], references: [id])
+  exercise        Exercise         @relation(fields: [exerciseId], references: [id])
+  questionAnswers QuestionAnswer[]
+
+  @@map("answers")
+}
+
+model QuestionAnswer {
   id               String   @id @default(uuid())
+  answerId         String   @map("answer_id") @db.VarChar(36)
   questionId       String   @map("question_id") @db.VarChar(36)
-  userId           String   @map("user_id") @db.VarChar(36)
-  answer           String?  @map("answer") @db.Text
   selectedOptionId String?  @map("selected_option_id") @db.VarChar(36)
   createdAt        DateTime @default(now()) @map("created_at")
   updatedAt        DateTime @default(now()) @updatedAt @map("updated_at")
 
-  user           User     @relation(fields: [userId], references: [id])
-  question       Question @relation(fields: [questionId], references: [id])
+  answer         Answer   @relation(fields: [answerId], references: [id], onDelete: Cascade)
+  question       Question @relation(fields: [questionId], references: [id], onDelete: Cascade)
   selectedOption Option?  @relation(fields: [selectedOptionId], references: [id])
+
+  @@map("question_answers")
 }

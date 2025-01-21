@@ -1,0 +1,91 @@
+[
+  {
+    "title": "Trắc nghiệm Lịch Sử 12 Kết nối tri thức Bài 1 (có đáp án): Liên hợp quốc",
+    "questions": [
+      {
+        "content": "Tổ chức quốc tế được xem như tiền thân của Liên hợp quốc là",
+        "options": [
+          {
+            "content": "Hội Quốc liên.",
+            "isCorrect": true
+          },
+          {
+            "content": "Liên minh châu Âu.",
+            "isCorrect": false
+          },
+          {
+            "content": "khối Đồng minh",
+            "isCorrect": false
+          },
+          {
+            "content": "khối Hiệp ước.",
+            "isCorrect": false
+          }
+        ]
+      },
+      {
+        "content": "Nhằm duy trì hoà bình và an ninh thế giới sau chiến tranh, Hội nghị I-an-ta (2-1945) có quyết định quan trọng nào sau đây?",
+        "options": [
+          {
+            "content": "Thành lập Ban Thư kí Liên hợp quốc.",
+            "isCorrect": true
+          },
+          {
+            "content": "Thành lập tổ chức Hội Quốc liên.",
+            "isCorrect": false
+          },
+          {
+            "content": "Thành lập tổ chức Hội Quốc liên.",
+            "isCorrect": false
+          },
+          {
+            "content": "Duy trì và mở rộng Hội Quốc liên.",
+            "isCorrect": false
+          }
+        ]
+      },
+      {
+        "content": "Từ cuối tháng 4 đến cuối tháng 6-1945, 50 nước họp tại Xan Phran-xi-xcô (Mỹ) thông qua nội dung nào sau đây?",
+        "options": [
+          {
+            "content": "Thành lập Ban Thư kí Liên hợp quốc.",
+            "isCorrect": true
+          },
+          {
+            "content": "Xét xử tội phạm chiến tranh thế giới.",
+            "isCorrect": false
+          },
+          {
+            "content": "Kết thúc chiến tranh Triều Tiên.",
+            "isCorrect": false
+          },
+          {
+            "content": "Hiến chương Liên hợp quốc.",
+            "isCorrect": false
+          }
+        ]
+      },
+      {
+        "content": "Một trong những quốc gia có vai trò quan trọng trong quá trình hình thành Liên hợp quốc là",
+        "options": [
+          {
+            "content": "Liên Xô.",
+            "isCorrect": true
+          },
+          {
+            "content": "Thái Lan.",
+            "isCorrect": false
+          },
+          {
+            "content": "Lào.",
+            "isCorrect": false
+          },
+          {
+            "content": "Nhật Bản.",
+            "isCorrect": false
+          }
+        ]
+      }
+    ]
+  }
+]

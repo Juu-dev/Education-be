@@ -55,5 +55,15 @@ export const includesConfig = {
         options: true
       }
     }
+  },
+  exercise: {
+    _count: {
+      select: { answers: true },
+    },
+    answers: {
+      include: {
+        user: true
+      }
+    }
   }
 };

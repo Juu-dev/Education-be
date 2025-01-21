@@ -26,6 +26,14 @@ const getBooks = () => {
     return readFileJson('data-seed/4_books.json')
 }
 
+const getQuizzes = () => {
+    return readFileJson('data-seed/5_quizzes.json')
+}
+
+const getExercises = () => {
+    return readFileJson('data-seed/6_exercises.json')
+}
+
 const seedRoles = async () => {
     const roles = getRoles();
 
@@ -145,6 +153,87 @@ const seedBooks = async () => {
     return createdBooks;
 }
 
+const seedQuizzes = async () => {
+    const quizzes = getQuizzes();
+
+    const creatorEmail = "an.ptb@g.com";
+    const creator = await prisma.user.findFirst({
+        where: {
+            email: creatorEmail
+        }
+    })
+
+    const quizList = await Promise.all(
+        quizzes.map(async (quiz: any) => {
+            return prisma.quiz.create({
+                data: {
+                    title: quiz.title,
+                    creator: {
+                        connect: {
+                            id: creator.id
+                        }
+                    },
+                    questions: {
+                        create: quiz.questions.map((question) => ({
+                            content: question.content,
+                            options: {
+                                create: question.options.map((e) => ({
+                                    content: e.content,
+                                    isCorrect: e.isCorrect
+                                }))
+                            }
+                        }))
+                    },
+                },
+            })
+        })
+    )
+
+    return quizList.map(quiz => quiz.id)
+}
+
+const seedExercises = async (quizIds: string[]) => {
+    const exercises = getExercises()
+
+    const assignerName = "an.ptb@g.com"
+    const assigner = await prisma.user.findFirst({
+        where: {
+            email: assignerName
+        }
+    })
+    const className = "1A"
+    const classes = await prisma.class.findFirst({
+        where: {
+            name: className
+        }
+    })
+
+    await Promise.all(
+        exercises.map(async (exercise: any) => {
+            await prisma.exercise.create({
+                data: {
+                    ...exercise,
+                    assigner: {
+                        connect: {
+                            id: assigner.id,
+                        }
+                    },
+                    classAssignee: {
+                        connect: {
+                            id: classes.id
+                        }
+                    },
+                    quiz: {
+                        connect: {
+                            id: quizIds[0]
+                        }
+                    }
+                },
+            })
+        })
+    )
+}
+
 const main = async () => {
     // Seed roles
     await seedRoles();
@@ -161,6 +250,13 @@ const main = async () => {
     // Seed books
     await seedBooks()
     console.log('Seeding books completed!');
+
+    // Seed Quizzes
+    const quizIds = await seedQuizzes()
+    console.log('Seeding quizzes completed!');
+
+    await seedExercises(quizIds)
+    console.log('Seeding exercises completed!');
 
     // Done
     console.log('Seeding All completed!');

@@ -103,6 +103,11 @@ export const Errors = {
       statusCode: HttpStatus.NOT_FOUND,
       errorCode: 'AU11',
     },
+    STUDENT_NOT_FOUND: {
+      message: 'Student not found. <Ref: AU11>',
+      statusCode: HttpStatus.NOT_FOUND,
+      errorCode: 'AU11',
+    },
     CODE_EXISTED: {
       message: 'The employee code already exists in the system. <Ref: AU12>',
       statusCode: HttpStatus.CONFLICT,

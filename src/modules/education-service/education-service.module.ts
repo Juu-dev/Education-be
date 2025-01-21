@@ -8,6 +8,7 @@ import {BooksModule} from "@n-modules/education-service/books/books.module";
 import {QuizzesModule} from "@n-modules/education-service/quizzes/quizzes.module";
 import {ExercisesModule} from "@n-modules/education-service/exercises/exercises.module";
 import {BooksImportModule} from "@n-modules/education-service/books-import/books-import.module";
+import {AnswersModule} from "@n-modules/education-service/answers/answers.module";
 
 @Module({
   imports: [
@@ -19,7 +20,8 @@ import {BooksImportModule} from "@n-modules/education-service/books-import/books
     BooksModule,
     QuizzesModule,
     ExercisesModule,
-    BooksImportModule
+    BooksImportModule,
+    AnswersModule
   ],
   providers: [],
   controllers: [],

@@ -4,6 +4,14 @@ export type Generated<T> = T extends ColumnType<infer S, infer I, infer U>
   : ColumnType<T, T | undefined, T>;
 export type Timestamp = ColumnType<Date, Date | string, Date | string>;
 
+export type Answer = {
+    id: Generated<string>;
+    userId: string;
+    exerciseId: string;
+    mark: number | null;
+    createdAt: Generated<Timestamp>;
+    updatedAt: Generated<Timestamp>;
+};
 export type Book = {
     id: Generated<string>;
     title: string;
@@ -127,6 +135,14 @@ export type Question = {
     createdAt: Generated<Timestamp>;
     updatedAt: Generated<Timestamp>;
 };
+export type QuestionAnswer = {
+    id: Generated<string>;
+    answerId: string;
+    questionId: string;
+    selectedOptionId: string | null;
+    createdAt: Generated<Timestamp>;
+    updatedAt: Generated<Timestamp>;
+};
 export type Quiz = {
     id: Generated<string>;
     title: string;
@@ -157,15 +173,6 @@ export type Request = {
     bookTitle: string | null;
     description: string | null;
     status: string | null;
-    createdAt: Generated<Timestamp>;
-    updatedAt: Generated<Timestamp>;
-};
-export type Response = {
-    id: Generated<string>;
-    questionId: string;
-    userId: string;
-    answer: string | null;
-    selectedOptionId: string | null;
     createdAt: Generated<Timestamp>;
     updatedAt: Generated<Timestamp>;
 };
@@ -227,6 +234,7 @@ export type UserRole = {
     roleId: string;
 };
 export type DB = {
+    answers: Answer;
     books: Book;
     booksImports: BookImport;
     borrowedLogs: BorrowedLog;
@@ -238,13 +246,13 @@ export type DB = {
     goals: Goal;
     librarians: Librarian;
     marks: Mark;
-    Option: Option;
-    Question: Question;
-    Quiz: Quiz;
+    options: Option;
+    questionAnswers: QuestionAnswer;
+    questions: Question;
+    quizzes: Quiz;
     ratings: Rating;
     refreshTokens: RefreshToken;
     requests: Request;
-    Response: Response;
     roles: Role;
     students: Student;
     tasks: Task;
