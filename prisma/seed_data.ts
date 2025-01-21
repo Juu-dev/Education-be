@@ -34,6 +34,10 @@ const getExercises = () => {
     return readFileJson('data-seed/6_exercises.json')
 }
 
+const getTasks= () => {
+    return readFileJson('data-seed/7_tasks.json')
+}
+
 const seedRoles = async () => {
     const roles = getRoles();
 
@@ -234,6 +238,44 @@ const seedExercises = async (quizIds: string[]) => {
     )
 }
 
+const seedTasks = async () => {
+    const tasks = getTasks();
+
+    const assignerName = "binh.ttt@g.com"
+    const assigner = await prisma.user.findFirst({
+        where: {
+            email: assignerName
+        }
+    })
+
+    const assigneeName = "an.ptb@g.com"
+    const assignee = await prisma.user.findFirst({
+        where: {
+            email: assigneeName
+        }
+    })
+
+    await Promise.all(
+        tasks.map(async (task: any) => {
+            return prisma.task.create({
+                data: {
+                    ...task,
+                    assigner: {
+                        connect: {
+                            id: assigner.id
+                        }
+                    },
+                    assignee: {
+                        connect: {
+                            id: assignee.id
+                        }
+                    }
+                },
+            })
+        })
+    )
+}
+
 const main = async () => {
     // Seed roles
     await seedRoles();
@@ -257,6 +299,9 @@ const main = async () => {
 
     await seedExercises(quizIds)
     console.log('Seeding exercises completed!');
+
+    await seedTasks()
+    console.log('Seeding tasks completed!');
 
     // Done
     console.log('Seeding All completed!');

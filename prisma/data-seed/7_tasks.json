@@ -1,0 +1,66 @@
+[
+  {
+    "title": "Fix login bug",
+    "status": "In Progress",
+    "description": "Resolve the issue causing login failures on mobile devices.",
+    "type": "teaching",
+    "priority": "high",
+    "endTime": "2025-02-01T15:00:00Z"
+  },
+  {
+    "title": "Implement new dashboard",
+    "status": "Pending",
+    "description": "Design and implement the new user dashboard layout.",
+    "type": "calendar",
+    "priority": "medium",
+    "endTime": "2025-02-15T10:00:00Z"
+  },
+  {
+    "title": "Update API documentation",
+    "status": "Completed",
+    "description": "Ensure all API endpoints are documented in the API reference guide.",
+    "type": "admin",
+    "priority": "low",
+    "endTime": "2025-01-20T08:00:00Z"
+  },
+  {
+    "title": "Optimize database queries",
+    "status": "In Progress",
+    "description": "Analyze and optimize slow database queries to improve performance.",
+    "type": "admin",
+    "priority": "high",
+    "endTime": "2025-01-31T23:59:59Z"
+  },
+  {
+    "title": "Design marketing campaign",
+    "status": "Pending",
+    "description": "Create a detailed marketing campaign for the product launch.",
+    "type": "teaching",
+    "priority": "medium",
+    "endTime": "2025-02-20T12:00:00Z"
+  },
+  {
+    "title": "Fix email notification issue",
+    "status": "In Progress",
+    "description": "Resolve issue where users are not receiving email notifications.",
+    "type": "calendar",
+    "priority": "high",
+    "endTime": "2025-01-29T17:30:00Z"
+  },
+  {
+    "title": "Research new technologies",
+    "status": "Completed",
+    "description": "Investigate and evaluate new tools and technologies for the team.",
+    "type": "calendar",
+    "priority": "low",
+    "endTime": "2025-01-15T16:00:00Z"
+  },
+  {
+    "title": "Prepare quarterly report",
+    "status": "Pending",
+    "description": "Compile and prepare the report for the upcoming quarterly meeting.",
+    "type": "other",
+    "priority": "medium",
+    "endTime": "2025-02-10T09:00:00Z"
+  }
+]
