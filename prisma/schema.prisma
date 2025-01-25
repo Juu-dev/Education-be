@@ -316,7 +316,6 @@ model Book {
   coverImageUrl   String?  @map("cover_image_url") @db.VarChar(255)
   contentPdfUrl   String?  @map("content_pdf_url") @db.VarChar(255)
   type            String?  @map("type") @db.VarChar(255)
-  evaluate        Int?
   createdAt       DateTime @default(now()) @map("created_at")
   updatedAt       DateTime @default(now()) @updatedAt @map("updated_at")
 
@@ -324,15 +323,45 @@ model Book {
 }
 
 model BookImport {
-  id                String   @id @default(uuid())
-  title             String   @db.VarChar(100)
-  yearOfPublication String   @map("year_of_publication") @db.VarChar(50)
+  id                String @id @default(uuid())
+  title             String @db.VarChar(100)
+  yearOfPublication String @map("year_of_publication") @db.VarChar(50)
+  publishingHouse   String @map("publishing_house") @db.VarChar(50)
   amount            Int?
   borrowedAmount    Int?
-  createdAt         DateTime @default(now()) @map("created_at")
-  updatedAt         DateTime @default(now()) @updatedAt @map("updated_at")
+
+  createdAt DateTime  @default(now()) @map("created_at")
+  updatedAt DateTime  @default(now()) @updatedAt @map("updated_at")
+  isDeleted Boolean?  @default(false) @map("is_deleted")
+  deletedAt DateTime? @map("deleted_at")
+
+  bookImportHistory BookImportHistory[]
 
   @@map("books_imports")
+}
+
+model BookImportHistory {
+  id           String @id @default(uuid())
+  bookImportId String @map("book_import_id")
+  action       String
+
+  oldTitle             String? @map("old_title") @db.VarChar(50)
+  newTitle             String? @map("new_title") @db.VarChar(50)
+  oldYearOfPublication String? @map("old_year_of_publication") @db.VarChar(50)
+  newYearOfPublication String? @map("new_year_of_publication") @db.VarChar(50)
+  oldPublishingHouse   String? @map("old_publishing_house") @db.VarChar(50)
+  newPublishingHouse   String? @map("new_publishing_house") @db.VarChar(50)
+  oldAmount            Int?    @map("old_amount")
+  newAmount            Int?    @map("new_amount")
+  oldBorrowedAmount    Int?    @map("old_borrowed_amount")
+  newBorrowedAmount    Int?    @map("new_borrowed_amount")
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @default(now()) @updatedAt @map("updated_at")
+
+  bookImport BookImport @relation(fields: [bookImportId], references: [id])
+
+  @@map("books_import_histories")
 }
 
 model Exercise {

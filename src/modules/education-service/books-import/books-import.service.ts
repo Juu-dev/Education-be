@@ -20,7 +20,24 @@ export class BooksImportService {
     }
   }
 
+  async getOverviewBook() {
+    const overview = await this.booksImportRepository.getOverviewBook();
+
+    return {
+      data: overview,
+    }
+  }
+
   async bulkBook(bulkBookDto: CreateBookImportDto[]) {
+    const books = await this.booksImportRepository.createMany(bulkBookDto as any);
+
+    return {
+      data: books,
+    }
+  }
+
+  async bulkOverrideBook(bulkBookDto: CreateBookImportDto[]) {
+    await this.booksImportRepository.deleteAllBooks();
     const books = await this.booksImportRepository.createMany(bulkBookDto as any);
 
     return {
@@ -70,5 +87,9 @@ export class BooksImportService {
       id,
       updateBookDto as any,
     );
+  }
+
+  async softDeleteAllBook() {
+    return this.booksImportRepository.deleteAllBooks();
   }
 }

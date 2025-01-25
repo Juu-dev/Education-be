@@ -19,7 +19,6 @@ export class BooksService {
 
     const book = await this.booksRepository.create({
       ...createBookDto,
-      evaluate: Number(createBookDto.evaluate),
       coverImageUrl,
       contentPdfUrl,
     } as any);
@@ -61,7 +60,10 @@ export class BooksService {
   ) {
     const count = await this.booksRepository.count();
 
-    const items = await this.booksRepository.findAllPagination(page, pageSize);
+    const items = await this.booksRepository.findAllPagination({
+      page,
+      pageSize
+    });
 
     return {
       pagination: {

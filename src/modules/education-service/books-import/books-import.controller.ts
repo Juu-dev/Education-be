@@ -33,6 +33,22 @@ export class BooksImportController {
     return this.booksImportService.bulkBook(bulkBookDto);
   }
 
+  @Post("bulk-override")
+  @Roles([Permission.CREATE_CATEGORY])
+  @AuthClaims()
+  async bulkOverride(
+      @Body() bulkBookDto: CreateBookImportDto[],
+  ) {
+    return this.booksImportService.bulkOverrideBook(bulkBookDto);
+  }
+
+  @Get('overview')
+  @Roles([Permission.GET_CATEGORIES])
+  @AuthClaims()
+  overview() {
+    return this.booksImportService.getOverviewBook();
+  }
+
   @Get('pagination')
   @Roles([Permission.GET_CATEGORIES])
   @AuthClaims()

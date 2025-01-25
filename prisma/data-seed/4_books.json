@@ -6,8 +6,7 @@
     "publishingHouse": "Charles Scribner's Sons",
     "coverImageUrl": "https://example.com/images/great-gatsby.jpg",
     "contentPdfUrl": "https://example.com/pdfs/great-gatsby.pdf",
-    "type": "Sách giáo khoa",
-    "evaluate": 5
+    "type": "textBooks"
   },
   {
     "title": "1984",
@@ -16,8 +15,7 @@
     "publishingHouse": "Secker & Warburg",
     "coverImageUrl": "https://example.com/images/1984.jpg",
     "contentPdfUrl": "https://example.com/pdfs/1984.pdf",
-    "type": "Sách bài tập",
-    "evaluate": 4
+    "type": "referenceBooks"
   },
   {
     "title": "To Kill a Mockingbird",
@@ -26,8 +24,7 @@
     "publishingHouse": "J.B. Lippincott & Co.",
     "coverImageUrl": "https://example.com/images/to-kill-a-mockingbird.jpg",
     "contentPdfUrl": null,
-    "type": "Sách giáo khoa",
-    "evaluate": 5
+    "type": "audioBooks"
   },
   {
     "title": "Pride and Prejudice",
@@ -36,8 +33,7 @@
     "publishingHouse": "T. Egerton",
     "coverImageUrl": null,
     "contentPdfUrl": "https://example.com/pdfs/pride-and-prejudice.pdf",
-    "type": "Sách bài tập",
-    "evaluate": 4
+    "type": "referenceBooks"
   },
   {
     "title": "Moby-Dick",
@@ -46,7 +42,240 @@
     "publishingHouse": "Harper & Brothers",
     "coverImageUrl": "https://example.com/images/moby-dick.jpg",
     "contentPdfUrl": null,
-    "type": "Sách tham khảo",
-    "evaluate": 3
+    "type": "audioBooks"
+  },
+  {
+    "title": "War and Peace",
+    "description": "A novel by Leo Tolstoy chronicling the history of the French invasion of Russia.",
+    "author": "Leo Tolstoy",
+    "publishingHouse": "The Russian Messenger",
+    "coverImageUrl": "https://example.com/images/war-and-peace.jpg",
+    "contentPdfUrl": "https://example.com/pdfs/war-and-peace.pdf",
+    "type": "textBooks"
+  },
+  {
+    "title": "The Catcher in the Rye",
+    "description": "A novel by J.D. Salinger about the struggles of teenage angst.",
+    "author": "J.D. Salinger",
+    "publishingHouse": "Little, Brown and Company",
+    "coverImageUrl": "https://example.com/images/catcher-in-the-rye.jpg",
+    "contentPdfUrl": "https://example.com/pdfs/catcher-in-the-rye.pdf",
+    "type": "referenceBooks"
+  },
+  {
+    "title": "The Hobbit",
+    "description": "A fantasy novel by J.R.R. Tolkien.",
+    "author": "J.R.R. Tolkien",
+    "publishingHouse": "George Allen & Unwin",
+    "coverImageUrl": "https://example.com/images/the-hobbit.jpg",
+    "contentPdfUrl": null,
+    "type": "audioBooks"
+  },
+  {
+    "title": "Little Women",
+    "description": "A novel by Louisa May Alcott following the lives of four sisters.",
+    "author": "Louisa May Alcott",
+    "publishingHouse": "Roberts Brothers",
+    "coverImageUrl": "https://example.com/images/little-women.jpg",
+    "contentPdfUrl": "https://example.com/pdfs/little-women.pdf",
+    "type": "textBooks"
+  },
+  {
+    "title": "Brave New World",
+    "description": "A dystopian novel by Aldous Huxley.",
+    "author": "Aldous Huxley",
+    "publishingHouse": "Chatto & Windus",
+    "coverImageUrl": "https://example.com/images/brave-new-world.jpg",
+    "contentPdfUrl": null,
+    "type": "audioBooks"
+  },
+  {
+    "title": "Anna Karenina",
+    "description": "A novel by Leo Tolstoy about love and societal norms in Russia.",
+    "author": "Leo Tolstoy",
+    "publishingHouse": "The Russian Messenger",
+    "coverImageUrl": "https://example.com/images/anna-karenina.jpg",
+    "contentPdfUrl": "https://example.com/pdfs/anna-karenina.pdf",
+    "type": "referenceBooks"
+  },
+  {
+    "title": "Jane Eyre",
+    "description": "A novel by Charlotte Brontë following the experiences of its heroine.",
+    "author": "Charlotte Brontë",
+    "publishingHouse": "Smith, Elder & Co.",
+    "coverImageUrl": "https://example.com/images/jane-eyre.jpg",
+    "contentPdfUrl": "https://example.com/pdfs/jane-eyre.pdf",
+    "type": "textBooks"
+  },
+  {
+    "title": "The Grapes of Wrath",
+    "description": "A novel by John Steinbeck about the Great Depression.",
+    "author": "John Steinbeck",
+    "publishingHouse": "The Viking Press",
+    "coverImageUrl": "https://example.com/images/grapes-of-wrath.jpg",
+    "contentPdfUrl": null,
+    "type": "audioBooks"
+  },
+  {
+    "title": "Wuthering Heights",
+    "description": "A novel by Emily Brontë set on the Yorkshire moors.",
+    "author": "Emily Brontë",
+    "publishingHouse": "Thomas Cautley Newby",
+    "coverImageUrl": "https://example.com/images/wuthering-heights.jpg",
+    "contentPdfUrl": "https://example.com/pdfs/wuthering-heights.pdf",
+    "type": "referenceBooks"
+  },
+  {
+    "title": "Crime and Punishment",
+    "description": "A novel by Fyodor Dostoevsky about morality and redemption.",
+    "author": "Fyodor Dostoevsky",
+    "publishingHouse": "The Russian Messenger",
+    "coverImageUrl": "https://example.com/images/crime-and-punishment.jpg",
+    "contentPdfUrl": null,
+    "type": "audioBooks"
+  },
+  {
+    "title": "The Picture of Dorian Gray",
+    "description": "A novel by Oscar Wilde about aestheticism and moral duplicity.",
+    "author": "Oscar Wilde",
+    "publishingHouse": "Ward, Lock & Co.",
+    "coverImageUrl": "https://example.com/images/dorian-gray.jpg",
+    "contentPdfUrl": "https://example.com/pdfs/dorian-gray.pdf",
+    "type": "textBooks"
+  },
+  {
+    "title": "Frankenstein",
+    "description": "A novel by Mary Shelley about the scientist Victor Frankenstein.",
+    "author": "Mary Shelley",
+    "publishingHouse": "Lackington, Hughes, Harding, Mavor & Jones",
+    "coverImageUrl": "https://example.com/images/frankenstein.jpg",
+    "contentPdfUrl": null,
+    "type": "audioBooks"
+  },
+  {
+    "title": "The Scarlet Letter",
+    "description": "A novel by Nathaniel Hawthorne about sin and redemption.",
+    "author": "Nathaniel Hawthorne",
+    "publishingHouse": "Ticknor, Reed & Fields",
+    "coverImageUrl": "https://example.com/images/scarlet-letter.jpg",
+    "contentPdfUrl": "https://example.com/pdfs/scarlet-letter.pdf",
+    "type": "referenceBooks"
+  },
+  {
+    "title": "Dracula",
+    "description": "A novel by Bram Stoker introducing the iconic vampire Count Dracula.",
+    "author": "Bram Stoker",
+    "publishingHouse": "Archibald Constable and Company",
+    "coverImageUrl": "https://example.com/images/dracula.jpg",
+    "contentPdfUrl": "https://example.com/pdfs/dracula.pdf",
+    "type": "textBooks"
+  },
+  {
+    "title": "Don Quixote",
+    "description": "A novel by Miguel de Cervantes about the adventures of an aspiring knight.",
+    "author": "Miguel de Cervantes",
+    "publishingHouse": "Francisco de Robles",
+    "coverImageUrl": "https://example.com/images/don-quixote.jpg",
+    "contentPdfUrl": null,
+    "type": "audioBooks"
+  },
+  {
+    "title": "The Odyssey",
+    "description": "An epic poem attributed to Homer about Odysseus's journey home.",
+    "author": "Homer",
+    "publishingHouse": "Ancient Greece",
+    "coverImageUrl": "https://example.com/images/the-odyssey.jpg",
+    "contentPdfUrl": "https://example.com/pdfs/the-odyssey.pdf",
+    "type": "referenceBooks"
+  },
+  {
+    "title": "The Divine Comedy",
+    "description": "A long narrative poem by Dante Alighieri.",
+    "author": "Dante Alighieri",
+    "publishingHouse": "Johann Numeister and Evangelista Angelini",
+    "coverImageUrl": "https://example.com/images/divine-comedy.jpg",
+    "contentPdfUrl": null,
+    "type": "audioBooks"
+  },
+  {
+    "title": "The Brothers Karamazov",
+    "description": "A novel by Fyodor Dostoevsky about family dynamics and morality.",
+    "author": "Fyodor Dostoevsky",
+    "publishingHouse": "The Russian Messenger",
+    "coverImageUrl": "https://example.com/images/brothers-karamazov.jpg",
+    "contentPdfUrl": "https://example.com/pdfs/brothers-karamazov.pdf",
+    "type": "textBooks"
+  },
+  {
+    "title": "Les Misérables",
+    "description": "A novel by Victor Hugo about justice, love, and redemption.",
+    "author": "Victor Hugo",
+    "publishingHouse": "A. Lacroix, Verboeckhoven & Cie",
+    "coverImageUrl": "https://example.com/images/les-miserables.jpg",
+    "contentPdfUrl": null,
+    "type": "audioBooks"
+  },
+  {
+    "title": "Great Expectations",
+    "description": "A novel by Charles Dickens about the growth and development of an orphan.",
+    "author": "Charles Dickens",
+    "publishingHouse": "Chapman & Hall",
+    "coverImageUrl": "https://example.com/images/great-expectations.jpg",
+    "contentPdfUrl": "https://example.com/pdfs/great-expectations.pdf",
+    "type": "referenceBooks"
+  },
+  {
+    "title": "The Old Man and the Sea",
+    "description": "A novella by Ernest Hemingway about an aging fisherman's struggle.",
+    "author": "Ernest Hemingway",
+    "publishingHouse": "Charles Scribner's Sons",
+    "coverImageUrl": "https://example.com/images/old-man-and-sea.jpg",
+    "contentPdfUrl": "https://example.com/pdfs/old-man-and-sea.pdf",
+    "type": "textBooks"
+  },
+  {
+    "title": "Madame Bovary",
+    "description": "A novel by Gustave Flaubert about the life of a doctor's wife.",
+    "author": "Gustave Flaubert",
+    "publishingHouse": "Revue de Paris",
+    "coverImageUrl": "https://example.com/images/madame-bovary.jpg",
+    "contentPdfUrl": null,
+    "type": "audioBooks"
+  },
+  {
+    "title": "A Tale of Two Cities",
+    "description": "A novel by Charles Dickens set during the French Revolution.",
+    "author": "Charles Dickens",
+    "publishingHouse": "Chapman & Hall",
+    "coverImageUrl": "https://example.com/images/tale-of-two-cities.jpg",
+    "contentPdfUrl": "https://example.com/pdfs/tale-of-two-cities.pdf",
+    "type": "referenceBooks"
+  },
+  {
+    "title": "Ulysses",
+    "description": "A novel by James Joyce following the experiences of Leopold Bloom.",
+    "author": "James Joyce",
+    "publishingHouse": "Shakespeare and Company",
+    "coverImageUrl": "https://example.com/images/ulysses.jpg",
+    "contentPdfUrl": null,
+    "type": "audioBooks"
+  },
+  {
+    "title": "The Sound and the Fury",
+    "description": "A novel by William Faulkner about the decline of a Southern family.",
+    "author": "William Faulkner",
+    "publishingHouse": "Jonathan Cape and Harrison Smith",
+    "coverImageUrl": "https://example.com/images/sound-and-fury.jpg",
+    "contentPdfUrl": "https://example.com/pdfs/sound-and-fury.pdf",
+    "type": "textBooks"
+  },
+  {
+    "title": "One Hundred Years of Solitude",
+    "description": "A novel by Gabriel García Márquez chronicling the Buendía family.",
+    "author": "Gabriel García Márquez",
+    "publishingHouse": "Editorial Sudamericana",
+    "coverImageUrl": "https://example.com/images/one-hundred-years.jpg",
+    "contentPdfUrl": "https://example.com/pdfs/one-hundred-years.pdf",
+    "type": "referenceBooks"
   }
 ]

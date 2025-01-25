@@ -21,7 +21,6 @@ export type Book = {
     coverImageUrl: string | null;
     contentPdfUrl: string | null;
     type: string | null;
-    evaluate: number | null;
     createdAt: Generated<Timestamp>;
     updatedAt: Generated<Timestamp>;
 };
@@ -29,8 +28,28 @@ export type BookImport = {
     id: Generated<string>;
     title: string;
     yearOfPublication: string;
+    publishingHouse: string;
     amount: number | null;
     borrowedAmount: number | null;
+    createdAt: Generated<Timestamp>;
+    updatedAt: Generated<Timestamp>;
+    isDeleted: Generated<boolean | null>;
+    deletedAt: Timestamp | null;
+};
+export type BookImportHistory = {
+    id: Generated<string>;
+    bookImportId: string;
+    action: string;
+    oldTitle: string | null;
+    newTitle: string | null;
+    oldYearOfPublication: string | null;
+    newYearOfPublication: string | null;
+    oldPublishingHouse: string | null;
+    newPublishingHouse: string | null;
+    oldAmount: number | null;
+    newAmount: number | null;
+    oldBorrowedAmount: number | null;
+    newBorrowedAmount: number | null;
     createdAt: Generated<Timestamp>;
     updatedAt: Generated<Timestamp>;
 };
@@ -236,6 +255,7 @@ export type UserRole = {
 export type DB = {
     answers: Answer;
     books: Book;
+    booksImportHistories: BookImportHistory;
     booksImports: BookImport;
     borrowedLogs: BorrowedLog;
     classes: Class;

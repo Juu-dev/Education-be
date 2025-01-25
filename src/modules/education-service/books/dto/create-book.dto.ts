@@ -43,7 +43,7 @@ export class CreateBookDto {
   @IsOptional()
   @ApiProperty({
     example: 5,
-    description: 'Đánh giá sách',
+    description: 'Loại sách',
   })
-  evaluate?: string;
+  type?: string;
 }
