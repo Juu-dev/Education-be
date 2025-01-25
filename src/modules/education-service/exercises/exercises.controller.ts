@@ -51,6 +51,20 @@ export class ExercisesController {
     );
   }
 
+  @Get('pagination/:classId')
+  @Permissions([Permission.GET_USERS])
+  @AuthClaims()
+  findAllByPaginationAndTeacherId(
+      @Query() { page, pageSize }: PaginationParamsDto,
+      @Param('classId') classId: string
+  ) {
+    return this.exerciseService.getListPaginatedExerciseModeStudent(
+        page,
+        pageSize,
+        classId
+    );
+  }
+
   @Get('')
   @Permissions([Permission.GET_USERS])
   @AuthClaims()
@@ -63,6 +77,13 @@ export class ExercisesController {
   @AuthClaims()
   findOne(@Param('id') id: string) {
     return this.exerciseService.getExerciseById(id);
+  }
+
+  @Get('student/:id')
+  @Permissions([Permission.GET_USER])
+  @AuthClaims()
+  findStudentsByExerciseId(@Param('id') id: string) {
+    return this.exerciseService.getStudentsByExerciseId(id);
   }
 
   @Patch(':id')

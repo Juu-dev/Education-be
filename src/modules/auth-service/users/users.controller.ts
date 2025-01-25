@@ -13,6 +13,7 @@ import {
   CreateUserDto, FilterUserDto, SearchUserDto, UpdateUserDto,
 } from './dto';
 import {CategoryEntity} from "@n-modules/education-service/students/entities/category.entity";
+import {CreateStudentDto} from "@n-modules/auth-service/users/dto/create-student.dto";
 
 @Controller('users')
 @ApiTags('User')
@@ -120,12 +121,26 @@ export class UsersController {
   @AuthClaims()
   @ApiOkResponse({ type: UserEntity })
   update(
-  @Param('id') id: string,
+    @Param('id') id: string,
     @Body() updateUserDto: UpdateUserDto,
   ) {
     return this.usersService.updateUserById(
       id,
       updateUserDto,
+    );
+  }
+
+  @Patch('student/:id')
+  @Permissions([Permission.UPDATE_USER])
+  @AuthClaims()
+  @ApiOkResponse({ type: UserEntity })
+  updateStudent(
+      @Param('id') id: string,
+      @Body() updateStudentDto: CreateStudentDto,
+  ) {
+    return this.usersService.updateStudentById(
+        id,
+        updateStudentDto,
     );
   }
 

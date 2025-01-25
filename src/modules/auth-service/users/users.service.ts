@@ -111,6 +111,15 @@ export class UsersService {
     return this.usersRepository.updateById(id, updateUserData);
   }
 
+  async updateStudentById(id: string, updateUserDto: UpdateUserDto) {
+    const getUserById = await this.usersRepository.findById(id);
+    if (!getUserById) {
+      throw new BaseException(Errors.USER.USER_NOT_FOUND);
+    }
+
+    return this.usersRepository.updateStudentById(id, updateUserDto);
+  }
+
   async deleteStudentById(id: string) {
     const student = await this.usersRepository.findById(id);
     if (!student) {

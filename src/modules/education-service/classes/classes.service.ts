@@ -23,14 +23,24 @@ export class ClassesService {
   async getListClass(
     page?: number,
     pageSize?: number,
+    search?: string
   ) {
-    const count = await this.classesRepository.count();
+    const where: any = {};
+
+    if (search) {
+      where.name = {
+        contains: search, mode: "insensitive"
+      };
+    }
+
+    const count = await this.classesRepository.count({where});
 
     const orderBy = [{name: "asc"}]
     const items = await this.classesRepository.findAllPagination({
       page,
       pageSize,
-      orderBy
+      orderBy,
+      where
     });
 
     return {
@@ -51,7 +61,7 @@ export class ClassesService {
       throw new BaseException(Errors.CLASS.CLASS_NOT_FOUND);
     }
 
-    return classResult;
+    return {data: classResult};
   }
 
   async getCountStudentByClassId (classId: string) {

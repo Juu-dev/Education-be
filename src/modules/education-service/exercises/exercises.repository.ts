@@ -33,4 +33,19 @@ export class ExercisesRepository extends GenericRepository<Exercise> {
       }
     });
   }
+
+  async findStudentsByExerciseId(id: string): Promise<any | null> {
+    return this.prismaService.exercise.findUnique({
+      where: {
+        id: id
+      },
+      include: {
+        answers: {
+          include: {
+            user: true
+          }
+        }
+      }
+    });
+  }
 }

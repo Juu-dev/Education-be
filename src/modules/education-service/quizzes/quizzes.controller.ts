@@ -22,7 +22,6 @@ export class QuizzesController {
     @GetUser() user: any,
     @Body() createQuizDto: CreateQuizDto
   ) {
-
     return this.quizzesService.createQuiz({
       ...createQuizDto,
       creatorId: user?.id

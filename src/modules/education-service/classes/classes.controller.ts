@@ -6,7 +6,7 @@ import {
 } from '@nestjs/common';
 import { ApiCreatedResponse, ApiOkResponse, ApiTags } from '@nestjs/swagger';
 
-import { CreateClassDto, UpdateClassDto } from '@n-modules/education-service/classes/dto';
+import {CreateClassDto, SearchClassDto, UpdateClassDto} from '@n-modules/education-service/classes/dto';
 import { ClassesService } from '@n-modules/education-service/classes/classes.service';
 import { CategoryEntity } from './entities/category.entity';
 
@@ -46,10 +46,12 @@ export class ClassesController {
     page,
     pageSize,
   }: PaginationParamsDto,
+  @Query() {search}: SearchClassDto,
   ) {
     return this.classesService.getListClass(
       page,
       pageSize,
+      search
     );
   }
 

@@ -22,8 +22,8 @@ export const includesConfig = {
     user: true,
     role: true,
   },
-  Class: {
-    users: true,
+  class: {
+    user: true,
     exercises: true,
   },
   student: {

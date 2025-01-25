@@ -104,6 +104,14 @@ export class ExercisesService {
     return {data: exercise};
   }
 
+  async getStudentsByExerciseId(id: string): Promise<Exercise> {
+    const exercise = await this.exercisesRepository.findStudentsByExerciseId(id);
+    if (!exercise) {
+      throw new BaseException(Errors.EXERCISE.EXERCISE_NOT_FOUND);
+    }
+    return {data: exercise};
+  }
+
   async updateExercise(id: string, updateExerciseDto: UpdateExerciseDto): Promise<Exercise> {
     const exercise = await this.exercisesRepository.findById(id);
     if (!exercise) {

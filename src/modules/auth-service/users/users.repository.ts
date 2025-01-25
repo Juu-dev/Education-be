@@ -9,6 +9,24 @@ export class UsersRepository extends GenericRepository<User> {
     super(prismaService, 'user');
   }
 
+  updateStudentById(id: string, data: any): Promise<User> {
+    const {parentName, ...rest} = data;
+    const payload = rest
+
+    if (data?.parentName) {
+      payload.student = {
+        update: {
+          parentName: data?.parentName
+        }
+      }
+    }
+
+    return this.prismaService.user.update({
+      where: { id },
+      data: payload,
+    })
+  }
+
   findByUsername(username: string): Promise<User> {
     return this.prismaService.user.findFirst({
       where: {

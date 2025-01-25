@@ -21,7 +21,6 @@ export class AnswersController {
   create(
   @Body() createAnswerDto: CreateAnswerDto,
   ) {
-    console.log("createAnswerDto: ", createAnswerDto)
     return this.answersService.createAnswer(createAnswerDto);
   }
 
