@@ -74,9 +74,24 @@ export class TasksService {
     };
   }
 
+  async findFiveLatest(userId: string) {
+    const items = await this.tasksRepository.findFiveLatest(userId);
+
+    return {data: items};
+  }
+
   async getListTaskWithSpecificMode(props: IGetListTaskWithSpecificModeDTO) {
-    const { page, pageSize } = props;
-    const count = this.tasksRepository.count();
+    const { page, pageSize, mode, id } = props;
+
+    const where: any = {}
+
+    if (mode === "sent") {
+      where.assignerId = id
+    } else if (mode === "received") {
+      where.assigneeId = id
+    }
+
+    const count = this.tasksRepository.count({where});
 
     const items = this.tasksRepository.findAllPaginationWithSpecificMode(props);
 

@@ -26,6 +26,19 @@ export class TasksController {
     return this.tasksService.createTask(createTaskDto);
   }
 
+  @Get('five-latest')
+  // @Roles([Permission.GET_CATEGORIES])
+  @AuthClaims()
+  @ApiOkResponse({
+    type: CategoryEntity,
+    isArray: true,
+  })
+  findFiveLatest(
+      @GetUser() user: any,
+  ) {
+    return this.tasksService.findFiveLatest(user?.id);
+  }
+
   @Get('pagination')
   // @Roles([Permission.GET_CATEGORIES])
   @AuthClaims()

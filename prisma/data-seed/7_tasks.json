@@ -1,7 +1,7 @@
 [
   {
     "title": "Fix login bug",
-    "status": "In Progress",
+    "status": "inProgress",
     "description": "Resolve the issue causing login failures on mobile devices.",
     "type": "teaching",
     "priority": "high",
@@ -9,7 +9,7 @@
   },
   {
     "title": "Implement new dashboard",
-    "status": "Pending",
+    "status": "pending",
     "description": "Design and implement the new user dashboard layout.",
     "type": "calendar",
     "priority": "medium",
@@ -17,7 +17,7 @@
   },
   {
     "title": "Update API documentation",
-    "status": "Completed",
+    "status": "completed",
     "description": "Ensure all API endpoints are documented in the API reference guide.",
     "type": "admin",
     "priority": "low",
@@ -25,7 +25,7 @@
   },
   {
     "title": "Optimize database queries",
-    "status": "In Progress",
+    "status": "inProgress",
     "description": "Analyze and optimize slow database queries to improve performance.",
     "type": "admin",
     "priority": "high",
@@ -33,7 +33,7 @@
   },
   {
     "title": "Design marketing campaign",
-    "status": "Pending",
+    "status": "pending",
     "description": "Create a detailed marketing campaign for the product launch.",
     "type": "teaching",
     "priority": "medium",
@@ -41,7 +41,7 @@
   },
   {
     "title": "Fix email notification issue",
-    "status": "In Progress",
+    "status": "inProgress",
     "description": "Resolve issue where users are not receiving email notifications.",
     "type": "calendar",
     "priority": "high",
@@ -49,7 +49,7 @@
   },
   {
     "title": "Research new technologies",
-    "status": "Completed",
+    "status": "completed",
     "description": "Investigate and evaluate new tools and technologies for the team.",
     "type": "calendar",
     "priority": "low",
@@ -57,7 +57,7 @@
   },
   {
     "title": "Prepare quarterly report",
-    "status": "Pending",
+    "status": "pending",
     "description": "Compile and prepare the report for the upcoming quarterly meeting.",
     "type": "other",
     "priority": "medium",

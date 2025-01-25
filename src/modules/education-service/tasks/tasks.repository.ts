@@ -11,6 +11,27 @@ export class TasksRepository extends GenericRepository<Task> {
     super(prismaService, 'task');
   }
 
+  findFiveLatest(userId: string): Promise<Task[]> {
+    const limit = 5;
+    const now = new Date();
+    return this.prismaService.task.findMany({
+      where: {
+        assigneeId: userId,
+        endTime: {
+          gte: now,
+        },
+      },
+      take: limit,
+      orderBy: {
+        endTime: "asc"
+      },
+      include: {
+        assignee: true,
+        assigner: true
+      },
+    });
+  }
+
   findAllPaginationWithSpecificMode(props: IGetListTaskWithSpecificModeDTO): Promise<Task[]> {
     const { page, pageSize: limit, mode, id } = props;
     const skip = (page - 1) * limit;
