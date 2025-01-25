@@ -6,7 +6,7 @@ import {
 } from '@nestjs/common';
 import {ApiOkResponse, ApiTags} from '@nestjs/swagger';
 
-import { CreateBookDto, UpdateBookDto } from '@n-modules/education-service/books/dto';
+import {CreateBookDto, FilterBookDto, UpdateBookDto} from '@n-modules/education-service/books/dto';
 import { BooksService } from '@n-modules/education-service/books/books.service';
 import { CategoryEntity } from './entities/category.entity';
 import {ApiFile} from "@n-decorators/api-file.decorator";
@@ -43,10 +43,12 @@ export class BooksController {
     page,
     pageSize,
   }: PaginationParamsDto,
+  @Query() {type}: FilterBookDto
   ) {
     return this.booksService.getListBook(
       page,
       pageSize,
+      type
     );
   }
 

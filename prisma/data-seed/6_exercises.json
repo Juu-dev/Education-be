@@ -2,6 +2,151 @@
   {
     "name": "Trắc nghiệm Lịch Sử 12 Kết nối tri thức Bài 1 (có đáp án): Liên hợp quốc",
     "description": "Với 20 câu hỏi trắc nghiệm Lịch Sử 12 Bài 1: Liên hợp quốc có đáp án chi tiết đầy đủ các mức độ sách Kết nối tri thức sẽ giúp học sinh lớp 12 ôn luyện trắc nghiệm Lịch Sử 12.",
+    "timeOut": 1
+  },
+  {
+    "name": "Trắc nghiệm Sinh Học 12 Bài 2: Tế bào và cấu trúc",
+    "description": "20 câu hỏi trắc nghiệm Sinh Học 12 Bài 2 về tế bào và các thành phần cấu trúc giúp học sinh củng cố kiến thức cơ bản.",
+    "timeOut": 45
+  },
+  {
+    "name": "Trắc nghiệm Toán 12 Hình học không gian Bài 3: Khối đa diện",
+    "description": "Bộ câu hỏi trắc nghiệm Toán 12 Bài 3 về khối đa diện giúp học sinh rèn luyện tư duy không gian.",
+    "timeOut": 50
+  },
+  {
+    "name": "Trắc nghiệm Hóa Học 12 Bài 4: Este và Lipit",
+    "description": "Các bài tập trắc nghiệm Hóa Học 12 Bài 4 về Este và Lipit kèm đáp án để ôn tập.",
+    "timeOut": 40
+  },
+  {
+    "name": "Trắc nghiệm Vật Lý 12 Bài 5: Dao động điều hòa",
+    "description": "Bài tập trắc nghiệm Vật Lý 12 Bài 5 với các câu hỏi về dao động điều hòa và cách giải chi tiết.",
+    "timeOut": 60
+  },
+  {
+    "name": "Trắc nghiệm Địa Lý 12 Bài 6: Đặc điểm nền kinh tế Việt Nam",
+    "description": "20 câu hỏi trắc nghiệm Địa Lý 12 Bài 6 về các đặc điểm của nền kinh tế Việt Nam thời kỳ đổi mới.",
+    "timeOut": 55
+  },
+  {
+    "name": "Trắc nghiệm Tiếng Anh 12 Unit 1: Life Stories",
+    "description": "Bài tập trắc nghiệm Tiếng Anh 12 Unit 1 về Life Stories có đáp án để nâng cao kỹ năng đọc hiểu.",
+    "timeOut": 30
+  },
+  {
+    "name": "Trắc nghiệm Giáo dục Công dân 12 Bài 7: Pháp luật và đời sống",
+    "description": "Bài tập trắc nghiệm Giáo dục Công dân 12 Bài 7 với các câu hỏi thực tiễn về pháp luật.",
+    "timeOut": 35
+  },
+  {
+    "name": "Trắc nghiệm Ngữ Văn 12 Bài 8: Vợ chồng A Phủ",
+    "description": "20 câu hỏi trắc nghiệm về Vợ chồng A Phủ giúp học sinh hiểu rõ nội dung và ý nghĩa tác phẩm.",
+    "timeOut": 40
+  },
+  {
+    "name": "Trắc nghiệm Tin học 12 Bài 9: Cơ sở dữ liệu",
+    "description": "Các câu hỏi trắc nghiệm về cơ sở dữ liệu trong Tin học 12 giúp học sinh nắm bắt kiến thức căn bản.",
+    "timeOut": 50
+  },
+  {
+    "name": "Trắc nghiệm Sinh Học 12 Bài 10: Di truyền học người",
+    "description": "Bộ câu hỏi trắc nghiệm Sinh Học 12 Bài 10 về di truyền học người, kèm theo đáp án chi tiết.",
+    "timeOut": 45
+  },
+  {
+    "name": "Trắc nghiệm Lịch Sử 12 Bài 11: Các nước Á, Phi, Mỹ Latinh",
+    "description": "20 câu hỏi trắc nghiệm Lịch Sử 12 Bài 11 về tình hình các nước Á, Phi, Mỹ Latinh trong thế kỷ 20.",
+    "timeOut": 60
+  },
+  {
+    "name": "Trắc nghiệm Hóa Học 12 Bài 12: Polime và vật liệu polime",
+    "description": "Các bài tập trắc nghiệm về polime trong chương trình Hóa Học 12 kèm lời giải chi tiết.",
+    "timeOut": 40
+  },
+  {
+    "name": "Trắc nghiệm Vật Lý 12 Bài 13: Sóng ánh sáng",
+    "description": "Bài tập trắc nghiệm Vật Lý 12 về sóng ánh sáng và các ứng dụng thực tiễn.",
+    "timeOut": 55
+  },
+  {
+    "name": "Trắc nghiệm Toán 12 Bài 14: Tích phân",
+    "description": "Các câu hỏi trắc nghiệm Toán 12 về tích phân giúp học sinh nắm vững kiến thức quan trọng.",
+    "timeOut": 50
+  },
+  {
+    "name": "Trắc nghiệm Địa Lý 12 Bài 15: Công nghiệp Việt Nam",
+    "description": "20 câu hỏi trắc nghiệm về ngành công nghiệp Việt Nam trong chương trình Địa Lý 12.",
+    "timeOut": 55
+  },
+  {
+    "name": "Trắc nghiệm Ngữ Văn 12 Bài 16: Người lái đò sông Đà",
+    "description": "Bài tập trắc nghiệm Ngữ Văn 12 về tác phẩm Người lái đò sông Đà với các câu hỏi phân tích chi tiết.",
+    "timeOut": 40
+  },
+  {
+    "name": "Trắc nghiệm Tiếng Anh 12 Unit 2: Urbanization",
+    "description": "Bài tập trắc nghiệm Tiếng Anh Unit 2 về Urbanization giúp rèn luyện kỹ năng nghe và viết.",
+    "timeOut": 30
+  },
+  {
+    "name": "Trắc nghiệm Sinh Học 12 Bài 17: Hệ sinh thái",
+    "description": "Bộ câu hỏi trắc nghiệm Sinh Học 12 về hệ sinh thái kèm đáp án để ôn luyện hiệu quả.",
+    "timeOut": 45
+  },
+  {
+    "name": "Trắc nghiệm Giáo dục Công dân 12 Bài 18: Quyền con người",
+    "description": "Bài tập trắc nghiệm Giáo dục Công dân 12 về quyền con người trong xã hội hiện đại.",
+    "timeOut": 35
+  },
+  {
+    "name": "Trắc nghiệm Lịch Sử 12 Bài 19: Cuộc cách mạng công nghiệp",
+    "description": "20 câu hỏi trắc nghiệm về cuộc cách mạng công nghiệp và các ảnh hưởng của nó.",
+    "timeOut": 60
+  },
+  {
+    "name": "Trắc nghiệm Tin học 12 Bài 20: Mạng máy tính",
+    "description": "Các câu hỏi trắc nghiệm Tin học 12 về mạng máy tính và các thành phần chính.",
+    "timeOut": 50
+  },
+  {
+    "name": "Trắc nghiệm Hóa Học 12 Bài 21: Hóa học và đời sống",
+    "description": "Các bài tập trắc nghiệm Hóa Học 12 về ứng dụng hóa học trong đời sống hàng ngày.",
+    "timeOut": 40
+  },
+  {
+    "name": "Trắc nghiệm Toán 12 Bài 22: Hình học tọa độ trong không gian",
+    "description": "Bài tập trắc nghiệm Toán 12 về hình học tọa độ không gian với các câu hỏi khó.",
+    "timeOut": 50
+  },
+  {
+    "name": "Trắc nghiệm Vật Lý 12 Bài 23: Quang phổ",
+    "description": "20 câu hỏi trắc nghiệm Vật Lý 12 về quang phổ và các ứng dụng.",
+    "timeOut": 55
+  },
+  {
+    "name": "Trắc nghiệm Địa Lý 12 Bài 24: Môi trường và tài nguyên thiên nhiên",
+    "description": "Bài tập trắc nghiệm Địa Lý 12 về bảo vệ môi trường và sử dụng tài nguyên thiên nhiên hợp lý.",
+    "timeOut": 60
+  },
+  {
+    "name": "Trắc nghiệm Ngữ Văn 12 Bài 25: Rừng xà nu",
+    "description": "Bài tập trắc nghiệm Ngữ Văn 12 về tác phẩm Rừng xà nu của Nguyễn Trung Thành.",
+    "timeOut": 40
+  },
+  {
+    "name": "Trắc nghiệm Tiếng Anh 12 Unit 3: Cultural Diversity",
+    "description": "Bộ câu hỏi trắc nghiệm Tiếng Anh 12 về sự đa dạng văn hóa giúp học sinh nâng cao vốn từ.",
+    "timeOut": 30
+  },
+  {
+    "name": "Trắc nghiệm Giáo dục Công dân 12 Bài 26: Nghĩa vụ công dân",
+    "description": "20 câu hỏi trắc nghiệm Giáo dục Công dân 12 về nghĩa vụ và trách nhiệm công dân.",
+    "timeOut": 35
+  },
+  {
+    "name": "Trắc nghiệm Lịch Sử 12 Bài 27: Chiến tranh thế giới thứ hai",
+    "description": "Các câu hỏi trắc nghiệm về chiến tranh thế giới thứ hai và hậu quả của nó.",
     "timeOut": 60
   }
 ]

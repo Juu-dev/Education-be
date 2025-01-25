@@ -57,8 +57,14 @@ export class StudentsController {
   @Roles([Permission.GET_CATEGORY])
   @AuthClaims()
   @ApiOkResponse({ type: CategoryEntity })
-  findByClassId(@Param('id') id: string) {
-    return this.studentsService.getStudentsByClassId(id);
+  findByClassId(
+      @Param('id') id: string,
+      @Query() {
+        page,
+        pageSize,
+      }: PaginationParamsDto,
+  ) {
+    return this.studentsService.getStudentsByClassId(id, page, pageSize);
   }
 
   @Patch(':id')

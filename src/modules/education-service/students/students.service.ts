@@ -19,7 +19,10 @@ export class StudentsService {
   ) {
     const count = await this.studentsRepository.count();
 
-    const items = await this.studentsRepository.findAllPagination(page, pageSize);
+    const items = await this.studentsRepository.findAllPagination({
+      page,
+      pageSize
+    });
 
     return {
       pagination: {
@@ -42,14 +45,19 @@ export class StudentsService {
     return student;
   }
 
-  async getStudentsByClassId(id: string) {
-    const students = await this.studentsRepository.findByClassId(id);
+  async getStudentsByClassId(classId: string, page?: number, pageSize?: number) {
+    const count = await this.studentsRepository.countByClassId(classId);
+    const students = await this.studentsRepository.findByClassId(classId, {page, pageSize});
 
-    if (!students) {
-      throw new BaseException(Errors.USER.USER_NOT_FOUND);
-    }
-
-    return { data: students };
+    return {
+      pagination: {
+        page,
+        pageSize,
+        totalPage: Math.ceil(count / pageSize),
+      },
+      count,
+      data: students,
+    };
   }
 
   async updateStudent(id: string, updateStudentDto: UpdateStudentDto) {

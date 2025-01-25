@@ -57,12 +57,20 @@ export class BooksService {
   async getListBook(
     page?: number,
     pageSize?: number,
+    type?: string
   ) {
-    const count = await this.booksRepository.count();
+    const where = {}
+
+    if (type) {
+      where.type = type
+    }
+
+    const count = await this.booksRepository.count({where});
 
     const items = await this.booksRepository.findAllPagination({
       page,
-      pageSize
+      pageSize,
+      where
     });
 
     return {
