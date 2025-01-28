@@ -1,6 +1,6 @@
 import { PrismaService } from '@n-database/prisma/prisma.service';
 import { Injectable } from '@nestjs/common';
-import { User } from '@prisma/client';
+import {Teacher, User} from '@prisma/client';
 import { GenericRepository } from '@n-modules/generic-service/generic.repository';
 
 @Injectable()
@@ -160,4 +160,26 @@ export class UsersRepository extends GenericRepository<User> {
 
     return this.prismaService.user.create({data})
   }
+
+  async assignTeacher(assignments: { classId?: string; teacherId: string }[]): Promise<any> {
+    return this.prismaService.$transaction(async (prisma) => {
+      await prisma.user.updateMany({
+        where: {
+          classId: { not: null },
+        },
+        data: {
+          classId: null,
+        },
+      });
+
+      for (const assignment of assignments) {
+        const { classId, teacherId } = assignment;
+        await prisma.user.update({
+          where: { id: teacherId },
+          data: { classId },
+        });
+      }
+    });
+  }
+
 }

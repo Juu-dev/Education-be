@@ -10,7 +10,7 @@ import {
 import { UserEntity } from './entities/user.entity';
 import { UsersService } from './users.service';
 import {
-  CreateUserDto, FilterUserDto, SearchUserDto, UpdateUserDto,
+  CreateUserDto, FilterUserDto, SearchUserDto, UpdateUserDto, TeacherAssignmentDto
 } from './dto';
 import {CategoryEntity} from "@n-modules/education-service/students/entities/category.entity";
 import {CreateStudentDto} from "@n-modules/auth-service/users/dto/create-student.dto";
@@ -27,6 +27,14 @@ export class UsersController {
   @ApiCreatedResponse({ type: UserEntity })
   create(@Body() createUserDto: CreateUserDto) {
     return this.usersService.createUser(createUserDto);
+  }
+
+  @Post("assign-teacher")
+  @Permissions([Permission.CREATE_USER])
+  @AuthClaims()
+  @ApiCreatedResponse({ type: UserEntity })
+  assignTeacher(@Body() assignTeacher: TeacherAssignmentDto) {
+    return this.usersService.assignTeacher(assignTeacher.school);
   }
 
   @Get()

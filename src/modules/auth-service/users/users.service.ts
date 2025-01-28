@@ -3,7 +3,7 @@ import * as bcrypt from 'bcryptjs';
 
 import { Errors } from '@n-constants';
 import { BaseException } from '@n-exceptions';
-import { CreateUserDto, UpdateUserDto } from './dto';
+import {CreateUserDto, TeacherAssignmentDto, UpdateUserDto} from './dto';
 import { UsersRepository } from './users.repository';
 
 @Injectable()
@@ -30,16 +30,21 @@ export class UsersService {
     return this.usersRepository.create(newUserData);
   }
 
+  async assignTeacher(assignments: { classId?: string; teacherId: string }[]) {
+    console.log("assignments: ", assignments)
+    return this.usersRepository.assignTeacher(assignments);
+  }
+
   async getListUser(
     page?: number,
     pageSize?: number,
   ) {
     const count = await this.usersRepository.count();
 
-    const items = await this.usersRepository.findAllPagination(
+    const items = await this.usersRepository.findAllPagination({
       page,
-      pageSize,
-    );
+      pageSize
+    });
 
     return {
       page,

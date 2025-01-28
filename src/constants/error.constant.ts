@@ -98,6 +98,11 @@ export const Errors = {
     },
   },
   USER: {
+    TEACHER_ASSIGNMENT: {
+      message: 'Teacher assignment wrong. <Ref: AU11>',
+      statusCode: HttpStatus.NOT_FOUND,
+      errorCode: 'AU00',
+    },
     USER_NOT_FOUND: {
       message: 'User not found. <Ref: AU11>',
       statusCode: HttpStatus.NOT_FOUND,
