@@ -77,6 +77,15 @@ export class UsersService {
     }
   }
 
+  async getListTeacher() {
+    const items = await this.usersRepository.findListTeacher();
+
+    return {
+      count: items.length,
+      data: items
+    }
+  }
+
   async getUserById(id: string) {
     const user = await this.usersRepository.findById(id);
     if (!user) {

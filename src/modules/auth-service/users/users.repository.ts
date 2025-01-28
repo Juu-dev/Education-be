@@ -110,6 +110,28 @@ export class UsersRepository extends GenericRepository<User> {
     });
   }
 
+  findListTeacher(): Promise<User[]> {
+    return this.prismaService.user.findMany({
+      where: {
+        roles: {
+          some: {
+            role: {
+              name: {
+                in: ['teacher'],
+              },
+            },
+          },
+        },
+      },
+      orderBy: {
+        name: 'asc'
+      },
+      include: {
+        class: true,
+      }
+    });
+  }
+
   createStudent(props: any) {
     const {email, password, classId, name} = props
     const data:  any= {

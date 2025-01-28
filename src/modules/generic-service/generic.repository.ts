@@ -37,9 +37,9 @@ export class GenericRepository<T> {
     const defaultOrderBy = {
       createdAt: 'desc',
     }
-    const orderByBuild = orderBy ? [{
+    const orderByBuild = orderBy ? [...orderBy, {
       createdAt: 'desc',
-    }, ...orderBy] : defaultOrderBy
+    }] : defaultOrderBy
 
     const conditionParams = {}
 

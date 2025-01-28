@@ -85,6 +85,16 @@ export class ExercisesService {
 
     const promise = await Promise.all([count, items])
 
+    const itemFilter = promise[1].map((exercise) => {
+      const {answers, ...rest} = exercise;
+      const distinctAnswers = new Set(answers.map(answer => answer.userId))
+
+      return {
+        ...rest,
+        countDoneStudent: distinctAnswers.size
+      }}
+    )
+
     return {
       pagination: {
         page,
@@ -92,7 +102,7 @@ export class ExercisesService {
         totalPage: Math.ceil(promise[0] / pageSize),
       },
       count: promise[0],
-      data: promise[1],
+      data: itemFilter,
     };
   }
 

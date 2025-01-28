@@ -58,11 +58,13 @@ export const includesConfig = {
   },
   exercise: {
     _count: {
-      select: { answers: true },
+      select: {
+        answers: true
+      }
     },
     answers: {
-      include: {
-        user: true
+      select: {
+        userId: true,
       }
     }
   }
