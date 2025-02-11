@@ -31,7 +31,6 @@ export class UsersService {
   }
 
   async assignTeacher(assignments: { classId?: string; teacherId: string }[]) {
-    console.log("assignments: ", assignments)
     return this.usersRepository.assignTeacher(assignments);
   }
 

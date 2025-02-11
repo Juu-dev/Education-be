@@ -1,7 +1,7 @@
-import { AuthServiceRole } from '@prisma/client';
+import { Role } from '@prisma/client';
 import { ApiProperty } from '@nestjs/swagger';
 
-export class RoleEntity implements AuthServiceRole {
+export class RoleEntity implements Role {
   @ApiProperty()
     id: string;
 

@@ -40,7 +40,7 @@ export class AllExceptionsFilter implements ExceptionFilter {
     errorFile: 'access-error.log',
   });
 
-  catch(exception: unknown, host: ArgumentsHost): any {
+  catch(exception: any, host: ArgumentsHost): any {
     const ctx = host.switchToHttp();
     const request = ctx.getRequest<Request>();
     const stacktraceEnable: number = parseInt(

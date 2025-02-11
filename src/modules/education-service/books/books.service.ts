@@ -59,7 +59,7 @@ export class BooksService {
     pageSize?: number,
     type?: string
   ) {
-    const where = {}
+    const where: any = {}
 
     if (type) {
       where.type = type

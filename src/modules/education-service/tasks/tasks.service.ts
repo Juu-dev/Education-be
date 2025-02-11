@@ -59,7 +59,10 @@ export class TasksService {
   ) {
     const count = this.tasksRepository.count();
 
-    const items = this.tasksRepository.findAllPagination(page, pageSize);
+    const items = this.tasksRepository.findAllPagination({
+      page,
+      pageSize
+    });
 
     const parallelPromise = await Promise.all([count, items])
 
@@ -136,6 +139,6 @@ export class TasksService {
       throw new BaseException(Errors.TASK.TASK_NOT_FOUND);
     }
 
-    return this.tasksRepository.deleteById(id);
+    return this.tasksRepository.softDeleteById(id);
   }
 }

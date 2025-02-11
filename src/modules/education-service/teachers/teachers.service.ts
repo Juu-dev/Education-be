@@ -19,7 +19,10 @@ export class TeachersService {
   ) {
     const count = await this.teachersRepository.count();
 
-    const items = await this.teachersRepository.findAllPagination(page, pageSize);
+    const items = await this.teachersRepository.findAllPagination({
+      page,
+      pageSize
+    });
 
     return {
       pagination: {
@@ -41,7 +44,7 @@ export class TeachersService {
     const teacher = await this.teachersRepository.findById(id);
 
     if (!teacher) {
-      throw new BaseException(Errors.CATEGORY.CATEGORY_NOT_FOUND);
+      throw new BaseException(Errors.USER.USER_NOT_FOUND);
     }
 
     return { data: teacher };
@@ -51,7 +54,7 @@ export class TeachersService {
     const teacher = await this.teachersRepository.findByUserId(userId);
 
     if (!teacher) {
-      throw new BaseException(Errors.CATEGORY.CATEGORY_NOT_FOUND);
+      throw new BaseException(Errors.USER.USER_NOT_FOUND);
     }
 
     return { data: teacher };
@@ -60,7 +63,7 @@ export class TeachersService {
   async updateTeacher(id: string, updateTeacherDto: UpdateTeacherDto) {
     const teacher = await this.teachersRepository.findById(id);
     if (!teacher) {
-      throw new BaseException(Errors.CATEGORY.CATEGORY_NOT_FOUND);
+      throw new BaseException(Errors.USER.USER_NOT_FOUND);
     }
 
     return this.teachersRepository.updateById(

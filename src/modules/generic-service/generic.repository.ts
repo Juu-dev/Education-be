@@ -15,7 +15,7 @@ export class GenericRepository<T> {
   }
 
   async findAll(props?: IFindAll): Promise<T[]> {
-    const conditionParams = {}
+    const conditionParams: any = {}
 
     if (props?.where) {
       conditionParams.where = props.where
@@ -41,7 +41,7 @@ export class GenericRepository<T> {
       createdAt: 'desc',
     }] : defaultOrderBy
 
-    const conditionParams = {}
+    const conditionParams: any = {}
 
     if (props?.where) {
       conditionParams.where = props.where
@@ -71,7 +71,7 @@ export class GenericRepository<T> {
       createdAt: 'desc',
     }, ...orderBy] : defaultOrderBy
 
-    const conditionParams = {}
+    const conditionParams: any = {}
 
     if (props?.where) {
       conditionParams.where = props.where
@@ -112,7 +112,7 @@ export class GenericRepository<T> {
   }
 
   async count(props?: ICount): Promise<number> {
-    const conditionParams = {}
+    const conditionParams: any = {}
 
     if (props?.where) {
       conditionParams.where = props?.where

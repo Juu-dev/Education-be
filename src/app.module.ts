@@ -19,7 +19,6 @@ import {
 import { PrismaModule } from '@n-database/prisma/prisma.module';
 import { AllExceptionsFilter } from '@n-exceptions';
 import { ResponseInterceptor } from '@n-interceptors';
-import { ScheduledJobService } from '@n-jobs/sync-categories.auth-service';
 import { AuthServiceModule } from '@n-modules/auth-service/auth-service.module';
 import { EducationServiceModule } from '@n-modules/education-service/education-service.module';
 
@@ -46,7 +45,6 @@ import { FileUploadModule } from './modules/file-upload/file-upload.module';
   controllers: [AppController],
   providers: [
     AppService,
-    ScheduledJobService,
     {
       provide: APP_INTERCEPTOR,
       useClass: ResponseInterceptor,

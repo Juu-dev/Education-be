@@ -25,7 +25,6 @@ src/config.ts
 coverage
 
 
-dist/
 yarn.lock
 package-lock.json
 

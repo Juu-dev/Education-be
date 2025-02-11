@@ -82,6 +82,6 @@ export class DocumentsService {
       throw new BaseException(Errors.DOCUMENT.DOCUMENT_NOT_FOUND);
     }
 
-    return this.documentsRepository.deleteById(id);
+    return this.documentsRepository.hardDeleteById(id);
   }
 }

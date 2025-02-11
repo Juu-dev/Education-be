@@ -8,7 +8,6 @@ import { ApiCreatedResponse, ApiOkResponse, ApiTags } from '@nestjs/swagger';
 
 import { CreateTeacherDto, UpdateTeacherDto } from '@n-modules/education-service/teachers/dto';
 import { TeachersService } from '@n-modules/education-service/teachers/teachers.service';
-import { CategoryEntity } from './entities/category.entity';
 
 @Controller('teachers')
 @ApiTags('Teacher')
@@ -19,7 +18,6 @@ export class TeachersController {
   @Post()
   @Roles([Permission.CREATE_CATEGORY])
   @AuthClaims()
-  @ApiCreatedResponse({ type: CategoryEntity })
   create(
   @Body() createCategoryDto: CreateTeacherDto,
   ) {
@@ -30,7 +28,6 @@ export class TeachersController {
   @Roles([Permission.GET_CATEGORIES])
   @AuthClaims()
   @ApiOkResponse({
-    type: CategoryEntity,
     isArray: true,
   })
   findAll(
@@ -48,7 +45,6 @@ export class TeachersController {
   @Get()
   @Roles([Permission.GET_CATEGORY])
   @AuthClaims()
-  @ApiOkResponse({ type: CategoryEntity })
   findAllTeacher() {
     return this.teachersService.getAllTeachers();
   }
@@ -56,7 +52,6 @@ export class TeachersController {
   @Get(':id')
   @Roles([Permission.GET_CATEGORY])
   @AuthClaims()
-  @ApiOkResponse({ type: CategoryEntity })
   findOne(@Param('id') id: string) {
     return this.teachersService.getTeacherById(id);
   }
@@ -64,7 +59,6 @@ export class TeachersController {
   @Get('user/:id')
   @Roles([Permission.GET_CATEGORY])
   @AuthClaims()
-  @ApiOkResponse({ type: CategoryEntity })
   findOneByUserId(@Param('id') id: string) {
     return this.teachersService.getTeacherByUserId(id);
   }
@@ -72,7 +66,6 @@ export class TeachersController {
   @Patch(':id')
   @Roles([Permission.UPDATE_CATEGORY])
   @AuthClaims()
-  @ApiOkResponse({ type: CategoryEntity })
   update(@Param('id') id: string, @Body() updateCategoryDto: UpdateTeacherDto) {
     return this.teachersService.updateTeacher(
       id,

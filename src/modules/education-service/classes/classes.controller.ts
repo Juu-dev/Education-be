@@ -8,7 +8,6 @@ import { ApiCreatedResponse, ApiOkResponse, ApiTags } from '@nestjs/swagger';
 
 import {CreateClassDto, SearchClassDto, UpdateClassDto} from '@n-modules/education-service/classes/dto';
 import { ClassesService } from '@n-modules/education-service/classes/classes.service';
-import { CategoryEntity } from './entities/category.entity';
 
 @Controller('classes')
 @ApiTags('Class')
@@ -19,7 +18,6 @@ export class ClassesController {
   @Post()
   @Roles([Permission.CREATE_CATEGORY])
   @AuthClaims()
-  @ApiCreatedResponse({ type: CategoryEntity })
   create(
   @Body() createCategoryDto: CreateClassDto,
   ) {
@@ -29,7 +27,6 @@ export class ClassesController {
   @Get()
   @Roles([Permission.GET_CATEGORY])
   @AuthClaims()
-  @ApiOkResponse({ type: CategoryEntity })
   findAll() {
     return this.classesService.getAllClass();
   }
@@ -38,7 +35,6 @@ export class ClassesController {
   // @Roles([Permission.GET_CATEGORIES])
   // @AuthClaims()
   @ApiOkResponse({
-    type: CategoryEntity,
     isArray: true,
   })
   findAllPagination(
@@ -58,7 +54,6 @@ export class ClassesController {
   @Get(':id')
   @Roles([Permission.GET_CATEGORY])
   @AuthClaims()
-  @ApiOkResponse({ type: CategoryEntity })
   findOne(@Param('id') id: string) {
     return this.classesService.getClassById(id);
   }
@@ -66,7 +61,6 @@ export class ClassesController {
   @Get(':id/count-student')
   @Roles([Permission.GET_CATEGORY])
   @AuthClaims()
-  @ApiOkResponse({ type: CategoryEntity })
   countStudent(@Param('id') id: string) {
     return this.classesService.getCountStudentByClassId(id);
   }
@@ -74,7 +68,6 @@ export class ClassesController {
   @Patch(':id')
   @Roles([Permission.UPDATE_CATEGORY])
   @AuthClaims()
-  @ApiOkResponse({ type: CategoryEntity })
   update(@Param('id') id: string, @Body() updateCategoryDto: UpdateClassDto) {
     return this.classesService.updateClass(
       id,

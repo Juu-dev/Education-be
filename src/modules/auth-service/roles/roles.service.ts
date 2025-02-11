@@ -15,7 +15,10 @@ export class RolesService {
     page?: number,
     pageSize?: number,
   ) {
-    const result = await this.rolesRepository.findAllPagination(page, pageSize);
+    const result = await this.rolesRepository.findAllPagination({
+      page,
+      pageSize
+    });
 
     return result;
   }

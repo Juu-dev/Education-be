@@ -85,7 +85,7 @@ export class ExercisesService {
 
     const promise = await Promise.all([count, items])
 
-    const itemFilter = promise[1].map((exercise) => {
+    const itemFilter = promise[1].map((exercise: any) => {
       const {answers, ...rest} = exercise;
       const distinctAnswers = new Set(answers.map(answer => answer.userId))
 
@@ -106,7 +106,7 @@ export class ExercisesService {
     };
   }
 
-  async getExerciseById(id: string): Promise<Exercise> {
+  async getExerciseById(id: string): Promise<{data: Exercise }> {
     const exercise = await this.exercisesRepository.findByIdWithQuestion(id);
     if (!exercise) {
       throw new BaseException(Errors.EXERCISE.EXERCISE_NOT_FOUND);
@@ -114,7 +114,7 @@ export class ExercisesService {
     return {data: exercise};
   }
 
-  async getStudentsByExerciseId(id: string): Promise<Exercise> {
+  async getStudentsByExerciseId(id: string): Promise<{ data: Exercise }> {
     const exercise = await this.exercisesRepository.findStudentsByExerciseId(id);
     if (!exercise) {
       throw new BaseException(Errors.EXERCISE.EXERCISE_NOT_FOUND);

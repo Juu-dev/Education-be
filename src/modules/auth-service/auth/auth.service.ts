@@ -44,7 +44,7 @@ export class AuthService {
       password,
     } = loginData;
     // User authentication
-    const user = await this.getAuthenticatedUser(username, password);
+    const user: any = await this.getAuthenticatedUser(username, password);
 
     // Generate token
     const {
@@ -82,7 +82,7 @@ export class AuthService {
       throw new BaseException(Errors.AUTH.INVALID_REFRESH_TOKEN);
     }
 
-    const user = await this.usersRepository.findByUsername(
+    const user: any = await this.usersRepository.findByUsername(
       payload.username,
     );
 

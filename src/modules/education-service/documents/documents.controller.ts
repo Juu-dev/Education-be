@@ -4,11 +4,10 @@ import { PaginationParamsDto } from '@n-dtos';
 import {
   Body, Controller, Delete, Get, Param, Patch, Post, Query, UploadedFiles
 } from '@nestjs/common';
-import { ApiCreatedResponse, ApiOkResponse, ApiTags } from '@nestjs/swagger';
+import { ApiOkResponse, ApiTags } from '@nestjs/swagger';
 
 import {CreateDocumentDto, FilterDocumentDto, SearchDocumentDto, UpdateDocumentDto} from '@n-modules/education-service/documents/dto';
 import { DocumentsService } from '@n-modules/education-service/documents/documents.service';
-import { CategoryEntity } from './entities/category.entity';
 import {ApiFile} from "@n-decorators/api-file.decorator";
 import {IFile} from "../../../interfaces";
 
@@ -35,7 +34,6 @@ export class DocumentsController {
   @Roles([Permission.GET_CATEGORIES])
   @AuthClaims()
   @ApiOkResponse({
-    type: CategoryEntity,
     isArray: true,
   })
   findAll(
@@ -60,7 +58,6 @@ export class DocumentsController {
   @Roles([Permission.GET_CATEGORIES])
   @AuthClaims()
   @ApiOkResponse({
-    type: CategoryEntity,
     isArray: true,
   })
   findAllByTeacherId(
@@ -86,7 +83,6 @@ export class DocumentsController {
   @Get(':id')
   @Roles([Permission.GET_CATEGORY])
   @AuthClaims()
-  @ApiOkResponse({ type: CategoryEntity })
   findOne(@Param('id') id: string) {
     return this.documentsService.getDocumentById(id);
   }
@@ -94,7 +90,6 @@ export class DocumentsController {
   @Patch(':id')
   @Roles([Permission.UPDATE_CATEGORY])
   @AuthClaims()
-  @ApiOkResponse({ type: CategoryEntity })
   update(@Param('id') id: string, @Body() updateCategoryDto: UpdateDocumentDto) {
     return this.documentsService.updateDocument(
       id,
@@ -105,7 +100,6 @@ export class DocumentsController {
   @Delete(':id')
   @Roles([Permission.UPDATE_CATEGORY])
   @AuthClaims()
-  @ApiOkResponse({ type: CategoryEntity })
   remove(@Param('id') id: string) {
     return this.documentsService.deleteById(id);
   }

@@ -8,7 +8,6 @@ import {ApiOkResponse, ApiTags} from '@nestjs/swagger';
 
 import {CreateBookDto, FilterBookDto, UpdateBookDto} from '@n-modules/education-service/books/dto';
 import { BooksService } from '@n-modules/education-service/books/books.service';
-import { CategoryEntity } from './entities/category.entity';
 import {ApiFile} from "@n-decorators/api-file.decorator";
 import {IFile} from "../../../interfaces";
 
@@ -35,7 +34,6 @@ export class BooksController {
   @Roles([Permission.GET_CATEGORIES])
   @AuthClaims()
   @ApiOkResponse({
-    type: CategoryEntity,
     isArray: true,
   })
   findAll(
@@ -55,7 +53,6 @@ export class BooksController {
   @Get(':id')
   @Roles([Permission.GET_CATEGORY])
   @AuthClaims()
-  @ApiOkResponse({ type: CategoryEntity })
   findOne(@Param('id') id: string) {
     return this.booksService.getBookById(id);
   }
@@ -63,7 +60,6 @@ export class BooksController {
   @Patch(':id')
   @Roles([Permission.UPDATE_CATEGORY])
   @AuthClaims()
-  @ApiOkResponse({ type: CategoryEntity })
   update(@Param('id') id: string, @Body() updateCategoryDto: UpdateBookDto) {
     return this.booksService.updateBook(
       id,

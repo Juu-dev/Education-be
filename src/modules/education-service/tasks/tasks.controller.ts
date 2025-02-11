@@ -5,7 +5,6 @@ import {
 } from '@nestjs/common';
 import { ApiCreatedResponse, ApiOkResponse, ApiTags } from '@nestjs/swagger';
 
-import { CategoryEntity } from '@n-modules/education-service/tasks/entities/category.entity';
 import { TasksService } from '@n-modules/education-service/tasks/tasks.service';
 import { CreateTaskDto } from './dto/create-task.dto';
 import { UpdateTaskDto } from './dto/update-task.dto';
@@ -19,7 +18,6 @@ export class TasksController {
   @Post()
   // @Roles([Permission.CREATE_CATEGORY])
   @AuthClaims()
-  @ApiCreatedResponse({ type: CategoryEntity })
   create(
   @Body() createTaskDto: CreateTaskDto,
   ) {
@@ -30,7 +28,6 @@ export class TasksController {
   // @Roles([Permission.GET_CATEGORIES])
   @AuthClaims()
   @ApiOkResponse({
-    type: CategoryEntity,
     isArray: true,
   })
   findFiveLatest(
@@ -43,7 +40,6 @@ export class TasksController {
   // @Roles([Permission.GET_CATEGORIES])
   @AuthClaims()
   @ApiOkResponse({
-    type: CategoryEntity,
     isArray: true,
   })
   findAll(
@@ -62,7 +58,6 @@ export class TasksController {
   // @Roles([Permission.GET_CATEGORIES])
   @AuthClaims()
   @ApiOkResponse({
-    type: CategoryEntity,
     isArray: true,
   })
   findAllWithSentMode(
@@ -86,7 +81,6 @@ export class TasksController {
   // @Roles([Permission.GET_CATEGORIES])
   @AuthClaims()
   @ApiOkResponse({
-    type: CategoryEntity,
     isArray: true,
   })
   findAllWithReceivedMode(
@@ -109,7 +103,6 @@ export class TasksController {
   @Get(':id')
   // @Roles([Permission.GET_CATEGORY])
   @AuthClaims()
-  @ApiOkResponse({ type: CategoryEntity })
   findOne(@Param('id') id: string) {
     return this.tasksService.getTaskById(id);
   }
@@ -117,7 +110,6 @@ export class TasksController {
   @Patch(':id')
   // @Roles([Permission.UPDATE_CATEGORY])
   @AuthClaims()
-  @ApiOkResponse({ type: CategoryEntity })
   update(@Param('id') id: string, @Body() updateTaskDto: UpdateTaskDto) {
     return this.tasksService.updateTask(id, updateTaskDto);
   }
@@ -125,7 +117,6 @@ export class TasksController {
   @Delete(':id')
   // @Roles([Permission.UPDATE_CATEGORY])
   @AuthClaims()
-  @ApiOkResponse({ type: CategoryEntity })
   remove(@Param('id') id: string) {
     return this.tasksService.deleteTask(id);
   }
