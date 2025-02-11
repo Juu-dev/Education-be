@@ -71,7 +71,7 @@ connect-db:
 	docker exec -it $(DB_NAME) bash
 
 login-db:
-	docker exec -it $(DB_NAME) psql -U education_username -d education_dbß
+	docker exec -it $(DB_NAME) psql -U education_username -d education_db
 
 delete-db:
 	docker exec -it $(DB_NAME) psql -U education_username -d postgres -c "DROP DATABASE education_db;"

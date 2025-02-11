@@ -18,7 +18,7 @@ async function bootstrap() {
     app.use((0, cookie_parser_1.default)());
     app.enableCors({
         credentials: true,
-        origin: ['http://localhost:5173'],
+        origin: ['http://localhost:5173', 'http://miraischool.org'],
     });
     app.useGlobalPipes(new common_1.ValidationPipe({
         transform: true,

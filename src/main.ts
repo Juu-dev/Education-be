@@ -20,7 +20,7 @@ async function bootstrap() {
   app.use(cookieParser());
   app.enableCors({
     credentials: true,
-    origin: ['http://localhost:5173'],
+    origin: ['http://localhost:5173', 'http://miraischool.org'],
   });
 
   app.useGlobalPipes(
