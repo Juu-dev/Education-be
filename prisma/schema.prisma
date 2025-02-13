@@ -163,13 +163,7 @@ model Document {
   createdAt   DateTime @default(now()) @map("created_at")
   updatedAt   DateTime @default(now()) @updatedAt @map("updated_at")
 
-  user             User              @relation(fields: [userId], references: [id])
-  ratings          Rating[]
-  comments         Comment[]
-  goals            Goal[]
-  marks            Mark[]
-  documentStudents DocumentStudent[]
-  borrowedLog      BorrowedLog[]
+  user User @relation(fields: [userId], references: [id])
 
   @@map("documents")
 }
@@ -183,8 +177,7 @@ model Rating {
   createdAt  DateTime @default(now()) @map("created_at")
   updatedAt  DateTime @default(now()) @updatedAt @map("updated_at")
 
-  document Document @relation(fields: [documentId], references: [id])
-  user     User     @relation(fields: [userId], references: [id])
+  user User @relation(fields: [userId], references: [id])
 
   @@map("ratings")
 }
@@ -198,8 +191,7 @@ model Comment {
   createdAt  DateTime @default(now()) @map("created_at")
   updatedAt  DateTime @default(now()) @updatedAt @map("updated_at")
 
-  document Document @relation(fields: [documentId], references: [id])
-  user     User     @relation(fields: [userId], references: [id])
+  user User @relation(fields: [userId], references: [id])
 
   // parent   Comment?  @relation(fields: [parentId], references: [id])
   // Comment  Comment[]
@@ -218,8 +210,7 @@ model DocumentStudent {
   createdAt      DateTime  @default(now()) @map("created_at")
   updatedAt      DateTime  @default(now()) @updatedAt @map("updated_at")
 
-  document Document @relation(fields: [documentId], references: [id])
-  user     User     @relation(fields: [userId], references: [id])
+  user User @relation(fields: [userId], references: [id])
 
   @@map("document_students")
 }
@@ -234,8 +225,7 @@ model Goal {
   createdAt   DateTime  @default(now()) @map("created_at")
   updatedAt   DateTime  @default(now()) @updatedAt @map("updated_at")
 
-  document Document @relation(fields: [documentId], references: [id])
-  user     User     @relation(fields: [userId], references: [id])
+  user User @relation(fields: [userId], references: [id])
 
   @@map("goals")
 }
@@ -249,8 +239,7 @@ model Mark {
   createdAt  DateTime @default(now()) @map("created_at")
   updatedAt  DateTime @default(now()) @updatedAt @map("updated_at")
 
-  document Document @relation(fields: [documentId], references: [id])
-  user     User     @relation(fields: [userId], references: [id])
+  user User @relation(fields: [userId], references: [id])
 
   @@map("marks")
 }
@@ -301,8 +290,7 @@ model BorrowedLog {
   createdAt  DateTime  @default(now()) @map("created_at")
   updatedAt  DateTime  @default(now()) @updatedAt @map("updated_at")
 
-  user     User?    @relation(fields: [userId], references: [id])
-  document Document @relation(fields: [documentId], references: [id])
+  user User? @relation(fields: [userId], references: [id])
 
   @@map("borrowed_logs")
 }

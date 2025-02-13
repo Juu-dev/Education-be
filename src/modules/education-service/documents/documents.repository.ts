@@ -18,7 +18,7 @@ export class DocumentsRepository extends GenericRepository<Document> {
         ...rest,
         user: {
           connect: {
-            id: createDocumentDto.userId,
+            id: userId,
           }
         },
       }
