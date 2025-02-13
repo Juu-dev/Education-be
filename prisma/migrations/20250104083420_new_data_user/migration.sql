@@ -1,7 +1,0 @@
--- AlterTable
-ALTER TABLE "classes" ALTER COLUMN "amount" SET DEFAULT 0;
-
--- AlterTable
-ALTER TABLE "users" ADD COLUMN     "ethnicity" VARCHAR(50) NOT NULL DEFAULT '',
-ADD COLUMN     "gender" VARCHAR(50) NOT NULL DEFAULT '',
-ADD COLUMN     "phone" VARCHAR(50) NOT NULL DEFAULT '';
