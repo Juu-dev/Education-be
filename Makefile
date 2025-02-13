@@ -76,6 +76,9 @@ login-db:
 delete-db:
 	docker exec -it $(DB_NAME) psql -U education_username -d postgres -c "DROP DATABASE education_db;"
 
+create-db:
+	docker exec -it $(DB_NAME) psql -U education_username -d postgres -c "CREATE DATABASE education_db;"
+
 login-check:
 	docker exec -it $(DB_NAME) psql -U postgres
 
