@@ -18,6 +18,19 @@ let DocumentsRepository = class DocumentsRepository extends generic_repository_1
         super(prismaService, 'document');
         this.prismaService = prismaService;
     }
+    async createDocument(createDocumentDto) {
+        const { userId, ...rest } = createDocumentDto;
+        return this.prismaService.document.create({
+            data: {
+                ...rest,
+                user: {
+                    connect: {
+                        id: createDocumentDto.userId,
+                    }
+                },
+            }
+        });
+    }
     async countByUserId(id) {
         return this.prismaService.document.count({
             where: {

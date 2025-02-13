@@ -1,5 +1,5 @@
 import { Permission } from '@n-constants';
-import { AuthClaims, Roles } from '@n-decorators';
+import {AuthClaims, GetUser, Roles} from '@n-decorators';
 import { PaginationParamsDto } from '@n-dtos';
 import {
   Body, Controller, Delete, Get, Param, Patch, Post, Query, UploadedFiles

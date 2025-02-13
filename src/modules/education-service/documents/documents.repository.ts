@@ -11,6 +11,20 @@ export class DocumentsRepository extends GenericRepository<Document> {
     super(prismaService, 'document');
   }
 
+  async createDocument(createDocumentDto: any): Promise<Document> {
+    const {userId, ...rest} = createDocumentDto;
+    return this.prismaService.document.create({
+      data: {
+        ...rest,
+        user: {
+          connect: {
+            id: createDocumentDto.userId,
+          }
+        },
+      }
+    });
+  }
+
   async countByUserId(id: string): Promise<number> {
     return this.prismaService.document.count({
       where: {

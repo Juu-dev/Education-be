@@ -24,16 +24,16 @@ let DocumentsService = class DocumentsService {
         const file = await this.fileUploadService.uploadFile(files[0]);
         const uploadData = {
             ...createDocumentDto,
-            url: file.Location
+            url: file.Location,
         };
-        return this.documentsRepository.create(uploadData);
+        return this.documentsRepository.createDocument(uploadData);
     }
     async getListDocument(props) {
-        const { userId, pageSize, page } = props;
-        const count = userId
-            ? await this.documentsRepository.countByUserId(userId)
+        const { pageSize, page } = props;
+        const count = props?.userId
+            ? await this.documentsRepository.countByUserId(props.userId)
             : await this.documentsRepository.count();
-        const items = userId
+        const items = props?.userId
             ? await this.documentsRepository.findAllPaginationByTeacherId(props)
             : await this.documentsRepository.findAllPaginationWithFilter(props);
         return {

@@ -1,7 +1,7 @@
-import {Injectable, Query} from '@nestjs/common';
+import {Injectable} from '@nestjs/common';
 import { BaseException } from '@n-exceptions';
 import { Errors } from '@n-constants';
-import {CreateDocumentDto, FilterDocumentDto, SearchDocumentDto, UpdateDocumentDto} from './dto';
+import {CreateDocumentDto, UpdateDocumentDto} from './dto';
 import { DocumentsRepository } from './documents.repository';
 import {FileUploadService} from "@n-modules/file-upload/file-upload.service";
 import {IFile} from "../../../interfaces";
@@ -27,20 +27,20 @@ export class DocumentsService {
 
     const uploadData = {
       ...createDocumentDto,
-      url: file.Location
+      url: file.Location,
     }
 
-    return this.documentsRepository.create(uploadData as any);
+    return this.documentsRepository.createDocument(uploadData as any);
   }
 
   async getListDocument(props: IGetListDocumentsDTO) {
-    const {userId, pageSize, page} = props
+    const {pageSize, page} = props;
 
-    const count = userId
-      ? await this.documentsRepository.countByUserId(userId)
+    const count = props?.userId
+      ? await this.documentsRepository.countByUserId(props.userId)
       : await this.documentsRepository.count();
 
-    const items = userId
+    const items = props?.userId
       ? await this.documentsRepository.findAllPaginationByTeacherId(props)
       : await this.documentsRepository.findAllPaginationWithFilter(props);
     return {
