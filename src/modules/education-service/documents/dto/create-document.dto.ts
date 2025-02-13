@@ -11,7 +11,7 @@ export class CreateDocumentDto {
     example: 'teacher-123',
     description: 'ID của giáo viên liên quan đến tài liệu',
   })
-    teacherId?: string;
+    userId?: string;
 
   @IsString()
   @IsOptional()
