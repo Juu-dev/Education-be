@@ -29,4 +29,4 @@ USER node
 
 CMD [ "npm", "run", "start:dev" ]
 
-# ENTRYPOINT [ "npm", "run", "start:dev" ]
+#ENTRYPOINT [ "npm", "run", "start:dev" ]
