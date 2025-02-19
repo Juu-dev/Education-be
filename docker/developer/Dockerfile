@@ -22,9 +22,11 @@ COPY --chown=node:node . .
 RUN  npx prisma generate
 
 # Expose port 9000
-EXPOSE 9000
+EXPOSE 9001
 
 # Use the node user from the image (instead of the root user)
 USER node
+
+CMD [ "npm", "run", "start:dev" ]
 
 # ENTRYPOINT [ "npm", "run", "start:dev" ]

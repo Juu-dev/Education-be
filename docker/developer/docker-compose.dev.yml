@@ -4,6 +4,7 @@ services:
     build:
       context: ../../
       dockerfile: ./docker/developer/Dockerfile
+#      dockerfile: ./docker/developer/Dockerfile.product
     working_dir: /home/node/app
     # command: [ "npm", "run", "start:dev" ]
     restart: unless-stopped
