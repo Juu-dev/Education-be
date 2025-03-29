@@ -16,7 +16,7 @@ const class_transformer_1 = require("class-transformer");
 const class_validator_1 = require("class-validator");
 class CreateDocumentDto {
     static _OPENAPI_METADATA_FACTORY() {
-        return { teacherId: { required: false, type: () => String }, type: { required: false, type: () => String }, description: { required: false, type: () => String }, createdAt: { required: false, type: () => Date }, url: { required: false, type: () => String } };
+        return { userId: { required: false, type: () => String }, type: { required: false, type: () => String }, description: { required: false, type: () => String }, createdAt: { required: false, type: () => Date }, url: { required: false, type: () => String } };
     }
 }
 __decorate([
@@ -27,7 +27,7 @@ __decorate([
         description: 'ID của giáo viên liên quan đến tài liệu',
     }),
     __metadata("design:type", String)
-], CreateDocumentDto.prototype, "teacherId", void 0);
+], CreateDocumentDto.prototype, "userId", void 0);
 __decorate([
     (0, class_validator_1.IsString)(),
     (0, class_validator_1.IsOptional)(),

@@ -25,7 +25,7 @@ let DocumentsRepository = class DocumentsRepository extends generic_repository_1
                 ...rest,
                 user: {
                     connect: {
-                        id: createDocumentDto.userId,
+                        id: userId,
                     }
                 },
             }

@@ -46,10 +46,17 @@ let BooksImportService = class BooksImportService {
         };
     }
     async getListBook(page, pageSize) {
-        const count = await this.booksImportRepository.count();
+        const count = await this.booksImportRepository.count({
+            where: {
+                isDeleted: false,
+            }
+        });
         const items = await this.booksImportRepository.findAllPagination({
             page,
-            pageSize
+            pageSize,
+            where: {
+                isDeleted: false,
+            }
         });
         return {
             pagination: {
