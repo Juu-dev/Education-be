@@ -2,7 +2,7 @@ import { Module } from '@nestjs/common';
 import { CacheModule } from '@nestjs/cache-manager';
 import { PassportModule } from '@nestjs/passport';
 
-import { RedisOptions } from '@n-configs/module-configs';
+// import { RedisOptions } from '@n-configs/module-configs';
 
 import { PrismaModule } from '@n-database/prisma/prisma.module';
 
@@ -26,7 +26,7 @@ import { RefreshTokensRepository } from './refresh-tokens.repository';
     RolesModule,
     PassportModule,
     ClassesModule,
-    CacheModule.registerAsync(RedisOptions),
+    // CacheModule.registerAsync(RedisOptions),
   ],
   providers: [
     AuthService,

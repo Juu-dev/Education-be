@@ -9,11 +9,11 @@ import appConfig from '@n-configs/env/app.config';
 import databaseConfig from '@n-configs/env/database.config';
 import emailConfig from '@n-configs/env/email.config';
 import validate from '@n-configs/env/env.validation';
-import redisConfig from '@n-configs/env/redis.config';
+// import redisConfig from '@n-configs/env/redis.config';
 import {
   JwtOptions,
   LoggerOptions,
-  RedisOptions,
+  // RedisOptions,
 } from '@n-configs/module-configs';
 
 import { PrismaModule } from '@n-database/prisma/prisma.module';
@@ -31,10 +31,11 @@ import { FileUploadModule } from './modules/file-upload/file-upload.module';
     ConfigModule.forRoot({
       isGlobal: true,
       envFilePath: '.env',
-      load: [appConfig, databaseConfig, emailConfig, redisConfig],
+      // load: [appConfig, databaseConfig, emailConfig, redisConfig],
+      load: [appConfig, databaseConfig, emailConfig],
       validate,
     }),
-    CacheModule.registerAsync(RedisOptions),
+    // CacheModule.registerAsync(RedisOptions),
     JwtModule.registerAsync(JwtOptions),
     LoggerModule.forRoot(LoggerOptions),
     PrismaModule,

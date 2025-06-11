@@ -8,9 +8,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.AuthModule = void 0;
 const common_1 = require("@nestjs/common");
-const cache_manager_1 = require("@nestjs/cache-manager");
 const passport_1 = require("@nestjs/passport");
-const module_configs_1 = require("../../../configs/module-configs");
 const prisma_module_1 = require("../../../database/prisma/prisma.module");
 const users_repository_1 = require("../users/users.repository");
 const auth_service_1 = require("./auth.service");
@@ -34,7 +32,6 @@ AuthModule = __decorate([
             roles_module_1.RolesModule,
             passport_1.PassportModule,
             classes_module_1.ClassesModule,
-            cache_manager_1.CacheModule.registerAsync(module_configs_1.RedisOptions),
         ],
         providers: [
             auth_service_1.AuthService,

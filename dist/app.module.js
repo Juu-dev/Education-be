@@ -10,7 +10,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.AppModule = void 0;
-const cache_manager_1 = require("@nestjs/cache-manager");
 const common_1 = require("@nestjs/common");
 const config_1 = require("@nestjs/config");
 const core_1 = require("@nestjs/core");
@@ -20,7 +19,6 @@ const app_config_1 = __importDefault(require("./configs/env/app.config"));
 const database_config_1 = __importDefault(require("./configs/env/database.config"));
 const email_config_1 = __importDefault(require("./configs/env/email.config"));
 const env_validation_1 = __importDefault(require("./configs/env/env.validation"));
-const redis_config_1 = __importDefault(require("./configs/env/redis.config"));
 const module_configs_1 = require("./configs/module-configs");
 const prisma_module_1 = require("./database/prisma/prisma.module");
 const _n_exceptions_1 = require("./filter-exceptions/index");
@@ -38,10 +36,9 @@ AppModule = __decorate([
             config_1.ConfigModule.forRoot({
                 isGlobal: true,
                 envFilePath: '.env',
-                load: [app_config_1.default, database_config_1.default, email_config_1.default, redis_config_1.default],
+                load: [app_config_1.default, database_config_1.default, email_config_1.default],
                 validate: env_validation_1.default,
             }),
-            cache_manager_1.CacheModule.registerAsync(module_configs_1.RedisOptions),
             jwt_1.JwtModule.registerAsync(module_configs_1.JwtOptions),
             nestjs_pino_1.LoggerModule.forRoot(module_configs_1.LoggerOptions),
             prisma_module_1.PrismaModule,

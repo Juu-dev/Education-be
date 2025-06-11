@@ -15,6 +15,5 @@ var __exportStar = (this && this.__exportStar) || function(m, exports) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 __exportStar(require("./logger.options"), exports);
-__exportStar(require("./redis.options"), exports);
 __exportStar(require("./jwt.options"), exports);
 //# sourceMappingURL=index.js.map

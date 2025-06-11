@@ -20,7 +20,7 @@ services:
     depends_on:
       # Local database
       - postgres
-      - redis
+#      - redis
 
 
   prisma-studio:
@@ -43,7 +43,7 @@ services:
     depends_on:
       # Local database
       - postgres
-      - redis
+#      - redis
 
 
   # If you want to use local database, use this code
@@ -62,23 +62,23 @@ services:
      networks:
        - education-network
 
-  redis:
-    container_name: education-redis
-    image: redis/redis-stack-server:latest
-    restart: unless-stopped
-    ports:
-      - 6379:6379
-    volumes:
-      - redis:/data
-    networks:
-      - education-network
+#  redis:
+#    container_name: education-redis
+#    image: redis/redis-stack-server:latest
+#    restart: unless-stopped
+#    ports:
+#      - 6379:6379
+#    volumes:
+#      - redis:/data
+#    networks:
+#      - education-network
 
 volumes:
   # Local database
   postgres:
     driver: local
-  redis:
-    driver: local
+#  redis:
+#    driver: local
 
 networks:
   education-network:
