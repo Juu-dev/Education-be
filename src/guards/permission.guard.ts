@@ -1,19 +1,20 @@
 import { Reflector } from '@nestjs/core';
 import {
-  Injectable, CanActivate, ExecutionContext, Inject,
+  Injectable, CanActivate, ExecutionContext,
 } from '@nestjs/common';
-import { CACHE_MANAGER } from '@nestjs/cache-manager';
+// import { CACHE_MANAGER } from '@nestjs/cache-manager';
 import { PrismaService } from '@n-database/prisma/prisma.service';
-import { PermissionType, Errors } from '@n-constants';
-import { BaseException } from '@n-exceptions/all.exceptions.filter';
-import { Cache } from 'cache-manager';
+// import { PermissionType, Errors } from '@n-constants';
+import { PermissionType } from '@n-constants';
+// import { BaseException } from '@n-exceptions/all.exceptions.filter';
+// import { Cache } from 'cache-manager';
 
 @Injectable()
 export class PermissionGuard implements CanActivate {
   constructor(
     private prisma: PrismaService,
     private reflector: Reflector,
-    @Inject(CACHE_MANAGER) private cacheManager: Cache,
+    // @Inject(CACHE_MANAGER) private cacheManager: Cache,
   ) {}
 
   async canActivate(context: ExecutionContext): Promise<boolean> {
@@ -38,7 +39,7 @@ export class PermissionGuard implements CanActivate {
     permissionToCheck: PermissionType[],
   ): Promise<boolean> {
     const cacheKey = `user-permissions:${userId}`;
-    let userPermissions = await this.cacheManager.get<string[]>(cacheKey);
+    // let userPermissions = await this.cacheManager.get<string[]>(cacheKey);
 
     // if (!userPermissions) {
     //   const userWithRoles = await this.prisma.authServiceUser.findUnique({
