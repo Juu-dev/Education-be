@@ -87,6 +87,8 @@ export class AllExceptionsFilter implements ExceptionFilter {
       },
     };
 
+    Logger.log("exception: ", exception);
+    
     response
       .status(exception.getStatus() || HttpStatus.BAD_REQUEST)
       .json(responsePayload);
