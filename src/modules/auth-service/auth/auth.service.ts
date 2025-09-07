@@ -57,15 +57,19 @@ export class AuthService {
     });
 
     return {
-      accessToken,
-      refreshToken,
-      user: {
-        ...user,
-      },
+        accessToken,
+        refreshToken,
+        user: {
+          ...user,
+        },
     };
   }
 
   public async refresh(refreshToken: string | null) {
+    // if (refreshToken === "undefined") {
+    //   throw new BaseException(Errors.AUTH.INVALID_REFRESH_TOKEN);
+    // }
+
     const payload = await this.jwtService.verifyAsync(refreshToken, {
       secret: this.configService.get('app.refreshTokenSecret'),
     });
@@ -86,16 +90,19 @@ export class AuthService {
       payload.username,
     );
 
-    const accessToken = await this.jwtService.signAsync({
+    const {
+      accessToken,
+      refreshToken: newRefreshToken,
+    } = await this.generateToken({
       id: user.id,
       username: user.username,
-      refreshTokenId: foundedRefreshToken.id,
       classId: user.class.id
     });
 
     return {
         data: {
           accessToken,
+          refreshToken: newRefreshToken,
           user: {
             ...user,
           },
@@ -188,5 +195,18 @@ export class AuthService {
 
     user.password = undefined;
     return user;
+  }
+
+  public async getMe(username: string) {
+    const user = await this.usersRepository.findByUsername(
+      username,
+    );
+    if (!user) {
+      throw new BaseException(Errors.USER.USER_NOT_FOUND);
+    }
+
+    return {
+      data: user
+    };
   }
 }

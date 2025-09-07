@@ -66,7 +66,7 @@ exports.Errors = {
         },
         WRONG_CREDENTIALS: {
             message: 'Incorrect username or password. <Ref: AU07>',
-            statusCode: common_1.HttpStatus.UNAUTHORIZED,
+            statusCode: common_1.HttpStatus.NOT_FOUND,
             errorCode: 'AU07',
         },
         USER_NOT_FOUND: {

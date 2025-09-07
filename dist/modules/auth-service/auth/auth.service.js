@@ -86,15 +86,15 @@ let AuthService = class AuthService {
             throw new _n_exceptions_1.BaseException(_n_constants_1.Errors.AUTH.INVALID_REFRESH_TOKEN);
         }
         const user = await this.usersRepository.findByUsername(payload.username);
-        const accessToken = await this.jwtService.signAsync({
+        const { accessToken, refreshToken: newRefreshToken, } = await this.generateToken({
             id: user.id,
             username: user.username,
-            refreshTokenId: foundedRefreshToken.id,
             classId: user.class.id
         });
         return {
             data: {
                 accessToken,
+                refreshToken: newRefreshToken,
                 user: {
                     ...user,
                 },
@@ -155,6 +155,15 @@ let AuthService = class AuthService {
         }
         user.password = undefined;
         return user;
+    }
+    async getMe(username) {
+        const user = await this.usersRepository.findByUsername(username);
+        if (!user) {
+            throw new _n_exceptions_1.BaseException(_n_constants_1.Errors.USER.USER_NOT_FOUND);
+        }
+        return {
+            data: user
+        };
     }
 };
 AuthService = __decorate([

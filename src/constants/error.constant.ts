@@ -88,7 +88,7 @@ export const Errors = {
     },
     WRONG_CREDENTIALS: {
       message: 'Incorrect username or password. <Ref: AU07>',
-      statusCode: HttpStatus.UNAUTHORIZED,
+      statusCode: HttpStatus.NOT_FOUND,
       errorCode: 'AU07',
     },
     USER_NOT_FOUND: {

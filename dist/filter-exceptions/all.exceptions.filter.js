@@ -75,6 +75,7 @@ let AllExceptionsFilter = class AllExceptionsFilter {
                     : detailError,
             },
         };
+        common_1.Logger.log("exception: ", exception);
         response
             .status(exception.getStatus() || common_1.HttpStatus.BAD_REQUEST)
             .json(responsePayload);

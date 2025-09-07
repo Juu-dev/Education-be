@@ -34,6 +34,9 @@ let AuthController = class AuthController {
         const { refreshToken } = request.cookies;
         return this.authService.refresh(refreshToken);
     }
+    async getMe(user) {
+        return this.authService.getMe(user?.username);
+    }
     async logOut(request) {
         return this.authService.logOut(request?.user?.refreshTokenId);
     }
@@ -62,13 +65,24 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], AuthController.prototype, "logIn", null);
 __decorate([
-    (0, common_1.Get)('refresh-token'),
-    openapi.ApiResponse({ status: 200 }),
+    (0, common_1.Post)('refresh-token'),
+    (0, common_1.UseInterceptors)(_n_interceptors_1.CookieInterceptor),
+    openapi.ApiResponse({ status: 201 }),
     __param(0, (0, common_1.Req)()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Object]),
     __metadata("design:returntype", Promise)
 ], AuthController.prototype, "refresh", null);
+__decorate([
+    (0, common_1.Get)('get-me'),
+    (0, _n_decorators_1.AuthClaims)(),
+    (0, common_1.UseInterceptors)(_n_interceptors_1.CookieInterceptor),
+    openapi.ApiResponse({ status: 200 }),
+    __param(0, (0, _n_decorators_1.GetUser)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", Promise)
+], AuthController.prototype, "getMe", null);
 __decorate([
     (0, common_1.Post)('logout'),
     (0, _n_decorators_1.AuthToken)(),

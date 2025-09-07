@@ -2,7 +2,7 @@ import {
   Body, Controller, Get, Post, Req, UseInterceptors,
 } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
-import { AuthClaims, AuthToken, Permissions } from '@n-decorators';
+import { AuthClaims, AuthToken, GetUser } from '@n-decorators';
 import { ClearCookieInterceptor, CookieInterceptor } from '@n-interceptors';
 import { Request } from 'express';
 
@@ -29,10 +29,20 @@ export class AuthController {
     return this.authService.login(loginData);
   }
 
-  @Get('refresh-token')
+  @Post('refresh-token')
+  @UseInterceptors(CookieInterceptor)
   async refresh(@Req() request: Request) {
     const { refreshToken } = request.cookies;
     return this.authService.refresh(refreshToken);
+  }
+
+  @Get('get-me')
+  @AuthClaims()
+  @UseInterceptors(CookieInterceptor)
+  async getMe(
+    @GetUser() user: any,
+  ) {
+    return this.authService.getMe(user?.username);
   }
 
   @Post('logout')
